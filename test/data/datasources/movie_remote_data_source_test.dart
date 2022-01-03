@@ -1,15 +1,17 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
-import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
-import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
+import '../../json_reader.dart';
 
 void main() {
   const API_KEY = 'api_key=c4419b53161aa5ce9706b6c909cb6775';
@@ -201,6 +203,28 @@ void main() {
       final call = dataSource.searchMovies(tQuery);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('get Airing Today TV Series', () {
+    final tvSeriesList = TvResponse.fromJson(
+            json.decode(readJson('dummy_data/airing_today_tv_series.json')))
+        .tvList;
+
+    test('should return list of TV Model when the response code is 200',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+          .thenAnswer((_) async => http.Response(
+                  readJson('dummy_data/airing_today_tv_series.json'), 200,
+                  headers: {
+                    HttpHeaders.contentTypeHeader:
+                        'application/json; charset=utf-8',
+                  }));
+      // act
+      final result = await dataSource.getAiringTodayTVSeries();
+      // assert
+      expect(result, equals(tvSeriesList));
     });
   });
 }

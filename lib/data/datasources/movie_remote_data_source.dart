@@ -1,18 +1,27 @@
 import 'dart:convert';
 
+import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
-import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/data/models/tv_model.dart';
+import 'package:ditonton/data/models/tv_response.dart';
 import 'package:http/http.dart' as http;
 
 abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getNowPlayingMovies();
+
   Future<List<MovieModel>> getPopularMovies();
+
   Future<List<MovieModel>> getTopRatedMovies();
+
   Future<MovieDetailResponse> getMovieDetail(int id);
+
   Future<List<MovieModel>> getMovieRecommendations(int id);
+
   Future<List<MovieModel>> searchMovies(String query);
+
+  Future<List<TvModel>> getAiringTodayTVSeries();
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
@@ -93,5 +102,13 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     } else {
       throw ServerException();
     }
+  }
+
+  @override
+  Future<List<TvModel>> getAiringTodayTVSeries() async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY'));
+
+    return TvResponse.fromJson(json.decode(response.body)).tvList;
   }
 }
