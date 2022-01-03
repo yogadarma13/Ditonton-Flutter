@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
+import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -58,8 +59,35 @@ void main() {
     voteAverage: 7.2,
   );
 
+  final tvModel = TvModel(
+      posterPath: "/zra8NrzxaEeunRWJmUm3HZOL4sd.jpg",
+      popularity: 11.520271,
+      id: 67419,
+      backdropPath: "/b0BckgEovxYLBbIk5xXyWYQpmlT.jpg",
+      voteAverage: 1.39,
+      overview:
+          "The early life of Queen Victoria, from her accession to the throne at the tender age of 18 through to her courtship and marriage to Prince Albert. Victoria went on to rule for 63 years, and was the longest-serving monarch until she was overtaken by Elizabeth II on 9th September 2016. Rufus Sewell was Victoria’s first prime minister; the two immediately connected and their intimate friendship became a popular source of gossip that threatened to destabilise the Government – angering both Tory and Whigs alike.",
+      firstAirDate: "2016-08-28",
+      originCountry: ["GB"],
+      genreIds: [18],
+      originalLanguage: "en",
+      voteCount: 9,
+      name: "Victoria",
+      originalName: "Victoria");
+
+  final tMovie2 = Movie(
+      id: 67419,
+      overview:
+          "The early life of Queen Victoria, from her accession to the throne at the tender age of 18 through to her courtship and marriage to Prince Albert. Victoria went on to rule for 63 years, and was the longest-serving monarch until she was overtaken by Elizabeth II on 9th September 2016. Rufus Sewell was Victoria’s first prime minister; the two immediately connected and their intimate friendship became a popular source of gossip that threatened to destabilise the Government – angering both Tory and Whigs alike.",
+      posterPath: "/zra8NrzxaEeunRWJmUm3HZOL4sd.jpg",
+      releaseDate: "2016-08-28",
+      title: "Victoria",
+      voteAverage: 1.39);
+
   final tMovieModelList = <MovieModel>[tMovieModel];
   final tMovieList = <Movie>[tMovie];
+  final tvModelList = <TvModel>[tvModel];
+  final tMovieList2 = <Movie>[tMovie2];
 
   group('Now Playing Movies', () {
     test('should check if the device is online', () async {
@@ -449,6 +477,24 @@ void main() {
       // assert
       final resultList = result.getOrElse(() => []);
       expect(resultList, [testWatchlistMovie]);
+    });
+  });
+
+  // TV SERIES
+  group('Airing Today TV Series', () {
+    test(
+        'should return remote data when the call to remote data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getAiringTodayTVSeries())
+          .thenAnswer((_) async => tvModelList);
+      // act
+      final result = await repository.getAiringTodayTVSeries();
+      // assert
+      verify(mockRemoteDataSource.getAiringTodayTVSeries());
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tMovieList2);
     });
   });
 }
