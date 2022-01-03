@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 class TvModel extends Equatable {
@@ -62,6 +63,17 @@ class TvModel extends Equatable {
         "name": name,
         "original_name": originalName,
       };
+
+  Movie toEntity() {
+    return Movie(
+      id: this.id,
+      overview: this.overview,
+      posterPath: this.posterPath,
+      releaseDate: this.firstAirDate,
+      title: this.name,
+      voteAverage: this.voteAverage,
+    );
+  }
 
   @override
   List<Object?> get props => [
