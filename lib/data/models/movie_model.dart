@@ -66,19 +66,12 @@ class MovieModel extends Equatable {
 
   Movie toEntity() {
     return Movie(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
-      genreIds: this.genreIds,
       id: this.id,
-      originalTitle: this.originalTitle,
       overview: this.overview,
-      popularity: this.popularity,
       posterPath: this.posterPath,
       releaseDate: this.releaseDate,
       title: this.title,
-      video: this.video,
       voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
     );
   }
 

@@ -35,19 +35,12 @@ void main() {
   });
 
   final tMovie = Movie(
-    adult: false,
-    backdropPath: 'backdropPath',
-    genreIds: [1, 2, 3],
     id: 1,
-    originalTitle: 'originalTitle',
     overview: 'overview',
-    popularity: 1,
     posterPath: 'posterPath',
     releaseDate: 'releaseDate',
     title: 'title',
-    video: false,
     voteAverage: 1,
-    voteCount: 1,
   );
   final tMovieList = <Movie>[tMovie];
 

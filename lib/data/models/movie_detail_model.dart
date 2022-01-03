@@ -101,18 +101,14 @@ class MovieDetailResponse extends Equatable {
 
   MovieDetail toEntity() {
     return MovieDetail(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
       id: this.id,
-      originalTitle: this.originalTitle,
       overview: this.overview,
       posterPath: this.posterPath,
       releaseDate: this.releaseDate,
       runtime: this.runtime,
       title: this.title,
       voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
     );
   }
 
