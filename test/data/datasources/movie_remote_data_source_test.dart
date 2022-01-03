@@ -226,5 +226,17 @@ void main() {
       // assert
       expect(result, equals(tvSeriesList));
     });
+
+    test(
+        'should throw a ServerException when the response code is 500 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Internal Server Error', 500));
+      // act
+      final call = dataSource.getAiringTodayTVSeries();
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
   });
 }
