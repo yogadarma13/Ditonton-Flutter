@@ -2,18 +2,17 @@
 // in ditonton/test/presentation/provider/movie_detail_notifier_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
-import 'package:dartz/dartz.dart' as _i3;
-import 'package:ditonton/common/failure.dart' as _i6;
-import 'package:ditonton/domain/entities/movie.dart' as _i9;
-import 'package:ditonton/domain/entities/movie_detail.dart' as _i7;
-import 'package:ditonton/domain/repositories/movie_repository.dart' as _i2;
-import 'package:ditonton/domain/usecases/get_movie_detail.dart' as _i4;
-import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i8;
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i10;
-import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i12;
-import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i11;
+import 'package:dartz/dartz.dart' as _i2;
+import 'package:ditonton/common/failure.dart' as _i5;
+import 'package:ditonton/domain/entities/movie.dart' as _i8;
+import 'package:ditonton/domain/entities/movie_detail.dart' as _i6;
+import 'package:ditonton/domain/usecases/get_movie_detail.dart' as _i3;
+import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i7;
+import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i9;
+import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i11;
+import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i10;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -25,116 +24,97 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeMovieRepository_0 extends _i1.Fake implements _i2.MovieRepository {}
+class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
-class _FakeEither_1<L, R> extends _i1.Fake implements _i3.Either<L, R> {}
-
-/// A class which mocks [GetMovieDetail].
+/// A class which mocks [GetMovieDetailUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetMovieDetail extends _i1.Mock implements _i4.GetMovieDetail {
-  MockGetMovieDetail() {
+class MockGetMovieDetailUseCase extends _i1.Mock
+    implements _i3.GetMovieDetailUseCase {
+  MockGetMovieDetailUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.MovieRepository get repository =>
-      (super.noSuchMethod(Invocation.getter(#repository),
-          returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
-  @override
-  _i5.Future<_i3.Either<_i6.Failure, _i7.MovieDetail>> execute(int? id) =>
+  _i4.Future<_i2.Either<_i5.Failure, _i6.MovieDetail>> execute(int? id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
-          returnValue: Future<_i3.Either<_i6.Failure, _i7.MovieDetail>>.value(
-              _FakeEither_1<_i6.Failure, _i7.MovieDetail>())) as _i5
-          .Future<_i3.Either<_i6.Failure, _i7.MovieDetail>>);
+          returnValue: Future<_i2.Either<_i5.Failure, _i6.MovieDetail>>.value(
+              _FakeEither_0<_i5.Failure, _i6.MovieDetail>())) as _i4
+          .Future<_i2.Either<_i5.Failure, _i6.MovieDetail>>);
   @override
   String toString() => super.toString();
 }
 
-/// A class which mocks [GetMovieRecommendations].
+/// A class which mocks [GetMovieRecommendationsUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetMovieRecommendations extends _i1.Mock
-    implements _i8.GetMovieRecommendations {
-  MockGetMovieRecommendations() {
+class MockGetMovieRecommendationsUseCase extends _i1.Mock
+    implements _i7.GetMovieRecommendationsUseCase {
+  MockGetMovieRecommendationsUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.MovieRepository get repository =>
-      (super.noSuchMethod(Invocation.getter(#repository),
-          returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
-  @override
-  _i5.Future<_i3.Either<_i6.Failure, List<_i9.Movie>>> execute(dynamic id) =>
+  _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>> execute(dynamic id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
-          returnValue: Future<_i3.Either<_i6.Failure, List<_i9.Movie>>>.value(
-              _FakeEither_1<_i6.Failure, List<_i9.Movie>>())) as _i5
-          .Future<_i3.Either<_i6.Failure, List<_i9.Movie>>>);
+          returnValue: Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>.value(
+              _FakeEither_0<_i5.Failure, List<_i8.Movie>>())) as _i4
+          .Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>);
   @override
   String toString() => super.toString();
 }
 
-/// A class which mocks [GetWatchListStatus].
+/// A class which mocks [GetWatchListStatusUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetWatchListStatus extends _i1.Mock
-    implements _i10.GetWatchListStatus {
-  MockGetWatchListStatus() {
+class MockGetWatchListStatusUseCase extends _i1.Mock
+    implements _i9.GetWatchListStatusUseCase {
+  MockGetWatchListStatusUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.MovieRepository get repository =>
-      (super.noSuchMethod(Invocation.getter(#repository),
-          returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
-  @override
-  _i5.Future<bool> execute(int? id) =>
+  _i4.Future<bool> execute(int? id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
   String toString() => super.toString();
 }
 
-/// A class which mocks [SaveWatchlist].
+/// A class which mocks [SaveWatchlistUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSaveWatchlist extends _i1.Mock implements _i11.SaveWatchlist {
-  MockSaveWatchlist() {
+class MockSaveWatchlistUseCase extends _i1.Mock
+    implements _i10.SaveWatchlistUseCase {
+  MockSaveWatchlistUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.MovieRepository get repository =>
-      (super.noSuchMethod(Invocation.getter(#repository),
-          returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
-  @override
-  _i5.Future<_i3.Either<_i6.Failure, String>> execute(_i7.MovieDetail? movie) =>
+  _i4.Future<_i2.Either<_i5.Failure, String>> execute(_i6.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#execute, [movie]),
-              returnValue: Future<_i3.Either<_i6.Failure, String>>.value(
-                  _FakeEither_1<_i6.Failure, String>()))
-          as _i5.Future<_i3.Either<_i6.Failure, String>>);
+              returnValue: Future<_i2.Either<_i5.Failure, String>>.value(
+                  _FakeEither_0<_i5.Failure, String>()))
+          as _i4.Future<_i2.Either<_i5.Failure, String>>);
   @override
   String toString() => super.toString();
 }
 
-/// A class which mocks [RemoveWatchlist].
+/// A class which mocks [RemoveWatchlistUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRemoveWatchlist extends _i1.Mock implements _i12.RemoveWatchlist {
-  MockRemoveWatchlist() {
+class MockRemoveWatchlistUseCase extends _i1.Mock
+    implements _i11.RemoveWatchlistUseCase {
+  MockRemoveWatchlistUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.MovieRepository get repository =>
-      (super.noSuchMethod(Invocation.getter(#repository),
-          returnValue: _FakeMovieRepository_0()) as _i2.MovieRepository);
-  @override
-  _i5.Future<_i3.Either<_i6.Failure, String>> execute(_i7.MovieDetail? movie) =>
+  _i4.Future<_i2.Either<_i5.Failure, String>> execute(_i6.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#execute, [movie]),
-              returnValue: Future<_i3.Either<_i6.Failure, String>>.value(
-                  _FakeEither_1<_i6.Failure, String>()))
-          as _i5.Future<_i3.Either<_i6.Failure, String>>);
+              returnValue: Future<_i2.Either<_i5.Failure, String>>.value(
+                  _FakeEither_0<_i5.Failure, String>()))
+          as _i4.Future<_i2.Either<_i5.Failure, String>>);
   @override
   String toString() => super.toString();
 }

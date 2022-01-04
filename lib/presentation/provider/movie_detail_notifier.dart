@@ -13,11 +13,11 @@ class MovieDetailNotifier extends ChangeNotifier {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-  final GetMovieDetail getMovieDetail;
-  final GetMovieRecommendations getMovieRecommendations;
-  final GetWatchListStatus getWatchListStatus;
-  final SaveWatchlist saveWatchlist;
-  final RemoveWatchlist removeWatchlist;
+  final GetMovieDetailUseCase getMovieDetail;
+  final GetMovieRecommendationsUseCase getMovieRecommendations;
+  final GetWatchListStatusUseCase getWatchListStatus;
+  final SaveWatchlistUseCase saveWatchlist;
+  final RemoveWatchlistUseCase removeWatchlist;
 
   MovieDetailNotifier({
     required this.getMovieDetail,

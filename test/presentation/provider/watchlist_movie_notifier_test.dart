@@ -10,17 +10,17 @@ import 'package:mockito/mockito.dart';
 import '../../dummy_data/dummy_objects.dart';
 import 'watchlist_movie_notifier_test.mocks.dart';
 
-@GenerateMocks([GetWatchlistMovies])
+@GenerateMocks([GetWatchlistMoviesUseCase])
 void main() {
   late WatchlistMovieNotifier provider;
-  late MockGetWatchlistMovies mockGetWatchlistMovies;
+  late MockGetWatchlistMoviesUseCase mockGetWatchlistMoviesUseCase;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
-    mockGetWatchlistMovies = MockGetWatchlistMovies();
+    mockGetWatchlistMoviesUseCase = MockGetWatchlistMoviesUseCase();
     provider = WatchlistMovieNotifier(
-      getWatchlistMovies: mockGetWatchlistMovies,
+      getWatchlistMovies: mockGetWatchlistMoviesUseCase,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -28,7 +28,7 @@ void main() {
 
   test('should change movies data when data is gotten successfully', () async {
     // arrange
-    when(mockGetWatchlistMovies.execute())
+    when(mockGetWatchlistMoviesUseCase.execute())
         .thenAnswer((_) async => Right([testWatchlistMovie]));
     // act
     await provider.fetchWatchlistMovies();
@@ -40,7 +40,7 @@ void main() {
 
   test('should return error when data is unsuccessful', () async {
     // arrange
-    when(mockGetWatchlistMovies.execute())
+    when(mockGetWatchlistMoviesUseCase.execute())
         .thenAnswer((_) async => Left(DatabaseFailure("Can't get data")));
     // act
     await provider.fetchWatchlistMovies();

@@ -33,9 +33,9 @@ class MovieListNotifier extends ChangeNotifier {
     required this.getTopRatedMovies,
   });
 
-  final GetNowPlayingMovies getNowPlayingMovies;
-  final GetPopularMovies getPopularMovies;
-  final GetTopRatedMovies getTopRatedMovies;
+  final GetNowPlayingMoviesUseCase getNowPlayingMovies;
+  final GetPopularMoviesUseCase getPopularMovies;
+  final GetTopRatedMoviesUseCase getTopRatedMovies;
 
   Future<void> fetchNowPlayingMovies() async {
     _nowPlayingState = RequestState.Loading;

@@ -26,17 +26,20 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeGetMovieDetail_0 extends _i1.Fake implements _i2.GetMovieDetail {}
+class _FakeGetMovieDetailUseCase_0 extends _i1.Fake
+    implements _i2.GetMovieDetailUseCase {}
 
-class _FakeGetMovieRecommendations_1 extends _i1.Fake
-    implements _i3.GetMovieRecommendations {}
+class _FakeGetMovieRecommendationsUseCase_1 extends _i1.Fake
+    implements _i3.GetMovieRecommendationsUseCase {}
 
-class _FakeGetWatchListStatus_2 extends _i1.Fake
-    implements _i4.GetWatchListStatus {}
+class _FakeGetWatchListStatusUseCase_2 extends _i1.Fake
+    implements _i4.GetWatchListStatusUseCase {}
 
-class _FakeSaveWatchlist_3 extends _i1.Fake implements _i5.SaveWatchlist {}
+class _FakeSaveWatchlistUseCase_3 extends _i1.Fake
+    implements _i5.SaveWatchlistUseCase {}
 
-class _FakeRemoveWatchlist_4 extends _i1.Fake implements _i6.RemoveWatchlist {}
+class _FakeRemoveWatchlistUseCase_4 extends _i1.Fake
+    implements _i6.RemoveWatchlistUseCase {}
 
 class _FakeMovieDetail_5 extends _i1.Fake implements _i7.MovieDetail {}
 
@@ -50,26 +53,29 @@ class MockMovieDetailNotifier extends _i1.Mock
   }
 
   @override
-  _i2.GetMovieDetail get getMovieDetail =>
+  _i2.GetMovieDetailUseCase get getMovieDetail =>
       (super.noSuchMethod(Invocation.getter(#getMovieDetail),
-          returnValue: _FakeGetMovieDetail_0()) as _i2.GetMovieDetail);
+              returnValue: _FakeGetMovieDetailUseCase_0())
+          as _i2.GetMovieDetailUseCase);
   @override
-  _i3.GetMovieRecommendations get getMovieRecommendations =>
+  _i3.GetMovieRecommendationsUseCase get getMovieRecommendations =>
       (super.noSuchMethod(Invocation.getter(#getMovieRecommendations),
-              returnValue: _FakeGetMovieRecommendations_1())
-          as _i3.GetMovieRecommendations);
+              returnValue: _FakeGetMovieRecommendationsUseCase_1())
+          as _i3.GetMovieRecommendationsUseCase);
   @override
-  _i4.GetWatchListStatus get getWatchListStatus =>
+  _i4.GetWatchListStatusUseCase get getWatchListStatus =>
       (super.noSuchMethod(Invocation.getter(#getWatchListStatus),
-          returnValue: _FakeGetWatchListStatus_2()) as _i4.GetWatchListStatus);
+              returnValue: _FakeGetWatchListStatusUseCase_2())
+          as _i4.GetWatchListStatusUseCase);
   @override
-  _i5.SaveWatchlist get saveWatchlist =>
-      (super.noSuchMethod(Invocation.getter(#saveWatchlist),
-          returnValue: _FakeSaveWatchlist_3()) as _i5.SaveWatchlist);
+  _i5.SaveWatchlistUseCase get saveWatchlist => (super.noSuchMethod(
+      Invocation.getter(#saveWatchlist),
+      returnValue: _FakeSaveWatchlistUseCase_3()) as _i5.SaveWatchlistUseCase);
   @override
-  _i6.RemoveWatchlist get removeWatchlist =>
+  _i6.RemoveWatchlistUseCase get removeWatchlist =>
       (super.noSuchMethod(Invocation.getter(#removeWatchlist),
-          returnValue: _FakeRemoveWatchlist_4()) as _i6.RemoveWatchlist);
+              returnValue: _FakeRemoveWatchlistUseCase_4())
+          as _i6.RemoveWatchlistUseCase);
   @override
   _i7.MovieDetail get movie => (super.noSuchMethod(Invocation.getter(#movie),
       returnValue: _FakeMovieDetail_5()) as _i7.MovieDetail);

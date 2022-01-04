@@ -21,8 +21,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeGetPopularMovies_0 extends _i1.Fake implements _i2.GetPopularMovies {
-}
+class _FakeGetPopularMoviesUseCase_0 extends _i1.Fake
+    implements _i2.GetPopularMoviesUseCase {}
 
 /// A class which mocks [PopularMoviesNotifier].
 ///
@@ -34,9 +34,10 @@ class MockPopularMoviesNotifier extends _i1.Mock
   }
 
   @override
-  _i2.GetPopularMovies get getPopularMovies =>
+  _i2.GetPopularMoviesUseCase get getPopularMovies =>
       (super.noSuchMethod(Invocation.getter(#getPopularMovies),
-          returnValue: _FakeGetPopularMovies_0()) as _i2.GetPopularMovies);
+              returnValue: _FakeGetPopularMoviesUseCase_0())
+          as _i2.GetPopularMoviesUseCase);
   @override
   _i4.RequestState get state => (super.noSuchMethod(Invocation.getter(#state),
       returnValue: _i4.RequestState.Empty) as _i4.RequestState);

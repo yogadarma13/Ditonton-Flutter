@@ -21,12 +21,12 @@ import 'package:mockito/mockito.dart' as _i1;
 
 class _FakeEither_0<L, R> extends _i1.Fake implements _i2.Either<L, R> {}
 
-/// A class which mocks [GetWatchlistMovies].
+/// A class which mocks [GetWatchlistMoviesUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockGetWatchlistMovies extends _i1.Mock
-    implements _i3.GetWatchlistMovies {
-  MockGetWatchlistMovies() {
+class MockGetWatchlistMoviesUseCase extends _i1.Mock
+    implements _i3.GetWatchlistMoviesUseCase {
+  MockGetWatchlistMoviesUseCase() {
     _i1.throwOnMissingStub(this);
   }
 

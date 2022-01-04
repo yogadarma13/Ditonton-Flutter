@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:flutter/foundation.dart';
 
 class TopRatedMoviesNotifier extends ChangeNotifier {
-  final GetTopRatedMovies getTopRatedMovies;
+  final GetTopRatedMoviesUseCase getTopRatedMovies;
 
   TopRatedMoviesNotifier({required this.getTopRatedMovies});
 

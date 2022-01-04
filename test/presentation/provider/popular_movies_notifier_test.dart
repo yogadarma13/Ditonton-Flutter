@@ -10,16 +10,16 @@ import 'package:mockito/mockito.dart';
 
 import 'popular_movies_notifier_test.mocks.dart';
 
-@GenerateMocks([GetPopularMovies])
+@GenerateMocks([GetPopularMoviesUseCase])
 void main() {
-  late MockGetPopularMovies mockGetPopularMovies;
+  late MockGetPopularMoviesUseCase mockGetPopularMoviesUseCase;
   late PopularMoviesNotifier notifier;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
-    mockGetPopularMovies = MockGetPopularMovies();
-    notifier = PopularMoviesNotifier(mockGetPopularMovies)
+    mockGetPopularMoviesUseCase = MockGetPopularMoviesUseCase();
+    notifier = PopularMoviesNotifier(mockGetPopularMoviesUseCase)
       ..addListener(() {
         listenerCallCount++;
       });
@@ -38,7 +38,7 @@ void main() {
 
   test('should change state to loading when usecase is called', () async {
     // arrange
-    when(mockGetPopularMovies.execute())
+    when(mockGetPopularMoviesUseCase.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
     notifier.fetchPopularMovies();
@@ -49,7 +49,7 @@ void main() {
 
   test('should change movies data when data is gotten successfully', () async {
     // arrange
-    when(mockGetPopularMovies.execute())
+    when(mockGetPopularMoviesUseCase.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
     await notifier.fetchPopularMovies();
@@ -61,7 +61,7 @@ void main() {
 
   test('should return error when data is unsuccessful', () async {
     // arrange
-    when(mockGetPopularMovies.execute())
+    when(mockGetPopularMoviesUseCase.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     // act
     await notifier.fetchPopularMovies();

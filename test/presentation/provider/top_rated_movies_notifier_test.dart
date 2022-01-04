@@ -10,19 +10,20 @@ import 'package:mockito/mockito.dart';
 
 import 'top_rated_movies_notifier_test.mocks.dart';
 
-@GenerateMocks([GetTopRatedMovies])
+@GenerateMocks([GetTopRatedMoviesUseCase])
 void main() {
-  late MockGetTopRatedMovies mockGetTopRatedMovies;
+  late MockGetTopRatedMoviesUseCase mockGetTopRatedMoviesUseCase;
   late TopRatedMoviesNotifier notifier;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
-    mockGetTopRatedMovies = MockGetTopRatedMovies();
-    notifier = TopRatedMoviesNotifier(getTopRatedMovies: mockGetTopRatedMovies)
-      ..addListener(() {
-        listenerCallCount++;
-      });
+    mockGetTopRatedMoviesUseCase = MockGetTopRatedMoviesUseCase();
+    notifier =
+        TopRatedMoviesNotifier(getTopRatedMovies: mockGetTopRatedMoviesUseCase)
+          ..addListener(() {
+            listenerCallCount++;
+          });
   });
 
   final tMovie = Movie(
@@ -38,7 +39,7 @@ void main() {
 
   test('should change state to loading when usecase is called', () async {
     // arrange
-    when(mockGetTopRatedMovies.execute())
+    when(mockGetTopRatedMoviesUseCase.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
     notifier.fetchTopRatedMovies();
@@ -49,7 +50,7 @@ void main() {
 
   test('should change movies data when data is gotten successfully', () async {
     // arrange
-    when(mockGetTopRatedMovies.execute())
+    when(mockGetTopRatedMoviesUseCase.execute())
         .thenAnswer((_) async => Right(tMovieList));
     // act
     await notifier.fetchTopRatedMovies();
@@ -61,7 +62,7 @@ void main() {
 
   test('should return error when data is unsuccessful', () async {
     // arrange
-    when(mockGetTopRatedMovies.execute())
+    when(mockGetTopRatedMoviesUseCase.execute())
         .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
     // act
     await notifier.fetchTopRatedMovies();

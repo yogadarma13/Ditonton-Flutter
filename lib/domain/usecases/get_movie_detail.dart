@@ -3,12 +3,18 @@ import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 import 'package:ditonton/common/failure.dart';
 
-class GetMovieDetail {
+abstract class GetMovieDetailUseCase {
+  Future<Either<Failure, MovieDetail>> execute(int id);
+}
+
+class GetMovieDetail implements GetMovieDetailUseCase{
   final MovieRepository repository;
 
   GetMovieDetail(this.repository);
 
+  @override
   Future<Either<Failure, MovieDetail>> execute(int id) {
     return repository.getMovieDetail(id);
   }
+
 }

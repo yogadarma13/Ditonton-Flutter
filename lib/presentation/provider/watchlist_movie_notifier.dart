@@ -13,9 +13,9 @@ class WatchlistMovieNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  WatchlistMovieNotifier({required this.getWatchlistMovies});
+  final GetWatchlistMoviesUseCase getWatchlistMovies;
 
-  final GetWatchlistMovies getWatchlistMovies;
+  WatchlistMovieNotifier({required this.getWatchlistMovies});
 
   Future<void> fetchWatchlistMovies() async {
     _watchlistState = RequestState.Loading;

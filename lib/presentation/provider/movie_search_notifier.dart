@@ -4,7 +4,7 @@ import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:flutter/foundation.dart';
 
 class MovieSearchNotifier extends ChangeNotifier {
-  final SearchMovies searchMovies;
+  final SearchMoviesUseCase searchMovies;
 
   MovieSearchNotifier({required this.searchMovies});
 
