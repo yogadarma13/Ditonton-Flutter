@@ -497,8 +497,7 @@ void main() {
       expect(resultList, tMovieList2);
     });
 
-    test(
-        'should return server failure when call to remote data source fails',
+    test('should return server failure when call to remote data source fails',
         () async {
       // arrange
       when(mockRemoteDataSource.getAiringTodayTVSeries())
