@@ -496,5 +496,18 @@ void main() {
       final resultList = result.getOrElse(() => []);
       expect(resultList, tMovieList2);
     });
+
+    test(
+        'should return server failure when call to remote data source fails',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getAiringTodayTVSeries())
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getAiringTodayTVSeries();
+      // assert
+      verify(mockRemoteDataSource.getAiringTodayTVSeries());
+      expect(result, equals(Left(ServerFailure(''))));
+    });
   });
 }
