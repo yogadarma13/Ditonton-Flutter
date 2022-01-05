@@ -213,5 +213,17 @@ void main() {
       // assert
       expect(provider.nowPlayingState, RequestState.Loading);
     });
+
+    test('should change movies when data is gotten successfully', () async {
+      // arrange
+      when(mockGetAiringTodayTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await provider.fetchNowPlayingMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(provider.nowPlayingState, RequestState.Loaded);
+      expect(provider.nowPlayingMovies, tMovieList2);
+      expect(listenerCallCount, 2);
+    });
   });
 }
