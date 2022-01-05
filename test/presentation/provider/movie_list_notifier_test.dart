@@ -58,7 +58,7 @@ void main() {
       when(mockGetNowPlayingMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      provider.fetchNowPlayingMovies();
+      provider.fetchNowPlayingMovies(CategoryMovie.Movies);
       // assert
       verify(mockGetNowPlayingMoviesUseCase.execute());
     });
@@ -68,7 +68,7 @@ void main() {
       when(mockGetNowPlayingMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      provider.fetchNowPlayingMovies();
+      provider.fetchNowPlayingMovies(CategoryMovie.Movies);
       // assert
       expect(provider.nowPlayingState, RequestState.Loading);
     });
@@ -78,7 +78,7 @@ void main() {
       when(mockGetNowPlayingMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      await provider.fetchNowPlayingMovies();
+      await provider.fetchNowPlayingMovies(CategoryMovie.Movies);
       // assert
       expect(provider.nowPlayingState, RequestState.Loaded);
       expect(provider.nowPlayingMovies, tMovieList);
@@ -90,7 +90,7 @@ void main() {
       when(mockGetNowPlayingMoviesUseCase.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await provider.fetchNowPlayingMovies();
+      await provider.fetchNowPlayingMovies(CategoryMovie.Movies);
       // assert
       expect(provider.nowPlayingState, RequestState.Error);
       expect(provider.message, 'Server Failure');
