@@ -203,5 +203,15 @@ void main() {
       // assert
       verify(mockGetAiringTodayTvSeriesUseCase.execute());
     });
+
+    test('should change state to Loading when usecase is called', () {
+      // arrange
+      when(mockGetAiringTodayTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      provider.fetchNowPlayingMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(provider.nowPlayingState, RequestState.Loading);
+    });
   });
 }
