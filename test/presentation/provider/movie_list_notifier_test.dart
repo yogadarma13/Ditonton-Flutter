@@ -46,7 +46,18 @@ void main() {
     title: 'title',
     voteAverage: 1,
   );
+
+  final tMovie2 = Movie(
+    id: 2,
+    overview: 'Synopsis',
+    posterPath: 'poster',
+    releaseDate: 'release',
+    title: 'Movie1',
+    voteAverage: 2,
+  );
+
   final tMovieList = <Movie>[tMovie];
+  final tMovieList2 = <Movie>[tMovie2];
 
   group('now playing movies', () {
     test('initialState should be Empty', () {
@@ -170,6 +181,12 @@ void main() {
       expect(provider.topRatedMoviesState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
+    });
+  });
+
+  group('airing today tv series', () {
+    test('initialState should be Empty', () {
+      expect(provider.nowPlayingState, equals(RequestState.Empty));
     });
   });
 }
