@@ -225,5 +225,17 @@ void main() {
       expect(provider.nowPlayingMovies, tMovieList2);
       expect(listenerCallCount, 2);
     });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetAiringTodayTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchNowPlayingMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(provider.nowPlayingState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
   });
 }
