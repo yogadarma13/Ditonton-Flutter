@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
@@ -29,11 +30,13 @@ class MovieListNotifier extends ChangeNotifier {
 
   MovieListNotifier({
     required this.getNowPlayingMovies,
+    required this.getAiringTodayTvSeries,
     required this.getPopularMovies,
     required this.getTopRatedMovies,
   });
 
   final GetNowPlayingMoviesUseCase getNowPlayingMovies;
+  final GetAiringTodayTvSeriesUseCase getAiringTodayTvSeries;
   final GetPopularMoviesUseCase getPopularMovies;
   final GetTopRatedMoviesUseCase getTopRatedMovies;
 
@@ -41,7 +44,7 @@ class MovieListNotifier extends ChangeNotifier {
     _nowPlayingState = RequestState.Loading;
     notifyListeners();
 
-    final result = await getNowPlayingMovies.execute();
+    final result = category == CategoryMovie.Movies ? await getNowPlayingMovies.execute() : await getAiringTodayTvSeries.execute();
     result.fold(
       (failure) {
         _nowPlayingState = RequestState.Error;

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
@@ -15,13 +16,15 @@ import 'movie_list_notifier_test.mocks.dart';
 @GenerateMocks([
   GetNowPlayingMoviesUseCase,
   GetPopularMoviesUseCase,
-  GetTopRatedMoviesUseCase
+  GetTopRatedMoviesUseCase,
+  GetAiringTodayTvSeriesUseCase
 ])
 void main() {
   late MovieListNotifier provider;
   late MockGetNowPlayingMoviesUseCase mockGetNowPlayingMoviesUseCase;
   late MockGetPopularMoviesUseCase mockGetPopularMoviesUseCase;
   late MockGetTopRatedMoviesUseCase mockGetTopRatedMoviesUseCase;
+  late MockGetAiringTodayTvSeriesUseCase mockGetAiringTodayTvSeriesUseCase;
   late int listenerCallCount;
 
   setUp(() {
@@ -29,8 +32,10 @@ void main() {
     mockGetNowPlayingMoviesUseCase = MockGetNowPlayingMoviesUseCase();
     mockGetPopularMoviesUseCase = MockGetPopularMoviesUseCase();
     mockGetTopRatedMoviesUseCase = MockGetTopRatedMoviesUseCase();
+    mockGetAiringTodayTvSeriesUseCase = MockGetAiringTodayTvSeriesUseCase();
     provider = MovieListNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
+      getAiringTodayTvSeries: mockGetAiringTodayTvSeriesUseCase,
       getPopularMovies: mockGetPopularMoviesUseCase,
       getTopRatedMovies: mockGetTopRatedMoviesUseCase,
     )..addListener(() {

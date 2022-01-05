@@ -5,6 +5,7 @@ import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
@@ -31,6 +32,7 @@ void init() {
   locator.registerFactory(
     () => MovieListNotifier(
       getNowPlayingMovies: locator(),
+      getAiringTodayTvSeries: locator(),
       getPopularMovies: locator(),
       getTopRatedMovies: locator(),
     ),
@@ -86,6 +88,8 @@ void init() {
       () => RemoveWatchlist(locator()));
   locator.registerLazySingleton<GetWatchlistMoviesUseCase>(
       () => GetWatchlistMovies(locator()));
+  locator.registerLazySingleton<GetAiringTodayTvSeriesUseCase>(
+      () => GetAiringTodayTvSeries(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(
