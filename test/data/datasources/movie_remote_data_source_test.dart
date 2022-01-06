@@ -253,7 +253,7 @@ void main() {
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/popular_tv.json'), 200));
       // act
-      final resultList = await dataSource.getPopularTvSeries();
+      final resultList = await dataSource.getPopularTVSeries();
       // assert
       expect(resultList, tvList);
     });
