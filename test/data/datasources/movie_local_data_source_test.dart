@@ -131,4 +131,19 @@ void main() {
       expect(() => call, throwsA(isA<CacheException>()));
     });
   });
+
+  group('cache airing today tv series', ()
+  {
+    test('should call database helper to save data', () async {
+      // arrange
+      when(mockDatabaseHelper.clearCache('airing today'))
+          .thenAnswer((_) async => 1);
+      // act
+      await dataSource.cacheAiringTodayTvSeries([testTvCache]);
+      // assert
+      verify(mockDatabaseHelper.clearCache('airing today'));
+      verify(mockDatabaseHelper
+          .insertCacheTransaction([testTvCache], 'airing today'));
+    });
+  });
 }
