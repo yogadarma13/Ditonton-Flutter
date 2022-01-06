@@ -154,5 +154,15 @@ void main() {
       // assert
       expect(result, [testTvCache]);
     });
+
+    test('should throw CacheException when cache data is not exist', () async {
+      // arrange
+      when(mockDatabaseHelper.getCacheMovies('airing today'))
+          .thenAnswer((_) async => []);
+      // act
+      final call = dataSource.getCachedAiringTodayTvSeries();
+      // assert
+      expect(() => call, throwsA(isA<CacheException>()));
+    });
   });
 }
