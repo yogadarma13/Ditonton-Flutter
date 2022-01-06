@@ -1,15 +1,22 @@
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
-import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/data/models/movie_table.dart';
 
 abstract class MovieLocalDataSource {
   Future<String> insertWatchlist(MovieTable movie);
+
   Future<String> removeWatchlist(MovieTable movie);
+
   Future<MovieTable?> getMovieById(int id);
+
   Future<List<MovieTable>> getWatchlistMovies();
+
   Future<void> cacheNowPlayingMovies(List<MovieTable> movies);
+
   Future<List<MovieTable>> getCachedNowPlayingMovies();
+
+  // TV SERIES
+  Future<void> cacheAiringTodayTvSeries(List<MovieTable> movies);
 }
 
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
@@ -67,5 +74,11 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
     } else {
       throw CacheException("Can't get the data :(");
     }
+  }
+
+  @override
+  Future<void> cacheAiringTodayTvSeries(List<MovieTable> movies) async {
+    await databaseHelper.clearCache('airing today');
+    await databaseHelper.insertCacheTransaction(movies, 'airing today');
   }
 }
