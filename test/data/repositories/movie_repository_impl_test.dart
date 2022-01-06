@@ -493,31 +493,37 @@ void main() {
       verify(mockNetworkInfo.isConnected);
     });
 
-    test(
-        'should return remote data when the call to remote data source is successful',
-        () async {
-      // arrange
-      when(mockRemoteDataSource.getAiringTodayTVSeries())
-          .thenAnswer((_) async => tvModelList);
-      // act
-      final result = await repository.getAiringTodayTVSeries();
-      // assert
-      verify(mockRemoteDataSource.getAiringTodayTVSeries());
-      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-      final resultList = result.getOrElse(() => []);
-      expect(resultList, tMovieList2);
-    });
+    group('when device is online', () {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      });
 
-    test('should return server failure when call to remote data source fails',
-        () async {
-      // arrange
-      when(mockRemoteDataSource.getAiringTodayTVSeries())
-          .thenThrow(ServerException());
-      // act
-      final result = await repository.getAiringTodayTVSeries();
-      // assert
-      verify(mockRemoteDataSource.getAiringTodayTVSeries());
-      expect(result, equals(Left(ServerFailure(''))));
+      test(
+          'should return remote data when the call to remote data source is successful',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getAiringTodayTVSeries())
+            .thenAnswer((_) async => tvModelList);
+        // act
+        final result = await repository.getAiringTodayTVSeries();
+        // assert
+        verify(mockRemoteDataSource.getAiringTodayTVSeries());
+        /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+        final resultList = result.getOrElse(() => []);
+        expect(resultList, tMovieList2);
+      });
+
+      test('should return server failure when call to remote data source fails',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getAiringTodayTVSeries())
+            .thenThrow(ServerException());
+        // act
+        final result = await repository.getAiringTodayTVSeries();
+        // assert
+        verify(mockRemoteDataSource.getAiringTodayTVSeries());
+        expect(result, equals(Left(ServerFailure(''))));
+      });
     });
   });
 }
