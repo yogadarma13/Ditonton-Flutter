@@ -141,14 +141,18 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<Either<Failure, List<Movie>>> getAiringTodayTVSeries() async {
-    networkInfo.isConnected;
-    try {
-      final result = await remoteDataSource.getAiringTodayTVSeries();
-      localDataSource.cacheAiringTodayTvSeries(
-          result.map((tv) => MovieTable.fromTvDTO(tv)).toList());
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await remoteDataSource.getAiringTodayTVSeries();
+        localDataSource.cacheAiringTodayTvSeries(
+            result.map((tv) => MovieTable.fromTvDTO(tv)).toList());
+        return Right(result.map((model) => model.toEntity()).toList());
+      } on ServerException {
+        return Left(ServerFailure(''));
+      }
+    } else {
+      final result = await localDataSource.getCachedAiringTodayTvSeries();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
-      return Left(ServerFailure(''));
     }
   }
 }
