@@ -206,6 +206,7 @@ void main() {
     });
   });
 
+  // TV SERIES
   group('get Airing Today TV Series', () {
     final tvSeriesList = TvResponse.fromJson(
             json.decode(readJson('dummy_data/airing_today_tv_series.json')))
@@ -237,6 +238,24 @@ void main() {
       final call = dataSource.getAiringTodayTVSeries();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('get Popular TV Series', () {
+    final tvList =
+        TvResponse.fromJson(json.decode(readJson('dummy_data/popular_tv.json')))
+            .tvList;
+
+    test('should return list of TV Model when the response code is 200',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/popular_tv.json'), 200));
+      // act
+      final resultList = await dataSource.getPopularTvSeries();
+      // assert
+      expect(resultList, tvList);
     });
   });
 }
