@@ -17,6 +17,8 @@ abstract class MovieLocalDataSource {
 
   // TV SERIES
   Future<void> cacheAiringTodayTvSeries(List<MovieTable> movies);
+
+  Future<List<MovieTable>> getCachedAiringTodayTvSeries();
 }
 
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
@@ -80,5 +82,12 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   Future<void> cacheAiringTodayTvSeries(List<MovieTable> movies) async {
     await databaseHelper.clearCache('airing today');
     await databaseHelper.insertCacheTransaction(movies, 'airing today');
+  }
+
+  @override
+  Future<List<MovieTable>> getCachedAiringTodayTvSeries() async {
+    final result = await databaseHelper.getCacheMovies('airing today');
+
+    return result.map((data) => MovieTable.fromMap(data)).toList();
   }
 }

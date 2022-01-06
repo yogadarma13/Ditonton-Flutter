@@ -147,7 +147,7 @@ void main() {
 
     test('should return list of movies from db when data exist', () async {
       // arrange
-      when(mockDatabaseHelper.getCacheTvSeries('airing today'))
+      when(mockDatabaseHelper.getCacheMovies('airing today'))
           .thenAnswer((_) async => [testTvCacheMap]);
       // act
       final result = await dataSource.getCachedAiringTodayTvSeries();
