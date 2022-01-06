@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
@@ -217,11 +216,7 @@ void main() {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/airing_today?$API_KEY')))
           .thenAnswer((_) async => http.Response(
-                  readJson('dummy_data/airing_today_tv_series.json'), 200,
-                  headers: {
-                    HttpHeaders.contentTypeHeader:
-                        'application/json; charset=utf-8',
-                  }));
+              readJson('dummy_data/airing_today_tv_series.json'), 200));
       // act
       final result = await dataSource.getAiringTodayTVSeries();
       // assert
@@ -256,6 +251,18 @@ void main() {
       final resultList = await dataSource.getPopularTVSeries();
       // assert
       expect(resultList, tvList);
+    });
+
+    test(
+        'should throw a ServerException when the response code is 401 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Unauthorized', 401));
+      // act
+      final call = dataSource.getPopularTVSeries();
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 }
