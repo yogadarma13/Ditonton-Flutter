@@ -482,6 +482,17 @@ void main() {
 
   // TV SERIES
   group('Airing Today TV Series', () {
+    test('should check if the device is online', () async {
+      // arrange
+      when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+      when(mockRemoteDataSource.getAiringTodayTVSeries())
+          .thenAnswer((_) async => []);
+      // act
+      await repository.getAiringTodayTVSeries();
+      // assert
+      verify(mockNetworkInfo.isConnected);
+    });
+
     test(
         'should return remote data when the call to remote data source is successful',
         () async {
