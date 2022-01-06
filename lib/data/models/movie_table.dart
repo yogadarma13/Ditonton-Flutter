@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/movie_model.dart';
+import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
@@ -36,6 +37,13 @@ class MovieTable extends Equatable {
         posterPath: movie.posterPath,
         overview: movie.overview,
       );
+
+  factory MovieTable.fromTvDTO(TvModel tv) => MovieTable(
+    id: tv.id,
+    title: tv.name,
+    posterPath: tv.posterPath,
+    overview: tv.overview,
+  );
 
   Map<String, dynamic> toJson() => {
         'id': id,

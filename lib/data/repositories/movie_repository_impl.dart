@@ -144,6 +144,8 @@ class MovieRepositoryImpl implements MovieRepository {
     networkInfo.isConnected;
     try {
       final result = await remoteDataSource.getAiringTodayTVSeries();
+      localDataSource.cacheAiringTodayTvSeries(
+          result.map((tv) => MovieTable.fromTvDTO(tv)).toList());
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));

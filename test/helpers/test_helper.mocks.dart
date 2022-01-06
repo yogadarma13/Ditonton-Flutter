@@ -217,6 +217,12 @@ class MockMovieLocalDataSource extends _i1.Mock
                   Future<List<_i14.MovieTable>>.value(<_i14.MovieTable>[]))
           as _i6.Future<List<_i14.MovieTable>>);
   @override
+  _i6.Future<void> cacheAiringTodayTvSeries(List<_i14.MovieTable>? movies) =>
+      (super.noSuchMethod(
+          Invocation.method(#cacheAiringTodayTvSeries, [movies]),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
+  @override
   String toString() => super.toString();
 }
 
