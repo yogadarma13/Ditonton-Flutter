@@ -66,6 +66,14 @@ final testMovieFromCache = Movie.watchlist(
   title: 'Spider-Man',
 );
 
+final testTvFromCache = Movie.watchlist(
+  id: 67419,
+  overview:
+  'The early life of Queen Victoria, from her accession to the throne at the tender age of 18 through to her courtship and marriage to Prince Albert. Victoria went on to rule for 63 years, and was the longest-serving monarch until she was overtaken by Elizabeth II on 9th September 2016. Rufus Sewell was Victoria’s first prime minister; the two immediately connected and their intimate friendship became a popular source of gossip that threatened to destabilise the Government – angering both Tory and Whigs alike.',
+  posterPath: '/zra8NrzxaEeunRWJmUm3HZOL4sd.jpg',
+  title: 'Victoria',
+);
+
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',

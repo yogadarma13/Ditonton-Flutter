@@ -538,5 +538,24 @@ void main() {
         expect(result, equals(Left(ServerFailure(''))));
       });
     });
+
+    group('when device is offline', ()
+    {
+      setUp(() {
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+      });
+
+      test('should return cached data when device is offline', () async {
+        // arrange
+        when(mockLocalDataSource.getCachedAiringTodayTvSeries())
+            .thenAnswer((_) async => [testTvCache]);
+        // act
+        final result = await repository.getAiringTodayTVSeries();
+        // assert
+        verify(mockLocalDataSource.getCachedAiringTodayTvSeries());
+        final resultList = result.getOrElse(() => []);
+        expect(resultList, [testTvFromCache]);
+      });
+    });
   });
 }
