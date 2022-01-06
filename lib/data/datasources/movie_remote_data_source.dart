@@ -124,6 +124,10 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/popular?$API_KEY'));
 
-    return TvResponse.fromJson(json.decode(response.body)).tvList;
+    if (response.statusCode == 200) {
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
+    } else {
+      throw ServerException();
+    }
   }
 }
