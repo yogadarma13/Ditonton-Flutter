@@ -132,8 +132,7 @@ void main() {
     });
   });
 
-  group('cache airing today tv series', ()
-  {
+  group('cache airing today tv series', () {
     test('should call database helper to save data', () async {
       // arrange
       when(mockDatabaseHelper.clearCache('airing today'))
@@ -144,6 +143,16 @@ void main() {
       verify(mockDatabaseHelper.clearCache('airing today'));
       verify(mockDatabaseHelper
           .insertCacheTransaction([testTvCache], 'airing today'));
+    });
+
+    test('should return list of movies from db when data exist', () async {
+      // arrange
+      when(mockDatabaseHelper.getCacheTvSeries('airing today'))
+          .thenAnswer((_) async => [testTvCacheMap]);
+      // act
+      final result = await dataSource.getCachedAiringTodayTvSeries();
+      // assert
+      expect(result, [testTvCache]);
     });
   });
 }
