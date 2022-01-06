@@ -86,8 +86,12 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
 
   @override
   Future<List<MovieTable>> getCachedAiringTodayTvSeries() async {
-    final result = await databaseHelper.getCacheMovies('airing today');
+    final resultList = await databaseHelper.getCacheMovies('airing today');
 
-    return result.map((data) => MovieTable.fromMap(data)).toList();
+    if(resultList.length > 0) {
+      return resultList.map((data) => MovieTable.fromMap(data)).toList();
+    } else {
+      throw CacheException("Can't get the data :(");
+    }
   }
 }
