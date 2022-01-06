@@ -556,6 +556,17 @@ void main() {
         final resultList = result.getOrElse(() => []);
         expect(resultList, [testTvFromCache]);
       });
+
+      test('should return CacheFailure when app has no cache', () async {
+        // arrange
+        when(mockLocalDataSource.getCachedAiringTodayTvSeries())
+            .thenThrow(CacheException('No Cache'));
+        // act
+        final result = await repository.getAiringTodayTVSeries();
+        // assert
+        verify(mockLocalDataSource.getCachedAiringTodayTvSeries());
+        expect(result, Left(CacheFailure('No Cache')));
+      });
     });
   });
 }
