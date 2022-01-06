@@ -513,6 +513,19 @@ void main() {
         expect(resultList, tMovieList2);
       });
 
+      test(
+          'should cache data locally when the call to remote data source is successful',
+          () async {
+        // arrange
+        when(mockRemoteDataSource.getAiringTodayTVSeries())
+            .thenAnswer((_) async => tvModelList);
+        // act
+        await repository.getAiringTodayTVSeries();
+        // assert
+        verify(mockRemoteDataSource.getAiringTodayTVSeries());
+        verify(mockLocalDataSource.cacheAiringTodayTvSeries([testTvCache]));
+      });
+
       test('should return server failure when call to remote data source fails',
           () async {
         // arrange
