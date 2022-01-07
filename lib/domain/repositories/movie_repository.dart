@@ -18,4 +18,5 @@ abstract class MovieRepository {
   // TV SERIES
   Future<Either<Failure, List<Movie>>> getAiringTodayTVSeries();
   Future<Either<Failure, List<Movie>>> getPopularTVSeries();
+  Future<Either<Failure, List<Movie>>> getTopRatedTVSeries();
 }
