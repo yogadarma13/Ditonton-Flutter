@@ -3,6 +3,7 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,16 +11,18 @@ import 'package:mockito/mockito.dart';
 
 import 'popular_movies_notifier_test.mocks.dart';
 
-@GenerateMocks([GetPopularMoviesUseCase])
+@GenerateMocks([GetPopularMoviesUseCase, GetPopularTvSeriesUseCase])
 void main() {
   late MockGetPopularMoviesUseCase mockGetPopularMoviesUseCase;
+  late MockGetPopularTvSeriesUseCase mockGetPopularTvSeriesUseCase;
   late PopularMoviesNotifier notifier;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetPopularMoviesUseCase = MockGetPopularMoviesUseCase();
-    notifier = PopularMoviesNotifier(mockGetPopularMoviesUseCase)
+    mockGetPopularTvSeriesUseCase = MockGetPopularTvSeriesUseCase();
+    notifier = PopularMoviesNotifier(mockGetPopularMoviesUseCase, mockGetPopularTvSeriesUseCase)
       ..addListener(() {
         listenerCallCount++;
       });
@@ -81,6 +84,19 @@ void main() {
       expect(notifier.state, RequestState.Error);
       expect(notifier.message, 'Server Failure');
       expect(listenerCallCount, 2);
+    });
+  });
+
+  group('Popular TV Series', () {
+    test('should change state to loading when usecase is called', () async {
+      // arrange
+      when(mockGetPopularTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      notifier.fetchPopularMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(notifier.state, RequestState.Loading);
+      expect(listenerCallCount, 1);
     });
   });
 }
