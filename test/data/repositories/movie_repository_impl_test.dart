@@ -539,8 +539,7 @@ void main() {
       });
     });
 
-    group('when device is offline', ()
-    {
+    group('when device is offline', () {
       setUp(() {
         when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
       });
@@ -572,16 +571,28 @@ void main() {
 
   group('Popular TV Series', () {
     test('should return tv series list when call to data source is success',
-            () async {
-          // arrange
-          when(mockRemoteDataSource.getPopularTVSeries())
-              .thenAnswer((_) async => tvModelList);
-          // act
-          final result = await repository.getPopularTVSeries();
-          // assert
-          /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
-          final resultList = result.getOrElse(() => []);
-          expect(resultList, tMovieList2);
-        });
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularTVSeries())
+          .thenAnswer((_) async => tvModelList);
+      // act
+      final result = await repository.getPopularTVSeries();
+      // assert
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tMovieList2);
     });
+
+    test(
+        'should return server failure when call to data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getPopularTVSeries())
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getPopularTVSeries();
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
+  });
 }
