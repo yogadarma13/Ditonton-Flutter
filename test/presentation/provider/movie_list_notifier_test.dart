@@ -47,6 +47,7 @@ void main() {
       getPopularMovies: mockGetPopularMoviesUseCase,
       getTopRatedMovies: mockGetTopRatedMoviesUseCase,
       getPopularTvSeries: mockGetPopularTvSeriesUseCase,
+      getTopRatedTvSeries: mockGetTopRatedTvSeriesUseCase,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -167,7 +168,7 @@ void main() {
       when(mockGetTopRatedMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      provider.fetchTopRatedMovies();
+      provider.fetchTopRatedMovies(CategoryMovie.Movies);
       // assert
       expect(provider.topRatedMoviesState, RequestState.Loading);
     });
@@ -178,7 +179,7 @@ void main() {
       when(mockGetTopRatedMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      await provider.fetchTopRatedMovies();
+      await provider.fetchTopRatedMovies(CategoryMovie.Movies);
       // assert
       expect(provider.topRatedMoviesState, RequestState.Loaded);
       expect(provider.topRatedMovies, tMovieList);
@@ -190,7 +191,7 @@ void main() {
       when(mockGetTopRatedMoviesUseCase.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await provider.fetchTopRatedMovies();
+      await provider.fetchTopRatedMovies(CategoryMovie.Movies);
       // assert
       expect(provider.topRatedMoviesState, RequestState.Error);
       expect(provider.message, 'Server Failure');

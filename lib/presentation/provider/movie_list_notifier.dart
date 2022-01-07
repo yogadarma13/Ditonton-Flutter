@@ -5,6 +5,7 @@ import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:flutter/material.dart';
 
 class MovieListNotifier extends ChangeNotifier {
@@ -41,13 +42,15 @@ class MovieListNotifier extends ChangeNotifier {
       required this.getAiringTodayTvSeries,
       required this.getPopularMovies,
       required this.getTopRatedMovies,
-      required this.getPopularTvSeries});
+      required this.getPopularTvSeries,
+      required this.getTopRatedTvSeries});
 
   final GetNowPlayingMoviesUseCase getNowPlayingMovies;
   final GetAiringTodayTvSeriesUseCase getAiringTodayTvSeries;
   final GetPopularMoviesUseCase getPopularMovies;
   final GetTopRatedMoviesUseCase getTopRatedMovies;
   final GetPopularTvSeriesUseCase getPopularTvSeries;
+  final GetTopRatedTvSeriesUseCase getTopRatedTvSeries;
 
   Future<void> fetchNowPlayingMovies(CategoryMovie category) async {
     _nowPlayingState = RequestState.Loading;
@@ -92,11 +95,14 @@ class MovieListNotifier extends ChangeNotifier {
     );
   }
 
-  Future<void> fetchTopRatedMovies() async {
+  Future<void> fetchTopRatedMovies(CategoryMovie category) async {
     _topRatedMoviesState = RequestState.Loading;
     notifyListeners();
 
-    final result = await getTopRatedMovies.execute();
+    final result = category == CategoryMovie.Movies
+        ? await getTopRatedMovies.execute()
+        : await getTopRatedTvSeries.execute();
+
     result.fold(
       (failure) {
         _topRatedMoviesState = RequestState.Error;
