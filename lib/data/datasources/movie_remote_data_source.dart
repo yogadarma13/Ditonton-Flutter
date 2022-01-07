@@ -137,6 +137,11 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<TvModel>> getTopRatedTVSeries() async {
     final response =
         await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
-    return TvResponse.fromJson(json.decode(response.body)).tvList;
+
+    if (response.statusCode == 200) {
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
+    } else {
+      throw ServerException();
+    }
   }
 }
