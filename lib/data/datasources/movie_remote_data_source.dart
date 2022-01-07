@@ -25,6 +25,8 @@ abstract class MovieRemoteDataSource {
   Future<List<TvModel>> getAiringTodayTVSeries();
 
   Future<List<TvModel>> getPopularTVSeries();
+
+  Future<List<TvModel>> getTopRatedTVSeries();
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
@@ -129,5 +131,12 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     } else {
       throw ServerException();
     }
+  }
+
+  @override
+  Future<List<TvModel>> getTopRatedTVSeries() async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/top_rated?$API_KEY'));
+    return TvResponse.fromJson(json.decode(response.body)).tvList;
   }
 }
