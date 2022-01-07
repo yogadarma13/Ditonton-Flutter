@@ -99,5 +99,18 @@ void main() {
       expect(notifier.state, RequestState.Loading);
       expect(listenerCallCount, 1);
     });
+
+    test('should change movies data when data is gotten successfully',
+        () async {
+      // arrange
+      when(mockGetPopularTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await notifier.fetchPopularMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(notifier.state, RequestState.Loaded);
+      expect(notifier.movies, tMovieList2);
+      expect(listenerCallCount, 2);
+    });
   });
 }
