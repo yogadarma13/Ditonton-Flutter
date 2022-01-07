@@ -569,4 +569,19 @@ void main() {
       });
     });
   });
+
+  group('Popular TV Series', () {
+    test('should return tv series list when call to data source is success',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getPopularTVSeries())
+              .thenAnswer((_) async => tvModelList);
+          // act
+          final result = await repository.getPopularTVSeries();
+          // assert
+          /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+          final resultList = result.getOrElse(() => []);
+          expect(resultList, tMovieList2);
+        });
+    });
 }
