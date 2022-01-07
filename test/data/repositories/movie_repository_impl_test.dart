@@ -608,4 +608,19 @@ void main() {
           result, Left(ConnectionFailure('Failed to connect to the network')));
     });
   });
+
+  group('Top Rated TV Series', () {
+    test('should return tv series list when call to data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTopRatedTVSeries())
+          .thenAnswer((_) async => tvModelList);
+      // act
+      final result = await repository.getTopRatedTVSeries();
+      // assert
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tMovieList2);
+    });
+  });
 }
