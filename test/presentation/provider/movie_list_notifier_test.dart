@@ -245,6 +245,10 @@ void main() {
   });
 
   group('popular tv series', () {
+    test('initialState should be Empty', () {
+      expect(provider.popularMoviesState, equals(RequestState.Empty));
+    });
+
     test('should change state to loading when usecase is called', () async {
       // arrange
       when(mockGetPopularTvSeriesUseCase.execute())
