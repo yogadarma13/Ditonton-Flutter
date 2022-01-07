@@ -22,7 +22,8 @@ void main() {
     listenerCallCount = 0;
     mockGetPopularMoviesUseCase = MockGetPopularMoviesUseCase();
     mockGetPopularTvSeriesUseCase = MockGetPopularTvSeriesUseCase();
-    notifier = PopularMoviesNotifier(mockGetPopularMoviesUseCase, mockGetPopularTvSeriesUseCase)
+    notifier = PopularMoviesNotifier(
+        mockGetPopularMoviesUseCase, mockGetPopularTvSeriesUseCase)
       ..addListener(() {
         listenerCallCount++;
       });
@@ -55,7 +56,7 @@ void main() {
       when(mockGetPopularMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      notifier.fetchPopularMovies();
+      notifier.fetchPopularMovies(CategoryMovie.Movies);
       // assert
       expect(notifier.state, RequestState.Loading);
       expect(listenerCallCount, 1);
@@ -67,7 +68,7 @@ void main() {
       when(mockGetPopularMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      await notifier.fetchPopularMovies();
+      await notifier.fetchPopularMovies(CategoryMovie.Movies);
       // assert
       expect(notifier.state, RequestState.Loaded);
       expect(notifier.movies, tMovieList);
@@ -79,7 +80,7 @@ void main() {
       when(mockGetPopularMoviesUseCase.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await notifier.fetchPopularMovies();
+      await notifier.fetchPopularMovies(CategoryMovie.Movies);
       // assert
       expect(notifier.state, RequestState.Error);
       expect(notifier.message, 'Server Failure');
