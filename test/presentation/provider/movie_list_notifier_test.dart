@@ -7,6 +7,7 @@ import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -19,7 +20,8 @@ import 'movie_list_notifier_test.mocks.dart';
   GetPopularMoviesUseCase,
   GetTopRatedMoviesUseCase,
   GetAiringTodayTvSeriesUseCase,
-  GetPopularTvSeriesUseCase
+  GetPopularTvSeriesUseCase,
+  GetTopRatedTvSeriesUseCase
 ])
 void main() {
   late MovieListNotifier provider;
@@ -28,6 +30,7 @@ void main() {
   late MockGetTopRatedMoviesUseCase mockGetTopRatedMoviesUseCase;
   late MockGetAiringTodayTvSeriesUseCase mockGetAiringTodayTvSeriesUseCase;
   late MockGetPopularTvSeriesUseCase mockGetPopularTvSeriesUseCase;
+  late MockGetTopRatedTvSeriesUseCase mockGetTopRatedTvSeriesUseCase;
   late int listenerCallCount;
 
   setUp(() {
@@ -37,6 +40,7 @@ void main() {
     mockGetTopRatedMoviesUseCase = MockGetTopRatedMoviesUseCase();
     mockGetAiringTodayTvSeriesUseCase = MockGetAiringTodayTvSeriesUseCase();
     mockGetPopularTvSeriesUseCase = MockGetPopularTvSeriesUseCase();
+    mockGetTopRatedTvSeriesUseCase = MockGetTopRatedTvSeriesUseCase();
     provider = MovieListNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
       getAiringTodayTvSeries: mockGetAiringTodayTvSeriesUseCase,
@@ -282,6 +286,12 @@ void main() {
       expect(provider.popularMoviesState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
+    });
+  });
+
+  group('top rated tv series', () {
+    test('initialState should be Empty', () {
+      expect(provider.topRatedMoviesState, equals(RequestState.Empty));
     });
   });
 }
