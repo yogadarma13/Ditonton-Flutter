@@ -125,7 +125,7 @@ void main() {
       when(mockGetPopularMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      provider.fetchPopularMovies();
+      provider.fetchPopularMovies(CategoryMovie.Movies);
       // assert
       expect(provider.popularMoviesState, RequestState.Loading);
       // verify(provider.setState(RequestState.Loading));
@@ -137,7 +137,7 @@ void main() {
       when(mockGetPopularMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      await provider.fetchPopularMovies();
+      await provider.fetchPopularMovies(CategoryMovie.Movies);
       // assert
       expect(provider.popularMoviesState, RequestState.Loaded);
       expect(provider.popularMovies, tMovieList);
@@ -149,7 +149,7 @@ void main() {
       when(mockGetPopularMoviesUseCase.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await provider.fetchPopularMovies();
+      await provider.fetchPopularMovies(CategoryMovie.Movies);
       // assert
       expect(provider.popularMoviesState, RequestState.Error);
       expect(provider.message, 'Server Failure');
@@ -244,16 +244,15 @@ void main() {
     });
   });
 
-  group('popular movies', () {
+  group('popular tv series', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
       when(mockGetPopularTvSeriesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList2));
       // act
-      provider.fetchPopularMovies();
+      provider.fetchPopularMovies(CategoryMovie.TvSeries);
       // assert
       expect(provider.popularMoviesState, RequestState.Loading);
-      // verify(provider.setState(RequestState.Loading));
     });
   });
 }
