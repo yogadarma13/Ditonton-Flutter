@@ -293,5 +293,15 @@ void main() {
     test('initialState should be Empty', () {
       expect(provider.topRatedMoviesState, equals(RequestState.Empty));
     });
+
+    test('should change state to loading when usecase is called', () async {
+      // arrange
+      when(mockGetTopRatedTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      provider.fetchTopRatedMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(provider.topRatedMoviesState, RequestState.Loading);
+    });
   });
 }
