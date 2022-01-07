@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -11,7 +12,7 @@ void main() {
 
   setUp(() {
     mockMovieRepository = MockMovieRepository();
-    usecase = GetTopRatedTvSeries(mockMovieRepository);
+    useCase = GetTopRatedTvSeries(mockMovieRepository);
   });
 
   final topRatedTvSeries = <Movie>[];
