@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "poster_path": "/tv-series.jpg",
+      "popularity": 87.9,
+      "id": 1,
+      "backdrop_path": "/tv-series-backdrop.jpg",
+      "vote_average": 98.4,
+      "overview": "Overview TV",
+      "first_air_date": "2022-01-01",
+      "origin_country": [
+        "ID"
+      ],
+      "genre_ids": [
+        1,
+        2,
+        3
+      ],
+      "original_language": "en",
+      "vote_count": 14,
+      "name": "TV Series Dicoding",
+      "original_name": "Original Dicoding TV"
+    }
+  ],
+  "total_results": 43,
+  "total_pages": 3
+}
