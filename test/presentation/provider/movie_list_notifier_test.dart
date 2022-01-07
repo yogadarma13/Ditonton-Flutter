@@ -5,6 +5,7 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,7 +18,8 @@ import 'movie_list_notifier_test.mocks.dart';
   GetNowPlayingMoviesUseCase,
   GetPopularMoviesUseCase,
   GetTopRatedMoviesUseCase,
-  GetAiringTodayTvSeriesUseCase
+  GetAiringTodayTvSeriesUseCase,
+  GetPopularTvSeriesUseCase
 ])
 void main() {
   late MovieListNotifier provider;
@@ -25,6 +27,7 @@ void main() {
   late MockGetPopularMoviesUseCase mockGetPopularMoviesUseCase;
   late MockGetTopRatedMoviesUseCase mockGetTopRatedMoviesUseCase;
   late MockGetAiringTodayTvSeriesUseCase mockGetAiringTodayTvSeriesUseCase;
+  late MockGetPopularTvSeriesUseCase mockGetPopularTvSeriesUseCase;
   late int listenerCallCount;
 
   setUp(() {
@@ -33,11 +36,13 @@ void main() {
     mockGetPopularMoviesUseCase = MockGetPopularMoviesUseCase();
     mockGetTopRatedMoviesUseCase = MockGetTopRatedMoviesUseCase();
     mockGetAiringTodayTvSeriesUseCase = MockGetAiringTodayTvSeriesUseCase();
+    mockGetPopularTvSeriesUseCase = MockGetPopularTvSeriesUseCase();
     provider = MovieListNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
       getAiringTodayTvSeries: mockGetAiringTodayTvSeriesUseCase,
       getPopularMovies: mockGetPopularMoviesUseCase,
       getTopRatedMovies: mockGetTopRatedMoviesUseCase,
+      getPopularTvSeries: mockGetPopularTvSeriesUseCase,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -236,6 +241,19 @@ void main() {
       expect(provider.nowPlayingState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
+    });
+  });
+
+  group('popular movies', () {
+    test('should change state to loading when usecase is called', () async {
+      // arrange
+      when(mockGetPopularTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      provider.fetchPopularMovies();
+      // assert
+      expect(provider.popularMoviesState, RequestState.Loading);
+      // verify(provider.setState(RequestState.Loading));
     });
   });
 }

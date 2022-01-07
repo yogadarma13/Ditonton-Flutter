@@ -11,6 +11,7 @@ import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart'
     as _i9;
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart' as _i3;
 import 'package:ditonton/domain/usecases/get_popular_movies.dart' as _i7;
+import 'package:ditonton/domain/usecases/get_popular_tv_series.dart' as _i10;
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -88,6 +89,25 @@ class MockGetTopRatedMoviesUseCase extends _i1.Mock
 class MockGetAiringTodayTvSeriesUseCase extends _i1.Mock
     implements _i9.GetAiringTodayTvSeriesUseCase {
   MockGetAiringTodayTvSeriesUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i6.Movie>>> execute() =>
+      (super.noSuchMethod(Invocation.method(#execute, []),
+          returnValue: Future<_i2.Either<_i5.Failure, List<_i6.Movie>>>.value(
+              _FakeEither_0<_i5.Failure, List<_i6.Movie>>())) as _i4
+          .Future<_i2.Either<_i5.Failure, List<_i6.Movie>>>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [GetPopularTvSeriesUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetPopularTvSeriesUseCase extends _i1.Mock
+    implements _i10.GetPopularTvSeriesUseCase {
+  MockGetPopularTvSeriesUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
