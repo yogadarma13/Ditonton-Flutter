@@ -317,5 +317,17 @@ void main() {
       expect(provider.topRatedMovies, tMovieList2);
       expect(listenerCallCount, 2);
     });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetTopRatedTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchTopRatedMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(provider.topRatedMoviesState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
   });
 }
