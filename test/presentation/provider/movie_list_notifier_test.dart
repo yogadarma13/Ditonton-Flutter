@@ -304,5 +304,18 @@ void main() {
       // assert
       expect(provider.topRatedMoviesState, RequestState.Loading);
     });
+
+    test('should change tv series data when data is gotten successfully',
+        () async {
+      // arrange
+      when(mockGetTopRatedTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await provider.fetchTopRatedMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(provider.topRatedMoviesState, RequestState.Loaded);
+      expect(provider.topRatedMovies, tMovieList2);
+      expect(listenerCallCount, 2);
+    });
   });
 }
