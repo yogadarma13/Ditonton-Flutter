@@ -313,5 +313,16 @@ void main() {
       // assert
       expect(result, equals(tvDetail));
     });
+
+    test('should throw Server Exception when the response code is 401 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+          .thenAnswer((_) async => http.Response('Unauthorized', 404));
+      // act
+      final call = dataSource.getTVSeriesDetail(tId);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
   });
 }
