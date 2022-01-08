@@ -716,7 +716,7 @@ void main() {
     });
   });
 
-  group('Get Movie Recommendations', () {
+  group('Get TV Series Recommendations', () {
     final tvList = <TvModel>[];
     final tId = 13;
 
