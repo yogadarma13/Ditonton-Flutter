@@ -2,19 +2,20 @@
 // in ditonton/test/presentation/pages/movie_detail_page_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i11;
-import 'dart:ui' as _i12;
+import 'dart:async' as _i12;
+import 'dart:ui' as _i13;
 
-import 'package:ditonton/common/state_enum.dart' as _i9;
-import 'package:ditonton/domain/entities/movie.dart' as _i10;
-import 'package:ditonton/domain/entities/movie_detail.dart' as _i7;
+import 'package:ditonton/common/state_enum.dart' as _i10;
+import 'package:ditonton/domain/entities/movie.dart' as _i11;
+import 'package:ditonton/domain/entities/movie_detail.dart' as _i8;
 import 'package:ditonton/domain/usecases/get_movie_detail.dart' as _i2;
-import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i3;
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i4;
-import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i6;
-import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i5;
+import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i4;
+import 'package:ditonton/domain/usecases/get_tv_series_detail.dart' as _i3;
+import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i5;
+import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i7;
+import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i6;
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart'
-    as _i8;
+    as _i9;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -29,25 +30,28 @@ import 'package:mockito/mockito.dart' as _i1;
 class _FakeGetMovieDetailUseCase_0 extends _i1.Fake
     implements _i2.GetMovieDetailUseCase {}
 
-class _FakeGetMovieRecommendationsUseCase_1 extends _i1.Fake
-    implements _i3.GetMovieRecommendationsUseCase {}
+class _FakeGetTvSeriesDetailUseCase_1 extends _i1.Fake
+    implements _i3.GetTvSeriesDetailUseCase {}
 
-class _FakeGetWatchListStatusUseCase_2 extends _i1.Fake
-    implements _i4.GetWatchListStatusUseCase {}
+class _FakeGetMovieRecommendationsUseCase_2 extends _i1.Fake
+    implements _i4.GetMovieRecommendationsUseCase {}
 
-class _FakeSaveWatchlistUseCase_3 extends _i1.Fake
-    implements _i5.SaveWatchlistUseCase {}
+class _FakeGetWatchListStatusUseCase_3 extends _i1.Fake
+    implements _i5.GetWatchListStatusUseCase {}
 
-class _FakeRemoveWatchlistUseCase_4 extends _i1.Fake
-    implements _i6.RemoveWatchlistUseCase {}
+class _FakeSaveWatchlistUseCase_4 extends _i1.Fake
+    implements _i6.SaveWatchlistUseCase {}
 
-class _FakeMovieDetail_5 extends _i1.Fake implements _i7.MovieDetail {}
+class _FakeRemoveWatchlistUseCase_5 extends _i1.Fake
+    implements _i7.RemoveWatchlistUseCase {}
+
+class _FakeMovieDetail_6 extends _i1.Fake implements _i8.MovieDetail {}
 
 /// A class which mocks [MovieDetailNotifier].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMovieDetailNotifier extends _i1.Mock
-    implements _i8.MovieDetailNotifier {
+    implements _i9.MovieDetailNotifier {
   MockMovieDetailNotifier() {
     _i1.throwOnMissingStub(this);
   }
@@ -58,39 +62,44 @@ class MockMovieDetailNotifier extends _i1.Mock
               returnValue: _FakeGetMovieDetailUseCase_0())
           as _i2.GetMovieDetailUseCase);
   @override
-  _i3.GetMovieRecommendationsUseCase get getMovieRecommendations =>
+  _i3.GetTvSeriesDetailUseCase get getTvSeriesDetail =>
+      (super.noSuchMethod(Invocation.getter(#getTvSeriesDetail),
+              returnValue: _FakeGetTvSeriesDetailUseCase_1())
+          as _i3.GetTvSeriesDetailUseCase);
+  @override
+  _i4.GetMovieRecommendationsUseCase get getMovieRecommendations =>
       (super.noSuchMethod(Invocation.getter(#getMovieRecommendations),
-              returnValue: _FakeGetMovieRecommendationsUseCase_1())
-          as _i3.GetMovieRecommendationsUseCase);
+              returnValue: _FakeGetMovieRecommendationsUseCase_2())
+          as _i4.GetMovieRecommendationsUseCase);
   @override
-  _i4.GetWatchListStatusUseCase get getWatchListStatus =>
+  _i5.GetWatchListStatusUseCase get getWatchListStatus =>
       (super.noSuchMethod(Invocation.getter(#getWatchListStatus),
-              returnValue: _FakeGetWatchListStatusUseCase_2())
-          as _i4.GetWatchListStatusUseCase);
+              returnValue: _FakeGetWatchListStatusUseCase_3())
+          as _i5.GetWatchListStatusUseCase);
   @override
-  _i5.SaveWatchlistUseCase get saveWatchlist => (super.noSuchMethod(
+  _i6.SaveWatchlistUseCase get saveWatchlist => (super.noSuchMethod(
       Invocation.getter(#saveWatchlist),
-      returnValue: _FakeSaveWatchlistUseCase_3()) as _i5.SaveWatchlistUseCase);
+      returnValue: _FakeSaveWatchlistUseCase_4()) as _i6.SaveWatchlistUseCase);
   @override
-  _i6.RemoveWatchlistUseCase get removeWatchlist =>
+  _i7.RemoveWatchlistUseCase get removeWatchlist =>
       (super.noSuchMethod(Invocation.getter(#removeWatchlist),
-              returnValue: _FakeRemoveWatchlistUseCase_4())
-          as _i6.RemoveWatchlistUseCase);
+              returnValue: _FakeRemoveWatchlistUseCase_5())
+          as _i7.RemoveWatchlistUseCase);
   @override
-  _i7.MovieDetail get movie => (super.noSuchMethod(Invocation.getter(#movie),
-      returnValue: _FakeMovieDetail_5()) as _i7.MovieDetail);
+  _i8.MovieDetail get movie => (super.noSuchMethod(Invocation.getter(#movie),
+      returnValue: _FakeMovieDetail_6()) as _i8.MovieDetail);
   @override
-  _i9.RequestState get movieState =>
+  _i10.RequestState get movieState =>
       (super.noSuchMethod(Invocation.getter(#movieState),
-          returnValue: _i9.RequestState.Empty) as _i9.RequestState);
+          returnValue: _i10.RequestState.Empty) as _i10.RequestState);
   @override
-  List<_i10.Movie> get movieRecommendations =>
+  List<_i11.Movie> get movieRecommendations =>
       (super.noSuchMethod(Invocation.getter(#movieRecommendations),
-          returnValue: <_i10.Movie>[]) as List<_i10.Movie>);
+          returnValue: <_i11.Movie>[]) as List<_i11.Movie>);
   @override
-  _i9.RequestState get recommendationState =>
+  _i10.RequestState get recommendationState =>
       (super.noSuchMethod(Invocation.getter(#recommendationState),
-          returnValue: _i9.RequestState.Empty) as _i9.RequestState);
+          returnValue: _i10.RequestState.Empty) as _i10.RequestState);
   @override
   String get message =>
       (super.noSuchMethod(Invocation.getter(#message), returnValue: '')
@@ -108,32 +117,33 @@ class MockMovieDetailNotifier extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
           as bool);
   @override
-  _i11.Future<void> fetchMovieDetail(int? id) => (super.noSuchMethod(
-      Invocation.method(#fetchMovieDetail, [id]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i11.Future<void>);
+  _i12.Future<void> fetchMovieDetail(_i10.CategoryMovie? category, int? id) =>
+      (super.noSuchMethod(Invocation.method(#fetchMovieDetail, [category, id]),
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i12.Future<void>);
   @override
-  _i11.Future<void> addWatchlist(_i7.MovieDetail? movie) => (super.noSuchMethod(
+  _i12.Future<void> addWatchlist(_i8.MovieDetail? movie) => (super.noSuchMethod(
       Invocation.method(#addWatchlist, [movie]),
       returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i11.Future<void>);
+      returnValueForMissingStub: Future<void>.value()) as _i12.Future<void>);
   @override
-  _i11.Future<void> removeFromWatchlist(_i7.MovieDetail? movie) =>
+  _i12.Future<void> removeFromWatchlist(_i8.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#removeFromWatchlist, [movie]),
               returnValue: Future<void>.value(),
               returnValueForMissingStub: Future<void>.value())
-          as _i11.Future<void>);
+          as _i12.Future<void>);
   @override
-  _i11.Future<void> loadWatchlistStatus(int? id) => (super.noSuchMethod(
+  _i12.Future<void> loadWatchlistStatus(int? id) => (super.noSuchMethod(
       Invocation.method(#loadWatchlistStatus, [id]),
       returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i11.Future<void>);
+      returnValueForMissingStub: Future<void>.value()) as _i12.Future<void>);
   @override
-  void addListener(_i12.VoidCallback? listener) =>
+  void addListener(_i13.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#addListener, [listener]),
           returnValueForMissingStub: null);
   @override
-  void removeListener(_i12.VoidCallback? listener) =>
+  void removeListener(_i13.VoidCallback? listener) =>
       super.noSuchMethod(Invocation.method(#removeListener, [listener]),
           returnValueForMissingStub: null);
   @override

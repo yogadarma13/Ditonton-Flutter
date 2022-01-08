@@ -1,8 +1,9 @@
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
-import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
@@ -14,6 +15,7 @@ class MovieDetailNotifier extends ChangeNotifier {
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
   final GetMovieDetailUseCase getMovieDetail;
+  final GetTvSeriesDetailUseCase getTvSeriesDetail;
   final GetMovieRecommendationsUseCase getMovieRecommendations;
   final GetWatchListStatusUseCase getWatchListStatus;
   final SaveWatchlistUseCase saveWatchlist;
@@ -21,6 +23,7 @@ class MovieDetailNotifier extends ChangeNotifier {
 
   MovieDetailNotifier({
     required this.getMovieDetail,
+    required this.getTvSeriesDetail,
     required this.getMovieRecommendations,
     required this.getWatchListStatus,
     required this.saveWatchlist,
@@ -28,27 +31,36 @@ class MovieDetailNotifier extends ChangeNotifier {
   });
 
   late MovieDetail _movie;
+
   MovieDetail get movie => _movie;
 
   RequestState _movieState = RequestState.Empty;
+
   RequestState get movieState => _movieState;
 
   List<Movie> _movieRecommendations = [];
+
   List<Movie> get movieRecommendations => _movieRecommendations;
 
   RequestState _recommendationState = RequestState.Empty;
+
   RequestState get recommendationState => _recommendationState;
 
   String _message = '';
+
   String get message => _message;
 
   bool _isAddedtoWatchlist = false;
+
   bool get isAddedToWatchlist => _isAddedtoWatchlist;
 
-  Future<void> fetchMovieDetail(int id) async {
+  Future<void> fetchMovieDetail(CategoryMovie category, int id) async {
     _movieState = RequestState.Loading;
     notifyListeners();
-    final detailResult = await getMovieDetail.execute(id);
+    final detailResult = category == CategoryMovie.Movies
+        ? await getMovieDetail.execute(id)
+        : await getTvSeriesDetail.execute(id);
+
     final recommendationResult = await getMovieRecommendations.execute(id);
     detailResult.fold(
       (failure) {
@@ -77,6 +89,7 @@ class MovieDetailNotifier extends ChangeNotifier {
   }
 
   String _watchlistMessage = '';
+
   String get watchlistMessage => _watchlistMessage;
 
   Future<void> addWatchlist(MovieDetail movie) async {

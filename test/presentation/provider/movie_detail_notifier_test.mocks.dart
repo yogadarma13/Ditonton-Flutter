@@ -6,13 +6,14 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:ditonton/common/failure.dart' as _i5;
-import 'package:ditonton/domain/entities/movie.dart' as _i8;
+import 'package:ditonton/domain/entities/movie.dart' as _i9;
 import 'package:ditonton/domain/entities/movie_detail.dart' as _i6;
 import 'package:ditonton/domain/usecases/get_movie_detail.dart' as _i3;
-import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i7;
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i9;
-import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i11;
-import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i10;
+import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i8;
+import 'package:ditonton/domain/usecases/get_tv_series_detail.dart' as _i7;
+import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i10;
+import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i12;
+import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -45,21 +46,40 @@ class MockGetMovieDetailUseCase extends _i1.Mock
   String toString() => super.toString();
 }
 
+/// A class which mocks [GetTvSeriesDetailUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetTvSeriesDetailUseCase extends _i1.Mock
+    implements _i7.GetTvSeriesDetailUseCase {
+  MockGetTvSeriesDetailUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, _i6.MovieDetail>> execute(int? id) =>
+      (super.noSuchMethod(Invocation.method(#execute, [id]),
+          returnValue: Future<_i2.Either<_i5.Failure, _i6.MovieDetail>>.value(
+              _FakeEither_0<_i5.Failure, _i6.MovieDetail>())) as _i4
+          .Future<_i2.Either<_i5.Failure, _i6.MovieDetail>>);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [GetMovieRecommendationsUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetMovieRecommendationsUseCase extends _i1.Mock
-    implements _i7.GetMovieRecommendationsUseCase {
+    implements _i8.GetMovieRecommendationsUseCase {
   MockGetMovieRecommendationsUseCase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i8.Movie>>> execute(dynamic id) =>
+  _i4.Future<_i2.Either<_i5.Failure, List<_i9.Movie>>> execute(dynamic id) =>
       (super.noSuchMethod(Invocation.method(#execute, [id]),
-          returnValue: Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>.value(
-              _FakeEither_0<_i5.Failure, List<_i8.Movie>>())) as _i4
-          .Future<_i2.Either<_i5.Failure, List<_i8.Movie>>>);
+          returnValue: Future<_i2.Either<_i5.Failure, List<_i9.Movie>>>.value(
+              _FakeEither_0<_i5.Failure, List<_i9.Movie>>())) as _i4
+          .Future<_i2.Either<_i5.Failure, List<_i9.Movie>>>);
   @override
   String toString() => super.toString();
 }
@@ -68,7 +88,7 @@ class MockGetMovieRecommendationsUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetWatchListStatusUseCase extends _i1.Mock
-    implements _i9.GetWatchListStatusUseCase {
+    implements _i10.GetWatchListStatusUseCase {
   MockGetWatchListStatusUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -85,7 +105,7 @@ class MockGetWatchListStatusUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSaveWatchlistUseCase extends _i1.Mock
-    implements _i10.SaveWatchlistUseCase {
+    implements _i11.SaveWatchlistUseCase {
   MockSaveWatchlistUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -104,7 +124,7 @@ class MockSaveWatchlistUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRemoveWatchlistUseCase extends _i1.Mock
-    implements _i11.RemoveWatchlistUseCase {
+    implements _i12.RemoveWatchlistUseCase {
   MockRemoveWatchlistUseCase() {
     _i1.throwOnMissingStub(this);
   }

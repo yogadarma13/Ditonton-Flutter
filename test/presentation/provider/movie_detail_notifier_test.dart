@@ -81,7 +81,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       verify(mockGetMovieDetailUseCase.execute(tId));
       verify(mockGetMovieRecommendationsUseCase.execute(tId));
@@ -91,7 +91,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      provider.fetchMovieDetail(tId);
+      provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       expect(provider.movieState, RequestState.Loading);
       expect(listenerCallCount, 1);
@@ -101,7 +101,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       expect(provider.movieState, RequestState.Loaded);
       expect(provider.movie, testMovieDetail);
@@ -113,7 +113,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       expect(provider.movieState, RequestState.Loaded);
       expect(provider.movieRecommendations, tMovies);
@@ -125,7 +125,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       verify(mockGetMovieRecommendationsUseCase.execute(tId));
       expect(provider.movieRecommendations, tMovies);
@@ -136,7 +136,7 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       expect(provider.recommendationState, RequestState.Loaded);
       expect(provider.movieRecommendations, tMovies);
@@ -149,7 +149,7 @@ void main() {
       when(mockGetMovieRecommendationsUseCase.execute(tId))
           .thenAnswer((_) async => Left(ServerFailure('Failed')));
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       expect(provider.recommendationState, RequestState.Error);
       expect(provider.message, 'Failed');
@@ -228,7 +228,7 @@ void main() {
       when(mockGetMovieRecommendationsUseCase.execute(tId))
           .thenAnswer((_) async => Right(tMovies));
       // act
-      await provider.fetchMovieDetail(tId);
+      await provider.fetchMovieDetail(CategoryMovie.Movies, tId);
       // assert
       expect(provider.movieState, RequestState.Error);
       expect(provider.message, 'Server Failure');
@@ -241,9 +241,9 @@ void main() {
       // arrange
       _arrangeUsecase();
       // act
-      await provider.fetchMovieDetail(CategoryMovie.TvSeries, tId);
+      await provider.fetchMovieDetail(CategoryMovie.TvSeries, tvId);
       // assert
-      verify(mockGetTvSeriesDetailUseCase.execute(tId));
+      verify(mockGetTvSeriesDetailUseCase.execute(tvId));
     });
   });
 }
