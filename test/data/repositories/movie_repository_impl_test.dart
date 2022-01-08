@@ -746,5 +746,19 @@ void main() {
       verify(mockRemoteDataSource.getTVSeriesRecommendations(tId));
       expect(result, equals(Left(ServerFailure(''))));
     });
+
+    test(
+        'should return connection failure when the device is not connected to the internet',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTVSeriesRecommendations(tId))
+          .thenThrow(SocketException('Failed to connect to the network'));
+      // act
+      final result = await repository.getTVSeriesRecommendations(tId);
+      // assert
+      verify(mockRemoteDataSource.getTVSeriesRecommendations(tId));
+      expect(result,
+          equals(Left(ConnectionFailure('Failed to connect to the network'))));
+    });
   });
 }
