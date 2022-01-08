@@ -1,4 +1,5 @@
 import 'package:ditonton/data/models/genre_model.dart';
+import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TvDetailResponse extends Equatable {
@@ -28,20 +29,20 @@ class TvDetailResponse extends Equatable {
 
   final String? backdropPath;
   final List<int> episodeRunTime;
-  final String? firstAirDate;
+  final String firstAirDate;
   final List<GenreModel> genres;
   final int id;
   final List<String> languages;
   final String? lastAirDate;
-  final String? name;
+  final String name;
   final int numberOfEpisodes;
   final int numberOfSeasons;
   final List<String> originCountry;
   final String? originalLanguage;
   final String? originalName;
-  final String? overview;
+  final String overview;
   final double popularity;
-  final String? posterPath;
+  final String posterPath;
   final String? status;
   final String? tagline;
   final String? type;
@@ -97,6 +98,19 @@ class TvDetailResponse extends Equatable {
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
+
+  MovieDetail toEntity() {
+    return MovieDetail(
+      genres: this.genres.map((genre) => genre.toEntity()).toList(),
+      id: this.id,
+      overview: this.overview,
+      posterPath: this.posterPath,
+      releaseDate: this.firstAirDate,
+      runtime: episodeRunTime[0],
+      title: this.name,
+      voteAverage: this.voteAverage,
+    );
+  }
 
   @override
   List<Object?> get props => [
