@@ -1,5 +1,6 @@
 {
   "backdrop_path": "/tv-series-backdrop.jpg",
+  "episode_run_time": [80],
   "first_air_date": "2022-01-01",
   "genres": [
     {

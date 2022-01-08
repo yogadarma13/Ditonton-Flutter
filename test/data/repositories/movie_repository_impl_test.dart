@@ -6,6 +6,7 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
+import 'package:ditonton/data/models/tv_detail_response.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/repositories/movie_repository_impl.dart';
 import 'package:ditonton/domain/entities/movie.dart';
@@ -646,6 +647,45 @@ void main() {
       // assert
       expect(
           result, Left(ConnectionFailure('Failed to connect to the network')));
+    });
+  });
+
+  group('Get Movie Detail', () {
+    final tId = 13;
+    final detailTvResponse = TvDetailResponse(
+        backdropPath: "/tv-series-backdrop.jpg",
+        episodeRunTime: [80],
+        firstAirDate: "2022-01-01",
+        genres: [GenreModel(id: 18, name: "Drama")],
+        id: 13,
+        languages: ["en"],
+        lastAirDate: "2019-05-19",
+        name: "TV Series Dicoding",
+        numberOfEpisodes: 73,
+        numberOfSeasons: 8,
+        originCountry: ["US"],
+        originalLanguage: "en",
+        originalName: "Original Dicoding TV",
+        overview: "Overview TV",
+        popularity: 369.594,
+        posterPath: "/tv-series.jpg",
+        status: "Ended",
+        tagline: "Winter Is Coming",
+        type: "Scripted",
+        voteAverage: 8.3,
+        voteCount: 11504);
+
+    test(
+        'should return TV Series Detail data when the call to remote data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTVSeriesDetail(tId))
+          .thenAnswer((_) async => detailTvResponse);
+      // act
+      final result = await repository.getTVSeriesDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getTVSeriesDetail(tId));
+      expect(result, equals(Right(testTvDetail)));
     });
   });
 }

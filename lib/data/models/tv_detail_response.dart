@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 class TvDetailResponse extends Equatable {
   TvDetailResponse({
     required this.backdropPath,
+    required this.episodeRunTime,
     required this.firstAirDate,
     required this.genres,
     required this.id,
@@ -26,6 +27,7 @@ class TvDetailResponse extends Equatable {
   });
 
   final String? backdropPath;
+  final List<int> episodeRunTime;
   final String? firstAirDate;
   final List<GenreModel> genres;
   final int id;
@@ -49,6 +51,7 @@ class TvDetailResponse extends Equatable {
   factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvDetailResponse(
         backdropPath: json["backdrop_path"],
+        episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
         firstAirDate: json["first_air_date"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
@@ -73,6 +76,7 @@ class TvDetailResponse extends Equatable {
 
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath,
+        "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
         "first_air_date": firstAirDate,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "id": id,
@@ -97,6 +101,7 @@ class TvDetailResponse extends Equatable {
   @override
   List<Object?> get props => [
         backdropPath,
+        runtimeType,
         firstAirDate,
         genres,
         id,

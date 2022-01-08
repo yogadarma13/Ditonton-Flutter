@@ -26,6 +26,17 @@ final testMovieDetail = MovieDetail(
   voteAverage: 1,
 );
 
+final testTvDetail = MovieDetail(
+  genres: [Genre(id: 18, name: 'Drama')],
+  id: 13,
+  overview: 'Overview TV',
+  posterPath: '/tv-series.jpg',
+  releaseDate: '2022-01-01',
+  runtime: 80,
+  title: 'TV Series Dicoding',
+  voteAverage: 8.3,
+);
+
 final testMovieCache = MovieTable(
   id: 557,
   overview:
