@@ -191,6 +191,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result.toEntity());
     } on ServerException {
       return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
 }
