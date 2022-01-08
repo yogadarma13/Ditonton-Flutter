@@ -4,6 +4,7 @@ import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
+import 'package:ditonton/data/models/tv_detail_response.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -293,6 +294,24 @@ void main() {
       final call = dataSource.getTopRatedTVSeries();
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('get tv series detail', () {
+    final tId = 13;
+    final tvDetail = TvDetailResponse.fromJson(
+        json.decode(readJson('dummy_data/tv_detail.json')));
+
+    test('should return tv series detail when the response code is 200',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/tv_detail.json'), 200));
+      // act
+      final result = await dataSource.getTVSeriesDetail(tId);
+      // assert
+      expect(result, equals(tvDetail));
     });
   });
 }

@@ -1,0 +1,31 @@
+{
+  "backdrop_path": "/tv-series-backdrop.jpg",
+  "first_air_date": "2022-01-01",
+  "genres": [
+    {
+      "id": 18,
+      "name": "Drama"
+    }
+  ],
+  "id": 13,
+  "languages": [
+    "en"
+  ],
+  "last_air_date": "2019-05-19",
+  "name": "TV Series Dicoding",
+  "number_of_episodes": 73,
+  "number_of_seasons": 8,
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_name": "Original Dicoding TV",
+  "overview": "Overview TV",
+  "popularity": 369.594,
+  "poster_path": "/tv-series.jpg",
+  "status": "Ended",
+  "tagline": "Winter Is Coming",
+  "type": "Scripted",
+  "vote_average": 8.3,
+  "vote_count": 11504
+}
