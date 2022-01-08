@@ -733,5 +733,18 @@ void main() {
       final resultList = result.getOrElse(() => []);
       expect(resultList, equals(tvList));
     });
+
+    test(
+        'should return server failure when call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTVSeriesRecommendations(tId))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getTVSeriesRecommendations(tId);
+      // assert
+      verify(mockRemoteDataSource.getTVSeriesRecommendations(tId));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
   });
 }
