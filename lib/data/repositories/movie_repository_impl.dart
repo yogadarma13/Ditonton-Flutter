@@ -199,7 +199,11 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<Either<Failure, List<Movie>>> getTVSeriesRecommendations(
       int id) async {
-    final result = await remoteDataSource.getTVSeriesRecommendations(id);
-    return Right(result.map((model) => model.toEntity()).toList());
+    try {
+      final result = await remoteDataSource.getTVSeriesRecommendations(id);
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    }
   }
 }
