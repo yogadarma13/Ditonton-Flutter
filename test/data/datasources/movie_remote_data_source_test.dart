@@ -318,7 +318,7 @@ void main() {
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/$tId?$API_KEY')))
-          .thenAnswer((_) async => http.Response('Unauthorized', 404));
+          .thenAnswer((_) async => http.Response('Unauthorized', 401));
       // act
       final call = dataSource.getTVSeriesDetail(tId);
       // assert
