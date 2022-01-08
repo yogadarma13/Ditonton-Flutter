@@ -715,4 +715,23 @@ void main() {
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
   });
+
+  group('Get Movie Recommendations', () {
+    final tvList = <TvModel>[];
+    final tId = 13;
+
+    test('should return data (tv series list) when the call is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTVSeriesRecommendations(tId))
+          .thenAnswer((_) async => tvList);
+      // act
+      final result = await repository.getTVSeriesRecommendations(tId);
+      // assert
+      verify(mockRemoteDataSource.getTVSeriesRecommendations(tId));
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, equals(tvList));
+    });
+  });
 }
