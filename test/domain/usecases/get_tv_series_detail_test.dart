@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -14,7 +15,7 @@ void main() {
     useCase = GetTvSeriesDetail(mockMovieRepository);
   });
 
-  final tId = 1;
+  final tId = 13;
 
   test('should get tv series detail from the repository', () async {
     // arrange
