@@ -4,6 +4,7 @@ import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
+import 'package:ditonton/data/models/tv_detail_response.dart';
 import 'package:ditonton/data/models/tv_model.dart';
 import 'package:ditonton/data/models/tv_response.dart';
 import 'package:http/http.dart' as http;
@@ -27,6 +28,8 @@ abstract class MovieRemoteDataSource {
   Future<List<TvModel>> getPopularTVSeries();
 
   Future<List<TvModel>> getTopRatedTVSeries();
+
+  Future<TvDetailResponse> getTVSeriesDetail(int id);
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
@@ -143,5 +146,13 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     } else {
       throw ServerException();
     }
+  }
+
+  @override
+  Future<TvDetailResponse> getTVSeriesDetail(int id) async {
+    final response =
+        await client.get(Uri.parse('$BASE_URL/tv/$id?$API_KEY'));
+
+    return TvDetailResponse.fromJson(json.decode(response.body));
   }
 }
