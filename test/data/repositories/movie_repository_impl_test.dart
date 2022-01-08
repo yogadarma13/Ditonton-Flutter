@@ -687,5 +687,18 @@ void main() {
       verify(mockRemoteDataSource.getTVSeriesDetail(tId));
       expect(result, equals(Right(testTvDetail)));
     });
+
+    test(
+        'should return Server Failure when the call to remote data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.getTVSeriesDetail(tId))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.getTVSeriesDetail(tId);
+      // assert
+      verify(mockRemoteDataSource.getTVSeriesDetail(tId));
+      expect(result, equals(Left(ServerFailure(''))));
+    });
   });
 }
