@@ -325,4 +325,24 @@ void main() {
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
+
+  group('get tv series recommendations', () {
+    final tvList = TvResponse.fromJson(
+            json.decode(readJson('dummy_data/tv_recommendations.json')))
+        .tvList;
+    final tId = 13;
+
+    test('should return list of TV Series Model when the response code is 200',
+        () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$BASE_URL/tv/$tId/recommendations?$API_KEY')))
+          .thenAnswer((_) async => http.Response(
+              readJson('dummy_data/tv_recommendations.json'), 200));
+      // act
+      final result = await dataSource.getTVSeriesRecommendations(tId);
+      // assert
+      expect(result, equals(tvList));
+    });
+  });
 }
