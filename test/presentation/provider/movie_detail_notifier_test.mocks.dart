@@ -11,9 +11,11 @@ import 'package:ditonton/domain/entities/movie_detail.dart' as _i6;
 import 'package:ditonton/domain/usecases/get_movie_detail.dart' as _i3;
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart' as _i8;
 import 'package:ditonton/domain/usecases/get_tv_series_detail.dart' as _i7;
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i10;
-import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i12;
-import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i11;
+import 'package:ditonton/domain/usecases/get_tv_series_recommendations.dart'
+    as _i10;
+import 'package:ditonton/domain/usecases/get_watchlist_status.dart' as _i11;
+import 'package:ditonton/domain/usecases/remove_watchlist.dart' as _i13;
+import 'package:ditonton/domain/usecases/save_watchlist.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: avoid_redundant_argument_values
@@ -84,11 +86,30 @@ class MockGetMovieRecommendationsUseCase extends _i1.Mock
   String toString() => super.toString();
 }
 
+/// A class which mocks [GetTvSeriesRecommendationsUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetTvSeriesRecommendationsUseCase extends _i1.Mock
+    implements _i10.GetTvSeriesRecommendationsUseCase {
+  MockGetTvSeriesRecommendationsUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Either<_i5.Failure, List<_i9.Movie>>> execute(dynamic id) =>
+      (super.noSuchMethod(Invocation.method(#execute, [id]),
+          returnValue: Future<_i2.Either<_i5.Failure, List<_i9.Movie>>>.value(
+              _FakeEither_0<_i5.Failure, List<_i9.Movie>>())) as _i4
+          .Future<_i2.Either<_i5.Failure, List<_i9.Movie>>>);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [GetWatchListStatusUseCase].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGetWatchListStatusUseCase extends _i1.Mock
-    implements _i10.GetWatchListStatusUseCase {
+    implements _i11.GetWatchListStatusUseCase {
   MockGetWatchListStatusUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -105,7 +126,7 @@ class MockGetWatchListStatusUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSaveWatchlistUseCase extends _i1.Mock
-    implements _i11.SaveWatchlistUseCase {
+    implements _i12.SaveWatchlistUseCase {
   MockSaveWatchlistUseCase() {
     _i1.throwOnMissingStub(this);
   }
@@ -124,7 +145,7 @@ class MockSaveWatchlistUseCase extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRemoveWatchlistUseCase extends _i1.Mock
-    implements _i12.RemoveWatchlistUseCase {
+    implements _i13.RemoveWatchlistUseCase {
   MockRemoveWatchlistUseCase() {
     _i1.throwOnMissingStub(this);
   }
