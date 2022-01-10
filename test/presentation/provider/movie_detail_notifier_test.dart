@@ -310,5 +310,16 @@ void main() {
       verify(mockGetTvSeriesRecommendationsUseCase.execute(tvId));
       expect(provider.movieRecommendations, tMovies2);
     });
+
+    test('should update recommendation state when data is gotten successfully',
+        () async {
+      // arrange
+      _arrangeUsecase();
+      // act
+      await provider.fetchMovieDetail(CategoryMovie.TvSeries, tvId);
+      // assert
+      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.movieRecommendations, tMovies2);
+    });
   });
 }
