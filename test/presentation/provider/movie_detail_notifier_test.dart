@@ -299,4 +299,16 @@ void main() {
       expect(provider.movieRecommendations, tMovies2);
     });
   });
+
+  group('Get TV Series Recommendations', () {
+    test('should get data from the usecase', () async {
+      // arrange
+      _arrangeUsecase();
+      // act
+      await provider.fetchMovieDetail(CategoryMovie.TvSeries, tvId);
+      // assert
+      verify(mockGetTvSeriesRecommendationsUseCase.execute(tvId));
+      expect(provider.movieRecommendations, tMovies2);
+    });
+  });
 }
