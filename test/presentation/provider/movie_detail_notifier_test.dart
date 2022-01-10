@@ -286,5 +286,17 @@ void main() {
       expect(provider.movie, testTvDetail);
       expect(listenerCallCount, 3);
     });
+
+    test(
+        'should change recommendation tv series when data is gotten successfully',
+        () async {
+      // arrange
+      _arrangeUsecase();
+      // act
+      await provider.fetchMovieDetail(CategoryMovie.TvSeries, tvId);
+      // assert
+      expect(provider.movieState, RequestState.Loaded);
+      expect(provider.movieRecommendations, tMovies2);
+    });
   });
 }
