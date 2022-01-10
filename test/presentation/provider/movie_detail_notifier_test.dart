@@ -31,7 +31,8 @@ void main() {
   late MockGetMovieDetailUseCase mockGetMovieDetailUseCase;
   late MockGetTvSeriesDetailUseCase mockGetTvSeriesDetailUseCase;
   late MockGetMovieRecommendationsUseCase mockGetMovieRecommendationsUseCase;
-  late MockGetTvSeriesRecommendationsUseCase mockGetTvSeriesRecommendationsUseCase;
+  late MockGetTvSeriesRecommendationsUseCase
+      mockGetTvSeriesRecommendationsUseCase;
   late MockGetWatchListStatusUseCase mockGetWatchlistStatusUseCase;
   late MockSaveWatchlistUseCase mockSaveWatchlistUseCase;
   late MockRemoveWatchlistUseCase mockRemoveWatchlistUseCase;
@@ -42,7 +43,8 @@ void main() {
     mockGetMovieDetailUseCase = MockGetMovieDetailUseCase();
     mockGetTvSeriesDetailUseCase = MockGetTvSeriesDetailUseCase();
     mockGetMovieRecommendationsUseCase = MockGetMovieRecommendationsUseCase();
-    mockGetTvSeriesRecommendationsUseCase = MockGetTvSeriesRecommendationsUseCase();
+    mockGetTvSeriesRecommendationsUseCase =
+        MockGetTvSeriesRecommendationsUseCase();
     mockGetWatchlistStatusUseCase = MockGetWatchListStatusUseCase();
     mockSaveWatchlistUseCase = MockSaveWatchlistUseCase();
     mockRemoveWatchlistUseCase = MockRemoveWatchlistUseCase();
@@ -70,7 +72,17 @@ void main() {
     title: 'title',
     voteAverage: 1,
   );
+
+  final tMovie2 = Movie(
+      id: 1,
+      overview: "Overview TV",
+      posterPath: "/tv-series.jpg",
+      releaseDate: "2022-01-01",
+      title: "TV Series Dicoding",
+      voteAverage: 98.4);
+
   final tMovies = <Movie>[tMovie];
+  final tMovies2 = <Movie>[tMovie2];
 
   void _arrangeUsecase() {
     when(mockGetMovieDetailUseCase.execute(tId))
@@ -79,6 +91,8 @@ void main() {
         .thenAnswer((_) async => Right(testTvDetail));
     when(mockGetMovieRecommendationsUseCase.execute(tId))
         .thenAnswer((_) async => Right(tMovies));
+    when(mockGetTvSeriesRecommendationsUseCase.execute(tvId))
+        .thenAnswer((_) async => Right(tMovies2));
   }
 
   group('Get Movie Detail', () {
