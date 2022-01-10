@@ -265,5 +265,15 @@ void main() {
       verify(mockGetTvSeriesDetailUseCase.execute(tvId));
       verify(mockGetTvSeriesRecommendationsUseCase.execute(tvId));
     });
+
+    test('should change state to Loading when usecase is called', () {
+      // arrange
+      _arrangeUsecase();
+      // act
+      provider.fetchMovieDetail(CategoryMovie.TvSeries, tvId);
+      // assert
+      expect(provider.movieState, RequestState.Loading);
+      expect(listenerCallCount, 1);
+    });
   });
 }
