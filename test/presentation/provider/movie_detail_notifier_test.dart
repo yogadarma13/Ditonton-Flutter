@@ -321,5 +321,18 @@ void main() {
       expect(provider.recommendationState, RequestState.Loaded);
       expect(provider.movieRecommendations, tMovies2);
     });
+
+    test('should update error message when request in successful', () async {
+      // arrange
+      when(mockGetTvSeriesDetailUseCase.execute(tvId))
+          .thenAnswer((_) async => Right(testTvDetail));
+      when(mockGetTvSeriesRecommendationsUseCase.execute(tvId))
+          .thenAnswer((_) async => Left(ServerFailure('Failed')));
+      // act
+      await provider.fetchMovieDetail(CategoryMovie.TvSeries, tvId);
+      // assert
+      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.message, 'Failed');
+    });
   });
 }
