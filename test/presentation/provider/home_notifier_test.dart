@@ -128,5 +128,17 @@ void main() {
       // assert
       expect(provider.airingTodayState, RequestState.Loading);
     });
+
+    test('should change tv series when data is gotten successfully', () async {
+      // arrange
+      when(mockGetAiringTodayTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await provider.fetchAiringTodayTvSeries();
+      // assert
+      expect(provider.airingTodayState, RequestState.Loaded);
+      expect(provider.airingTodayTvSeries, tMovieList2);
+      expect(listenerCallCount, 2);
+    });
   });
 }
