@@ -44,7 +44,7 @@ void main() {
       when(mockGetNowPlayingMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      provider.fetchNowPlayingMovies(CategoryMovie.Movies);
+      provider.fetchNowPlayingMovies();
       // assert
       verify(mockGetNowPlayingMoviesUseCase.execute());
     });

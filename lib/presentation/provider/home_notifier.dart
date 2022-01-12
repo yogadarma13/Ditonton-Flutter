@@ -10,4 +10,21 @@ class HomeNotifier extends ChangeNotifier {
   final GetNowPlayingMoviesUseCase getNowPlayingMovies;
 
   HomeNotifier({required this.getNowPlayingMovies});
+
+  Future<void> fetchNowPlayingMovies() async {
+    _nowPlayingState = RequestState.Loading;
+    notifyListeners();
+
+    final result = await getNowPlayingMovies.execute();
+    // result.fold(
+    //   (failure) {
+    //     _nowPlayingState = RequestState.Error;
+    //     notifyListeners();
+    //   },
+    //   (moviesData) {
+    //     _nowPlayingState = RequestState.Loaded;
+    //     notifyListeners();
+    //   },
+    // );
+  }
 }
