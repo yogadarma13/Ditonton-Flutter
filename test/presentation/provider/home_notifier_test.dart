@@ -48,5 +48,15 @@ void main() {
       // assert
       verify(mockGetNowPlayingMoviesUseCase.execute());
     });
+
+    test('should change state to Loading when usecase is called', () {
+      // arrange
+      when(mockGetNowPlayingMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      provider.fetchNowPlayingMovies();
+      // assert
+      expect(provider.nowPlayingState, RequestState.Loading);
+    });
   });
 }
