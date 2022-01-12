@@ -1,8 +1,13 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:flutter/material.dart';
 
 class HomeNotifier extends ChangeNotifier {
+  var _nowPlayingMovies = <Movie>[];
+
+  List<Movie> get nowPlayingMovies => _nowPlayingMovies;
+
   RequestState _nowPlayingState = RequestState.Empty;
 
   RequestState get nowPlayingState => _nowPlayingState;
@@ -16,15 +21,13 @@ class HomeNotifier extends ChangeNotifier {
     notifyListeners();
 
     final result = await getNowPlayingMovies.execute();
-    // result.fold(
-    //   (failure) {
-    //     _nowPlayingState = RequestState.Error;
-    //     notifyListeners();
-    //   },
-    //   (moviesData) {
-    //     _nowPlayingState = RequestState.Loaded;
-    //     notifyListeners();
-    //   },
-    // );
+    result.fold(
+      (failure) {},
+      (moviesData) {
+        _nowPlayingState = RequestState.Loaded;
+        _nowPlayingMovies = moviesData;
+        notifyListeners();
+      },
+    );
   }
 }
