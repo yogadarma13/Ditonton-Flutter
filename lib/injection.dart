@@ -10,7 +10,11 @@ import 'package:ditonton/domain/usecases/get_movie_detail.dart';
 import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/get_top_rated_tv_series.dart';
+import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
+import 'package:ditonton/domain/usecases/get_tv_series_recommendations.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
@@ -31,16 +35,19 @@ void init() {
   // provider
   locator.registerFactory(
     () => MovieListNotifier(
-      getNowPlayingMovies: locator(),
-      getAiringTodayTvSeries: locator(),
-      getPopularMovies: locator(),
-      getTopRatedMovies: locator(),
-    ),
+        getNowPlayingMovies: locator(),
+        getAiringTodayTvSeries: locator(),
+        getPopularMovies: locator(),
+        getPopularTvSeries: locator(),
+        getTopRatedMovies: locator(),
+        getTopRatedTvSeries: locator()),
   );
   locator.registerFactory(
     () => MovieDetailNotifier(
       getMovieDetail: locator(),
       getMovieRecommendations: locator(),
+      getTvSeriesDetail: locator(),
+      getTvSeriesRecommendations: locator(),
       getWatchListStatus: locator(),
       saveWatchlist: locator(),
       removeWatchlist: locator(),
@@ -52,9 +59,7 @@ void init() {
     ),
   );
   locator.registerFactory(
-    () => PopularMoviesNotifier(
-      locator(),
-    ),
+    () => PopularMoviesNotifier(locator(), locator()),
   );
   locator.registerFactory(
     () => TopRatedMoviesNotifier(
@@ -90,6 +95,14 @@ void init() {
       () => GetWatchlistMovies(locator()));
   locator.registerLazySingleton<GetAiringTodayTvSeriesUseCase>(
       () => GetAiringTodayTvSeries(locator()));
+  locator.registerLazySingleton<GetPopularTvSeriesUseCase>(
+      () => GetPopularTvSeries(locator()));
+  locator.registerLazySingleton<GetTopRatedTvSeriesUseCase>(
+      () => GetTopRatedTvSeries(locator()));
+  locator.registerLazySingleton<GetTvSeriesDetailUseCase>(
+      () => GetTvSeriesDetail(locator()));
+  locator.registerLazySingleton<GetTvSeriesRecommendationsUseCase>(
+      () => GetTvSeriesRecommendations(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(

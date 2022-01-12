@@ -17,7 +17,7 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
     super.initState();
     Future.microtask(() =>
         Provider.of<PopularMoviesNotifier>(context, listen: false)
-            .fetchPopularMovies());
+            .fetchPopularMovies(CategoryMovie.Movies));
   }
 
   @override

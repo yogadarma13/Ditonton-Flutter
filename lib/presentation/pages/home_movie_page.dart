@@ -13,6 +13,12 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomeMoviePage extends StatefulWidget {
+  static const ROUTE_NAME = '/movie';
+
+  final CategoryMovie category;
+
+  HomeMoviePage({required this.category});
+
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
@@ -23,9 +29,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
     super.initState();
     Future.microtask(
         () => Provider.of<MovieListNotifier>(context, listen: false)
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies());
+          ..fetchNowPlayingMovies(widget.category)
+          ..fetchPopularMovies(widget.category)
+          ..fetchTopRatedMovies(widget.category));
   }
 
   @override

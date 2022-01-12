@@ -1,3 +1,5 @@
+import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +41,24 @@ class _CustomDrawerState extends State<CustomDrawer>
             accountEmail: Text('ditonton@dicoding.com'),
           ),
           ListTile(
+            leading: Icon(Icons.home_filled),
+            title: Text('Home'),
+          ),
+          ListTile(
             leading: Icon(Icons.movie),
             title: Text('Movies'),
+            onTap: () {
+              Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME, arguments: CategoryMovie.Movies);
+              _animationController.reverse();
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.tv),
+            title: Text('TV Series'),
+            onTap: () {
+              Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME, arguments: CategoryMovie.TvSeries);
+              _animationController.reverse();
+            },
           ),
           ListTile(
             leading: Icon(Icons.save_alt),
