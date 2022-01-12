@@ -15,12 +15,16 @@ import 'movie_list_notifier_test.mocks.dart';
 void main() {
   late HomeNotifier provider;
   late MockGetNowPlayingMoviesUseCase mockGetNowPlayingMoviesUseCase;
+  late int listenerCallCount;
 
   setUp(() {
+    listenerCallCount = 0;
     mockGetNowPlayingMoviesUseCase = MockGetNowPlayingMoviesUseCase();
     provider = HomeNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
-    );
+    )..addListener(() {
+        listenerCallCount += 1;
+      });
   });
 
   final tMovie = Movie(
@@ -57,6 +61,18 @@ void main() {
       provider.fetchNowPlayingMovies();
       // assert
       expect(provider.nowPlayingState, RequestState.Loading);
+    });
+
+    test('should change movies when data is gotten successfully', () async {
+      // arrange
+      when(mockGetNowPlayingMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      await provider.fetchNowPlayingMovies();
+      // assert
+      expect(provider.nowPlayingState, RequestState.Loaded);
+      expect(provider.nowPlayingMovies, tMovieList);
+      expect(listenerCallCount, 2);
     });
   });
 }
