@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,10 +13,12 @@ import 'movie_list_notifier_test.mocks.dart';
 
 @GenerateMocks([
   GetNowPlayingMoviesUseCase,
+  GetAiringTodayTvSeriesUseCase,
 ])
 void main() {
   late HomeNotifier provider;
   late MockGetNowPlayingMoviesUseCase mockGetNowPlayingMoviesUseCase;
+  late MockGetAiringTodayTvSeriesUseCase mockGetAiringTodayTvSeriesUseCase;
   late int listenerCallCount;
 
   setUp(() {
@@ -23,6 +26,7 @@ void main() {
     mockGetNowPlayingMoviesUseCase = MockGetNowPlayingMoviesUseCase();
     provider = HomeNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
+      getAiringTodayTvSeries: mockGetAiringTodayTvSeriesUseCase,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -37,7 +41,17 @@ void main() {
     voteAverage: 1,
   );
 
+  final tMovie2 = Movie(
+    id: 2,
+    overview: 'Synopsis',
+    posterPath: 'poster',
+    releaseDate: 'release',
+    title: 'Movie1',
+    voteAverage: 2,
+  );
+
   final tMovieList = <Movie>[tMovie];
+  final tMovieList2 = <Movie>[tMovie2];
 
   group('now playing movies', () {
     test('initialState should be Empty', () {
@@ -92,6 +106,16 @@ void main() {
   group('airing today tv series', () {
     test('initialState should be Empty', () {
       expect(provider.airingTodayState, equals(RequestState.Empty));
+    });
+
+    test('should get data from the usecase', () async {
+      // arrange
+      when(mockGetAiringTodayTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      provider.fetchAiringTodayTvSeries();
+      // assert
+      verify(mockGetAiringTodayTvSeriesUseCase.execute());
     });
   });
 }
