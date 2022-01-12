@@ -88,4 +88,10 @@ void main() {
       expect(listenerCallCount, 2);
     });
   });
+
+  group('airing today tv series', () {
+    test('initialState should be Empty', () {
+      expect(provider.airingTodayState, equals(RequestState.Empty));
+    });
+  });
 }
