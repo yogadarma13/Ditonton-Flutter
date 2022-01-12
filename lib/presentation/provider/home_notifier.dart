@@ -57,10 +57,17 @@ class HomeNotifier extends ChangeNotifier {
     notifyListeners();
 
     final result = await getAiringTodayTvSeries.execute();
-    result.fold((failure) {}, (tvSeriesData) {
-      _airingTodayState = RequestState.Loaded;
-      _airingTodayTvSeries = tvSeriesData;
-      notifyListeners();
-    });
+    result.fold(
+      (failure) {
+        _airingTodayState = RequestState.Error;
+        _message = failure.message;
+        notifyListeners();
+      },
+      (tvSeriesData) {
+        _airingTodayState = RequestState.Loaded;
+        _airingTodayTvSeries = tvSeriesData;
+        notifyListeners();
+      },
+    );
   }
 }
