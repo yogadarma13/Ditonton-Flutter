@@ -16,13 +16,21 @@ class HomeNotifier extends ChangeNotifier {
 
   HomeNotifier({required this.getNowPlayingMovies});
 
+  String _message = '';
+
+  String get message => _message;
+
   Future<void> fetchNowPlayingMovies() async {
     _nowPlayingState = RequestState.Loading;
     notifyListeners();
 
     final result = await getNowPlayingMovies.execute();
     result.fold(
-      (failure) {},
+      (failure) {
+        _nowPlayingState = RequestState.Error;
+        _message = failure.message;
+        notifyListeners();
+      },
       (moviesData) {
         _nowPlayingState = RequestState.Loaded;
         _nowPlayingMovies = moviesData;
