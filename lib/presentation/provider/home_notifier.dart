@@ -12,6 +12,10 @@ class HomeNotifier extends ChangeNotifier {
 
   RequestState get nowPlayingState => _nowPlayingState;
 
+  RequestState _airingTodayState = RequestState.Empty;
+
+  RequestState get airingTodayState => _airingTodayState;
+
   final GetNowPlayingMoviesUseCase getNowPlayingMovies;
 
   HomeNotifier({required this.getNowPlayingMovies});
