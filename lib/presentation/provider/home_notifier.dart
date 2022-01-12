@@ -13,6 +13,10 @@ class HomeNotifier extends ChangeNotifier {
 
   RequestState get nowPlayingState => _nowPlayingState;
 
+  var _airingTodayTvSeries = <Movie>[];
+
+  List<Movie> get airingTodayTvSeries => _airingTodayTvSeries;
+
   RequestState _airingTodayState = RequestState.Empty;
 
   RequestState get airingTodayState => _airingTodayState;
@@ -48,10 +52,15 @@ class HomeNotifier extends ChangeNotifier {
     );
   }
 
-  void fetchAiringTodayTvSeries() {
+  Future<void> fetchAiringTodayTvSeries() async {
     _airingTodayState = RequestState.Loading;
     notifyListeners();
 
-    getAiringTodayTvSeries.execute();
+    final result = await getAiringTodayTvSeries.execute();
+    result.fold((failure) {}, (tvSeriesData) {
+      _airingTodayState = RequestState.Loaded;
+      _airingTodayTvSeries = tvSeriesData;
+      notifyListeners();
+    });
   }
 }
