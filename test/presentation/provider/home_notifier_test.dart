@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
@@ -72,6 +73,18 @@ void main() {
       // assert
       expect(provider.nowPlayingState, RequestState.Loaded);
       expect(provider.nowPlayingMovies, tMovieList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetNowPlayingMoviesUseCase.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchNowPlayingMovies();
+      // assert
+      expect(provider.nowPlayingState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
   });
