@@ -49,6 +49,9 @@ class HomeNotifier extends ChangeNotifier {
   }
 
   void fetchAiringTodayTvSeries() {
+    _airingTodayState = RequestState.Loading;
+    notifyListeners();
+
     getAiringTodayTvSeries.execute();
   }
 }
