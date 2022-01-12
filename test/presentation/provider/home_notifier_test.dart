@@ -1,8 +1,11 @@
+import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import 'movie_list_notifier_test.mocks.dart';
 
@@ -20,9 +23,30 @@ void main() {
     );
   });
 
+  final tMovie = Movie(
+    id: 1,
+    overview: 'overview',
+    posterPath: 'posterPath',
+    releaseDate: 'releaseDate',
+    title: 'title',
+    voteAverage: 1,
+  );
+
+  final tMovieList = <Movie>[tMovie];
+
   group('now playing movies', () {
     test('initialState should be Empty', () {
       expect(provider.nowPlayingState, equals(RequestState.Empty));
+    });
+
+    test('should get data from the usecase', () async {
+      // arrange
+      when(mockGetNowPlayingMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      provider.fetchNowPlayingMovies(CategoryMovie.Movies);
+      // assert
+      verify(mockGetNowPlayingMoviesUseCase.execute());
     });
   });
 }
