@@ -24,6 +24,7 @@ void main() {
   setUp(() {
     listenerCallCount = 0;
     mockGetNowPlayingMoviesUseCase = MockGetNowPlayingMoviesUseCase();
+    mockGetAiringTodayTvSeriesUseCase = MockGetAiringTodayTvSeriesUseCase();
     provider = HomeNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
       getAiringTodayTvSeries: mockGetAiringTodayTvSeriesUseCase,

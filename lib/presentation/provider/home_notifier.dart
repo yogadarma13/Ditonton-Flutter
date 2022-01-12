@@ -1,5 +1,6 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +18,12 @@ class HomeNotifier extends ChangeNotifier {
   RequestState get airingTodayState => _airingTodayState;
 
   final GetNowPlayingMoviesUseCase getNowPlayingMovies;
+  final GetAiringTodayTvSeriesUseCase getAiringTodayTvSeries;
 
-  HomeNotifier({required this.getNowPlayingMovies});
+  HomeNotifier({
+    required this.getNowPlayingMovies,
+    required this.getAiringTodayTvSeries,
+  });
 
   String _message = '';
 
@@ -41,5 +46,9 @@ class HomeNotifier extends ChangeNotifier {
         notifyListeners();
       },
     );
+  }
+
+  void fetchAiringTodayTvSeries() {
+    getAiringTodayTvSeries.execute();
   }
 }
