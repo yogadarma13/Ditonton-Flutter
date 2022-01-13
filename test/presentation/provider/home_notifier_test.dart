@@ -4,6 +4,7 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
+import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -14,20 +15,24 @@ import 'movie_list_notifier_test.mocks.dart';
 @GenerateMocks([
   GetNowPlayingMoviesUseCase,
   GetAiringTodayTvSeriesUseCase,
+  GetPopularMoviesUseCase,
 ])
 void main() {
   late HomeNotifier provider;
   late MockGetNowPlayingMoviesUseCase mockGetNowPlayingMoviesUseCase;
   late MockGetAiringTodayTvSeriesUseCase mockGetAiringTodayTvSeriesUseCase;
+  late MockGetPopularMoviesUseCase mockGetPopularMoviesUseCase;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetNowPlayingMoviesUseCase = MockGetNowPlayingMoviesUseCase();
     mockGetAiringTodayTvSeriesUseCase = MockGetAiringTodayTvSeriesUseCase();
+    mockGetPopularMoviesUseCase = MockGetPopularMoviesUseCase();
     provider = HomeNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
       getAiringTodayTvSeries: mockGetAiringTodayTvSeriesUseCase,
+      getPopularMovies: mockGetPopularMoviesUseCase,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -151,6 +156,12 @@ void main() {
       expect(provider.airingTodayState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
+    });
+  });
+
+  group('popular movies', () {
+    test('initialState should be Empty', () {
+      expect(provider.popularMoviesState, equals(RequestState.Empty));
     });
   });
 }
