@@ -57,12 +57,12 @@ class HomeNotifier extends ChangeNotifier {
 
     final result = await getNowPlayingMovies.execute();
     result.fold(
-      (failure) {
+          (failure) {
         _nowPlayingState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-      (moviesData) {
+          (moviesData) {
         _nowPlayingState = RequestState.Loaded;
         _nowPlayingMovies = moviesData;
         notifyListeners();
@@ -76,12 +76,12 @@ class HomeNotifier extends ChangeNotifier {
 
     final result = await getAiringTodayTvSeries.execute();
     result.fold(
-      (failure) {
+          (failure) {
         _airingTodayState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-      (tvSeriesData) {
+          (tvSeriesData) {
         _airingTodayState = RequestState.Loaded;
         _airingTodayTvSeries = tvSeriesData;
         notifyListeners();
@@ -95,16 +95,20 @@ class HomeNotifier extends ChangeNotifier {
 
     final result = await getPopularMovies.execute();
     result.fold(
-      (failure) {
+          (failure) {
         _popularMoviesState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-      (moviesData) {
+          (moviesData) {
         _popularMoviesState = RequestState.Loaded;
         _popularMovies = moviesData;
         notifyListeners();
       },
     );
+  }
+
+  void fetchPopularTvSeries() {
+    getPopularTvSeries.execute();
   }
 }
