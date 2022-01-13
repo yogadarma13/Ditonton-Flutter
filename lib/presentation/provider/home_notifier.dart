@@ -79,5 +79,6 @@ class HomeNotifier extends ChangeNotifier {
   }
 
   void fetchPopularMovies() {
+    getPopularMovies.execute();
   }
 }
