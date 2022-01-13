@@ -218,5 +218,15 @@ void main() {
     test('initialState should be Empty', () {
       expect(provider.popularTvSeriesState, equals(RequestState.Empty));
     });
+
+    test('should get data from the usecase', () async {
+      // arrange
+      when(mockGetPopularTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      provider.fetchPopularTvSeries();
+      // assert
+      verify(mockGetPopularTvSeriesUseCase.execute());
+    });
   });
 }
