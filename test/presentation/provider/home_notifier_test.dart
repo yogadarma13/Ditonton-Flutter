@@ -16,12 +16,14 @@ import 'movie_list_notifier_test.mocks.dart';
   GetNowPlayingMoviesUseCase,
   GetAiringTodayTvSeriesUseCase,
   GetPopularMoviesUseCase,
+  GetPopularTvSeriesUseCase,
 ])
 void main() {
   late HomeNotifier provider;
   late MockGetNowPlayingMoviesUseCase mockGetNowPlayingMoviesUseCase;
   late MockGetAiringTodayTvSeriesUseCase mockGetAiringTodayTvSeriesUseCase;
   late MockGetPopularMoviesUseCase mockGetPopularMoviesUseCase;
+  late MockGetPopularTvSeriesUseCase mockGetPopularTvSeriesUseCase;
   late int listenerCallCount;
 
   setUp(() {
@@ -29,10 +31,12 @@ void main() {
     mockGetNowPlayingMoviesUseCase = MockGetNowPlayingMoviesUseCase();
     mockGetAiringTodayTvSeriesUseCase = MockGetAiringTodayTvSeriesUseCase();
     mockGetPopularMoviesUseCase = MockGetPopularMoviesUseCase();
+    mockGetPopularTvSeriesUseCase = MockGetPopularTvSeriesUseCase();
     provider = HomeNotifier(
       getNowPlayingMovies: mockGetNowPlayingMoviesUseCase,
       getAiringTodayTvSeries: mockGetAiringTodayTvSeriesUseCase,
       getPopularMovies: mockGetPopularMoviesUseCase,
+      getPopularTvSeries: mockGetPopularTvSeriesUseCase,
     )..addListener(() {
         listenerCallCount += 1;
       });
@@ -206,6 +210,12 @@ void main() {
       expect(provider.popularMoviesState, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
+    });
+  });
+
+  group('popular tv series', () {
+    test('initialState should be Empty', () {
+      expect(provider.popularTvSeriesState, equals(RequestState.Empty));
     });
   });
 }
