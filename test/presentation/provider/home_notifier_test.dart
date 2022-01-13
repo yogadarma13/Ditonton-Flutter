@@ -173,5 +173,15 @@ void main() {
       // assert
       verify(mockGetPopularMoviesUseCase.execute());
     });
+
+    test('should change state to Loading when usecase is called', () {
+      // arrange
+      when(mockGetPopularMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      provider.fetchPopularMovies();
+      // assert
+      expect(provider.popularMoviesState, RequestState.Loading);
+    });
   });
 }
