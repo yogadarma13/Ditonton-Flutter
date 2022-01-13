@@ -195,5 +195,17 @@ void main() {
       expect(provider.popularMovies, tMovieList);
       expect(listenerCallCount, 2);
     });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetPopularMoviesUseCase.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchPopularMovies();
+      // assert
+      expect(provider.popularMoviesState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
   });
 }
