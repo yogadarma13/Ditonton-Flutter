@@ -3,6 +3,7 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
 import 'package:flutter/material.dart';
 
 class HomeNotifier extends ChangeNotifier {
@@ -30,14 +31,20 @@ class HomeNotifier extends ChangeNotifier {
 
   RequestState get popularMoviesState => _popularMoviesState;
 
+  RequestState _popularTvSeriesState = RequestState.Empty;
+
+  RequestState get popularTvSeriesState => _popularTvSeriesState;
+
   final GetNowPlayingMoviesUseCase getNowPlayingMovies;
   final GetAiringTodayTvSeriesUseCase getAiringTodayTvSeries;
   final GetPopularMoviesUseCase getPopularMovies;
+  final GetPopularTvSeriesUseCase getPopularTvSeries;
 
   HomeNotifier({
     required this.getNowPlayingMovies,
     required this.getAiringTodayTvSeries,
     required this.getPopularMovies,
+    required this.getPopularTvSeries,
   });
 
   String _message = '';
