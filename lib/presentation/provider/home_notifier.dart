@@ -22,6 +22,10 @@ class HomeNotifier extends ChangeNotifier {
 
   RequestState get airingTodayState => _airingTodayState;
 
+  var _popularMovies = <Movie>[];
+
+  List<Movie> get popularMovies => _popularMovies;
+
   RequestState _popularMoviesState = RequestState.Empty;
 
   RequestState get popularMoviesState => _popularMoviesState;
@@ -78,10 +82,18 @@ class HomeNotifier extends ChangeNotifier {
     );
   }
 
-  void fetchPopularMovies() {
+  Future<void> fetchPopularMovies() async {
     _popularMoviesState = RequestState.Loading;
     notifyListeners();
 
-    getPopularMovies.execute();
+    final result = await getPopularMovies.execute();
+    result.fold(
+      (failure) {},
+      (moviesData) {
+        _popularMoviesState = RequestState.Loaded;
+        _popularMovies = moviesData;
+        notifyListeners();
+      },
+    );
   }
 }
