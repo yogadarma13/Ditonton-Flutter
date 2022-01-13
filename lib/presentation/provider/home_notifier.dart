@@ -79,6 +79,9 @@ class HomeNotifier extends ChangeNotifier {
   }
 
   void fetchPopularMovies() {
+    _popularMoviesState = RequestState.Loading;
+    notifyListeners();
+
     getPopularMovies.execute();
   }
 }
