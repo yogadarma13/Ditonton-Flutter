@@ -250,5 +250,17 @@ void main() {
       expect(provider.popularTvSeries, tMovieList2);
       expect(listenerCallCount, 2);
     });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetPopularTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchPopularTvSeries();
+      // assert
+      expect(provider.popularTvSeriesState, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
   });
 }
