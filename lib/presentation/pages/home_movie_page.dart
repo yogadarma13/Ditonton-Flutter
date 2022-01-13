@@ -38,8 +38,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Icon(Icons.menu),
-        title: Text('Ditonton'),
+        title: Text(widget.category == CategoryMovie.Movies ? 'Movies' : 'TV Series'),
         actions: [
           IconButton(
             onPressed: () {
