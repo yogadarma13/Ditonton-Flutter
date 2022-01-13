@@ -183,5 +183,17 @@ void main() {
       // assert
       expect(provider.popularMoviesState, RequestState.Loading);
     });
+
+    test('should change movies when data is gotten successfully', () async {
+      // arrange
+      when(mockGetPopularMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      await provider.fetchPopularMovies();
+      // assert
+      expect(provider.popularMoviesState, RequestState.Loaded);
+      expect(provider.popularMovies, tMovieList);
+      expect(listenerCallCount, 2);
+    });
   });
 }
