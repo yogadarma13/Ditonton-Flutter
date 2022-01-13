@@ -228,5 +228,15 @@ void main() {
       // assert
       verify(mockGetPopularTvSeriesUseCase.execute());
     });
+
+    test('should change state to Loading when usecase is called', () {
+      // arrange
+      when(mockGetPopularTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      provider.fetchPopularTvSeries();
+      // assert
+      expect(provider.popularTvSeriesState, RequestState.Loading);
+    });
   });
 }
