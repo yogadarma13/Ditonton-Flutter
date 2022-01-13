@@ -238,5 +238,17 @@ void main() {
       // assert
       expect(provider.popularTvSeriesState, RequestState.Loading);
     });
+
+    test('should change tv series when data is gotten successfully', () async {
+      // arrange
+      when(mockGetPopularTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await provider.fetchPopularTvSeries();
+      // assert
+      expect(provider.popularTvSeriesState, RequestState.Loaded);
+      expect(provider.popularTvSeries, tMovieList2);
+      expect(listenerCallCount, 2);
+    });
   });
 }
