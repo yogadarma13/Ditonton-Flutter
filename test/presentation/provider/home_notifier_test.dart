@@ -163,5 +163,15 @@ void main() {
     test('initialState should be Empty', () {
       expect(provider.popularMoviesState, equals(RequestState.Empty));
     });
+
+    test('should get data from the usecase', () async {
+      // arrange
+      when(mockGetPopularMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      provider.fetchPopularMovies();
+      // assert
+      verify(mockGetPopularMoviesUseCase.execute());
+    });
   });
 }
