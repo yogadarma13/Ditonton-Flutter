@@ -118,7 +118,11 @@ class HomeNotifier extends ChangeNotifier {
 
     final result = await getPopularTvSeries.execute();
     result.fold(
-      (failure) {},
+      (failure) {
+        _popularTvSeriesState = RequestState.Error;
+        _message = failure.message;
+        notifyListeners();
+      },
       (tvSeriesData) {
         _popularTvSeriesState = RequestState.Loaded;
         _popularTvSeries = tvSeriesData;
