@@ -115,5 +115,17 @@ void main() {
       expect(provider.searchResult, tMovieList2);
       expect(listenerCallCount, 2);
     });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockSearchTvSeriesUseCase.execute(tQuery2))
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await provider.fetchMovieSearch(tQuery2, CategoryMovie.TvSeries);
+      // assert
+      expect(provider.state, RequestState.Error);
+      expect(provider.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
   });
 }
