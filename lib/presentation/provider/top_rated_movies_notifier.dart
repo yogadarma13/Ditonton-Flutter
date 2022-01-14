@@ -17,7 +17,7 @@ class TopRatedMoviesNotifier extends ChangeNotifier {
   String _message = '';
   String get message => _message;
 
-  Future<void> fetchTopRatedMovies() async {
+  Future<void> fetchTopRatedMovies(CategoryMovie category) async {
     _state = RequestState.Loading;
     notifyListeners();
 

@@ -53,18 +53,19 @@ void main() {
       when(mockGetTopRatedMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      notifier.fetchTopRatedMovies();
+      notifier.fetchTopRatedMovies(CategoryMovie.Movies);
       // assert
       expect(notifier.state, RequestState.Loading);
       expect(listenerCallCount, 1);
     });
 
-    test('should change movies data when data is gotten successfully', () async {
+    test('should change movies data when data is gotten successfully',
+        () async {
       // arrange
       when(mockGetTopRatedMoviesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      await notifier.fetchTopRatedMovies();
+      await notifier.fetchTopRatedMovies(CategoryMovie.Movies);
       // assert
       expect(notifier.state, RequestState.Loaded);
       expect(notifier.movies, tMovieList);
@@ -76,7 +77,7 @@ void main() {
       when(mockGetTopRatedMoviesUseCase.execute())
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await notifier.fetchTopRatedMovies();
+      await notifier.fetchTopRatedMovies(CategoryMovie.Movies);
       // assert
       expect(notifier.state, RequestState.Error);
       expect(notifier.message, 'Server Failure');
@@ -95,4 +96,5 @@ void main() {
       expect(notifier.state, RequestState.Loading);
       expect(listenerCallCount, 1);
     });
+  });
 }
