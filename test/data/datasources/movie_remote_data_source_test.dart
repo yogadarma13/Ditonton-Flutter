@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
@@ -372,10 +371,21 @@ void main() {
           .thenAnswer((_) async =>
               http.Response(readJson('dummy_data/search_got_tv.json'), 200));
       // act
-      final result =
-          await dataSource.searchTVSeries(tQuery);
+      final result = await dataSource.searchTVSeries(tQuery);
       // assert
       expect(result, tvSearchResult);
+    });
+
+    test('should throw Server Exception when the response code is 401 or other',
+        () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')))
+          .thenAnswer((_) async => http.Response('Unauthorized', 401));
+      // act
+      final call = dataSource.searchTVSeries(tQuery);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
     });
   });
 }
