@@ -373,7 +373,7 @@ void main() {
               http.Response(readJson('dummy_data/search_got_tv.json'), 200));
       // act
       final result =
-          await dataSource.searchMovies(tQuery, CategoryMovie.TvSeries);
+          await dataSource.searchTVSeries(tQuery);
       // assert
       expect(result, tvSearchResult);
     });
