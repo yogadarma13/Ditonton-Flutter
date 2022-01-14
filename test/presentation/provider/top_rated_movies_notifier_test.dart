@@ -35,40 +35,64 @@ void main() {
     voteAverage: 1,
   );
 
+  final tMovie2 = Movie(
+    id: 2,
+    overview: 'Synopsis',
+    posterPath: 'poster',
+    releaseDate: 'release',
+    title: 'Movie1',
+    voteAverage: 2,
+  );
+
   final tMovieList = <Movie>[tMovie];
+  final tMovieList2 = <Movie>[tMovie2];
 
-  test('should change state to loading when usecase is called', () async {
-    // arrange
-    when(mockGetTopRatedMoviesUseCase.execute())
-        .thenAnswer((_) async => Right(tMovieList));
-    // act
-    notifier.fetchTopRatedMovies();
-    // assert
-    expect(notifier.state, RequestState.Loading);
-    expect(listenerCallCount, 1);
+  group('top rated movies', () {
+    test('should change state to loading when usecase is called', () async {
+      // arrange
+      when(mockGetTopRatedMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      notifier.fetchTopRatedMovies();
+      // assert
+      expect(notifier.state, RequestState.Loading);
+      expect(listenerCallCount, 1);
+    });
+
+    test('should change movies data when data is gotten successfully', () async {
+      // arrange
+      when(mockGetTopRatedMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      await notifier.fetchTopRatedMovies();
+      // assert
+      expect(notifier.state, RequestState.Loaded);
+      expect(notifier.movies, tMovieList);
+      expect(listenerCallCount, 2);
+    });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetTopRatedMoviesUseCase.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await notifier.fetchTopRatedMovies();
+      // assert
+      expect(notifier.state, RequestState.Error);
+      expect(notifier.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
   });
 
-  test('should change movies data when data is gotten successfully', () async {
-    // arrange
-    when(mockGetTopRatedMoviesUseCase.execute())
-        .thenAnswer((_) async => Right(tMovieList));
-    // act
-    await notifier.fetchTopRatedMovies();
-    // assert
-    expect(notifier.state, RequestState.Loaded);
-    expect(notifier.movies, tMovieList);
-    expect(listenerCallCount, 2);
-  });
-
-  test('should return error when data is unsuccessful', () async {
-    // arrange
-    when(mockGetTopRatedMoviesUseCase.execute())
-        .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
-    // act
-    await notifier.fetchTopRatedMovies();
-    // assert
-    expect(notifier.state, RequestState.Error);
-    expect(notifier.message, 'Server Failure');
-    expect(listenerCallCount, 2);
-  });
+  group('top rated tv series', () {
+    test('should change state to loading when usecase is called', () async {
+      // arrange
+      when(mockGetTopRatedMoviesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      notifier.fetchTopRatedMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(notifier.state, RequestState.Loading);
+      expect(listenerCallCount, 1);
+    });
 }
