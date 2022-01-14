@@ -61,7 +61,7 @@ void main() {
       when(mockSearchMoviesUseCase.execute(tQuery))
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      provider.fetchMovieSearch(tQuery);
+      provider.fetchMovieSearch(tQuery, CategoryMovie.Movies);
       // assert
       expect(provider.state, RequestState.Loading);
     });
@@ -72,7 +72,7 @@ void main() {
       when(mockSearchMoviesUseCase.execute(tQuery))
           .thenAnswer((_) async => Right(tMovieList));
       // act
-      await provider.fetchMovieSearch(tQuery);
+      await provider.fetchMovieSearch(tQuery, CategoryMovie.Movies);
       // assert
       expect(provider.state, RequestState.Loaded);
       expect(provider.searchResult, tMovieList);
@@ -84,7 +84,7 @@ void main() {
       when(mockSearchMoviesUseCase.execute(tQuery))
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       // act
-      await provider.fetchMovieSearch(tQuery);
+      await provider.fetchMovieSearch(tQuery, CategoryMovie.Movies);
       // assert
       expect(provider.state, RequestState.Error);
       expect(provider.message, 'Server Failure');
