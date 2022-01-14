@@ -777,5 +777,16 @@ void main() {
       final resultList = result.getOrElse(() => []);
       expect(resultList, tMovieList2);
     });
+
+    test('should return ServerFailure when call to data source is unsuccessful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTVSeries(tQuery))
+          .thenThrow(ServerException());
+      // act
+      final result = await repository.searchTVSeries(tQuery);
+      // assert
+      expect(result, Left(ServerFailure('')));
+    });
   });
 }
