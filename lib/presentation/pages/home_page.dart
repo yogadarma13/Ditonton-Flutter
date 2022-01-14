@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return MovieList(data.nowPlayingMovies);
+                  return MovieList(data.nowPlayingMovies, CategoryMovie.Movies);
                 } else {
                   return Text('Failed');
                 }
@@ -65,7 +65,8 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return MovieList(data.airingTodayTvSeries);
+                  return MovieList(
+                      data.airingTodayTvSeries, CategoryMovie.TvSeries);
                 } else {
                   return Text('Failed');
                 }
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularMovies);
+                  return MovieList(data.popularMovies, CategoryMovie.Movies);
                 } else {
                   return Text('Failed');
                 }
@@ -103,7 +104,8 @@ class _HomePageState extends State<HomePage> {
                     child: CircularProgressIndicator(),
                   );
                 } else if (state == RequestState.Loaded) {
-                  return MovieList(data.popularTvSeries);
+                  return MovieList(
+                      data.popularTvSeries, CategoryMovie.TvSeries);
                 } else {
                   return Text('Failed');
                 }

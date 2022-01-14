@@ -82,13 +82,25 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             case PopularMoviesPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
+              final category = settings.arguments as CategoryMovie;
+              return CupertinoPageRoute(
+                builder: (_) => PopularMoviesPage(
+                  category: category,
+                ),
+              );
             case TopRatedMoviesPage.ROUTE_NAME:
-              return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
+              final category = settings.arguments as CategoryMovie;
+              return CupertinoPageRoute(
+                builder: (_) => TopRatedMoviesPage(
+                  category: category,
+                ),
+              );
             case MovieDetailPage.ROUTE_NAME:
-              final id = settings.arguments as int;
+              final arguments = settings.arguments as DetailScreenArguments;
               return MaterialPageRoute(
-                builder: (_) => MovieDetailPage(id: id),
+                builder: (_) => MovieDetailPage(
+                  arguments: arguments,
+                ),
                 settings: settings,
               );
             case SearchPage.ROUTE_NAME:

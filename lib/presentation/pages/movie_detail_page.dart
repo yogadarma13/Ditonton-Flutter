@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/common/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -13,8 +13,9 @@ import 'package:provider/provider.dart';
 class MovieDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail';
 
-  final int id;
-  MovieDetailPage({required this.id});
+  final DetailScreenArguments arguments;
+
+  MovieDetailPage({required this.arguments});
 
   @override
   _MovieDetailPageState createState() => _MovieDetailPageState();
@@ -26,9 +27,9 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
     super.initState();
     Future.microtask(() {
       Provider.of<MovieDetailNotifier>(context, listen: false)
-          .fetchMovieDetail(CategoryMovie.Movies, widget.id);
+          .fetchMovieDetail(widget.arguments.category, widget.arguments.id);
       Provider.of<MovieDetailNotifier>(context, listen: false)
-          .loadWatchlistStatus(widget.id);
+          .loadWatchlistStatus(widget.arguments.id);
     });
   }
 
@@ -303,4 +304,11 @@ class DetailContent extends StatelessWidget {
       return '${minutes}m';
     }
   }
+}
+
+class DetailScreenArguments {
+  final int id;
+  final CategoryMovie category;
+
+  DetailScreenArguments({required this.id, required this.category});
 }
