@@ -53,8 +53,8 @@ class MockTopRatedMoviesNotifier extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
           as bool);
   @override
-  _i6.Future<void> fetchTopRatedMovies() =>
-      (super.noSuchMethod(Invocation.method(#fetchTopRatedMovies, []),
+  _i6.Future<void> fetchTopRatedMovies(_i4.CategoryMovie? category) =>
+      (super.noSuchMethod(Invocation.method(#fetchTopRatedMovies, [category]),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
   @override

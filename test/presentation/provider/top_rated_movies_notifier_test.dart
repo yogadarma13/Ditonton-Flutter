@@ -3,6 +3,7 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -10,20 +11,23 @@ import 'package:mockito/mockito.dart';
 
 import 'top_rated_movies_notifier_test.mocks.dart';
 
-@GenerateMocks([GetTopRatedMoviesUseCase])
+@GenerateMocks([GetTopRatedMoviesUseCase, GetTopRatedTvSeriesUseCase])
 void main() {
   late MockGetTopRatedMoviesUseCase mockGetTopRatedMoviesUseCase;
+  late MockGetTopRatedTvSeriesUseCase mockGetTopRatedTvSeriesUseCase;
   late TopRatedMoviesNotifier notifier;
   late int listenerCallCount;
 
   setUp(() {
     listenerCallCount = 0;
     mockGetTopRatedMoviesUseCase = MockGetTopRatedMoviesUseCase();
-    notifier =
-        TopRatedMoviesNotifier(getTopRatedMovies: mockGetTopRatedMoviesUseCase)
-          ..addListener(() {
-            listenerCallCount++;
-          });
+    mockGetTopRatedTvSeriesUseCase = MockGetTopRatedTvSeriesUseCase();
+    notifier = TopRatedMoviesNotifier(
+        getTopRatedMovies: mockGetTopRatedMoviesUseCase,
+        getTopRatedTvSeries: mockGetTopRatedTvSeriesUseCase)
+      ..addListener(() {
+        listenerCallCount++;
+      });
   });
 
   final tMovie = Movie(
@@ -88,13 +92,26 @@ void main() {
   group('top rated tv series', () {
     test('should change state to loading when usecase is called', () async {
       // arrange
-      when(mockGetTopRatedMoviesUseCase.execute())
+      when(mockGetTopRatedTvSeriesUseCase.execute())
           .thenAnswer((_) async => Right(tMovieList2));
       // act
       notifier.fetchTopRatedMovies(CategoryMovie.TvSeries);
       // assert
       expect(notifier.state, RequestState.Loading);
       expect(listenerCallCount, 1);
+    });
+
+    test('should change tv series data when data is gotten successfully',
+        () async {
+      // arrange
+      when(mockGetTopRatedTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await notifier.fetchTopRatedMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(notifier.state, RequestState.Loaded);
+      expect(notifier.movies, tMovieList2);
+      expect(listenerCallCount, 2);
     });
   });
 }
