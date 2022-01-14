@@ -208,4 +208,10 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Movie>>> searchTVSeries(String query) async {
+    final result = await remoteDataSource.searchTVSeries(query);
+    return Right(result.map((model) => model.toEntity()).toList());
+  }
 }
