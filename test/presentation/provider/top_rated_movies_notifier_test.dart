@@ -113,5 +113,17 @@ void main() {
       expect(notifier.movies, tMovieList2);
       expect(listenerCallCount, 2);
     });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetTopRatedTvSeriesUseCase.execute())
+          .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      // act
+      await notifier.fetchTopRatedMovies(CategoryMovie.TvSeries);
+      // assert
+      expect(notifier.state, RequestState.Error);
+      expect(notifier.message, 'Server Failure');
+      expect(listenerCallCount, 2);
+    });
   });
 }
