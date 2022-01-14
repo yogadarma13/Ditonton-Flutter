@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ditonton/common/exception.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_response.dart';
@@ -355,6 +356,26 @@ void main() {
       final call = dataSource.getTVSeriesRecommendations(tId);
       // assert
       expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group('search tv series', () {
+    final tvSearchResult = TvResponse.fromJson(
+            json.decode(readJson('dummy_data/search_got_tv.json')))
+        .tvList;
+    final tQuery = 'Game of Thrones';
+
+    test('should return list of tv series when response code is 200', () async {
+      // arrange
+      when(mockHttpClient
+              .get(Uri.parse('$BASE_URL/search/tv?$API_KEY&query=$tQuery')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/search_got_tv.json'), 200));
+      // act
+      final result =
+          await dataSource.searchMovies(tQuery, CategoryMovie.TvSeries);
+      // assert
+      expect(result, tvSearchResult);
     });
   });
 }
