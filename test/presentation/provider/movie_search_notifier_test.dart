@@ -102,5 +102,18 @@ void main() {
       // assert
       expect(provider.state, RequestState.Loading);
     });
+
+    test('should change search result data when data is gotten successfully',
+        () async {
+      // arrange
+      when(mockSearchTvSeriesUseCase.execute(tQuery2))
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await provider.fetchMovieSearch(tQuery2, CategoryMovie.TvSeries);
+      // assert
+      expect(provider.state, RequestState.Loaded);
+      expect(provider.searchResult, tMovieList2);
+      expect(listenerCallCount, 2);
+    });
   });
 }
