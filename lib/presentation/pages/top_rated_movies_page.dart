@@ -21,7 +21,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
     super.initState();
     Future.microtask(() =>
         Provider.of<TopRatedMoviesNotifier>(context, listen: false)
-            .fetchTopRatedMovies());
+            .fetchTopRatedMovies(widget.category));
   }
 
   @override

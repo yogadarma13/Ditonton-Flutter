@@ -72,6 +72,7 @@ void init() {
   locator.registerFactory(
     () => TopRatedMoviesNotifier(
       getTopRatedMovies: locator(),
+      getTopRatedTvSeries: locator(),
     ),
   );
   locator.registerFactory(
