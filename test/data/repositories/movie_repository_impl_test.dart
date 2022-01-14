@@ -761,4 +761,21 @@ void main() {
           equals(Left(ConnectionFailure('Failed to connect to the network'))));
     });
   });
+
+  group('Seach TV Series', () {
+    final tQuery = 'victoria';
+
+    test('should return tv list when call to data source is successful',
+        () async {
+      // arrange
+      when(mockRemoteDataSource.searchTVSeries(tQuery))
+          .thenAnswer((_) async => tvModelList);
+      // act
+      final result = await repository.searchTVSeries(tQuery);
+      // assert
+      /* workaround to test List in Right. Issue: https://github.com/spebbe/dartz/issues/80 */
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tMovieList2);
+    });
+  });
 }
