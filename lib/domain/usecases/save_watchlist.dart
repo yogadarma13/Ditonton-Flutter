@@ -4,7 +4,7 @@ import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/domain/repositories/movie_repository.dart';
 
 abstract class SaveWatchlistUseCase {
-  Future<Either<Failure, String>> execute(MovieDetail movie);
+  Future<Either<Failure, String>> execute(MovieDetail movie, String category);
 }
 
 class SaveWatchlist implements SaveWatchlistUseCase {
@@ -13,7 +13,7 @@ class SaveWatchlist implements SaveWatchlistUseCase {
   SaveWatchlist(this.repository);
 
   @override
-  Future<Either<Failure, String>> execute(MovieDetail movie) {
-    return repository.saveWatchlist(movie);
+  Future<Either<Failure, String>> execute(MovieDetail movie, String category) {
+    return repository.saveWatchlist(movie, category);
   }
 }

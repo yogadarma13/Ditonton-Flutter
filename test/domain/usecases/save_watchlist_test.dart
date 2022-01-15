@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -17,12 +18,15 @@ void main() {
 
   test('should save movie to the repository', () async {
     // arrange
-    when(mockMovieRepository.saveWatchlist(testMovieDetail))
+    when(mockMovieRepository.saveWatchlist(
+            testMovieDetail, CategoryMovie.Movies.name))
         .thenAnswer((_) async => Right('Added to Watchlist'));
     // act
-    final result = await usecase.execute(testMovieDetail);
+    final result =
+        await usecase.execute(testMovieDetail, CategoryMovie.Movies.name);
     // assert
-    verify(mockMovieRepository.saveWatchlist(testMovieDetail));
+    verify(mockMovieRepository.saveWatchlist(
+        testMovieDetail, CategoryMovie.Movies.name));
     expect(result, Right('Added to Watchlist'));
   });
 }
