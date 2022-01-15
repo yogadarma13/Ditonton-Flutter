@@ -30,6 +30,8 @@ import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 
+import 'domain/usecases/search_tv_series.dart';
+
 final locator = GetIt.instance;
 
 void init() {
@@ -64,6 +66,7 @@ void init() {
   locator.registerFactory(
     () => MovieSearchNotifier(
       searchMovies: locator(),
+      searchTvSeries: locator(),
     ),
   );
   locator.registerFactory(
@@ -112,6 +115,8 @@ void init() {
       () => GetTvSeriesDetail(locator()));
   locator.registerLazySingleton<GetTvSeriesRecommendationsUseCase>(
       () => GetTvSeriesRecommendations(locator()));
+  locator.registerLazySingleton<SearchTvSeriesUseCase>(
+      () => SearchTvSeries(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(

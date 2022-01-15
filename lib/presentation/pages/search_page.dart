@@ -8,11 +8,20 @@ import 'package:provider/provider.dart';
 class SearchPage extends StatelessWidget {
   static const ROUTE_NAME = '/search';
 
+  final CategoryMovie category;
+
+  SearchPage(this.category);
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<MovieSearchNotifier>(context, listen: false).resetData();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search'),
+        title: Text(
+          category == CategoryMovie.Movies
+              ? 'Search Movies'
+              : 'Search TV Series',
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -22,7 +31,7 @@ class SearchPage extends StatelessWidget {
             TextField(
               onSubmitted: (query) {
                 Provider.of<MovieSearchNotifier>(context, listen: false)
-                    .fetchMovieSearch(query);
+                    .fetchMovieSearch(query, category);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -49,7 +58,7 @@ class SearchPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         final movie = data.searchResult[index];
-                        return MovieCard(movie, CategoryMovie.Movies);
+                        return MovieCard(movie, category);
                       },
                       itemCount: result.length,
                     ),

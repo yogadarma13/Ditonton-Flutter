@@ -25,6 +25,11 @@ class MovieSearchNotifier extends ChangeNotifier {
 
   String get message => _message;
 
+  void resetData() {
+    _searchResult = [];
+    notifyListeners();
+  }
+
   Future<void> fetchMovieSearch(String query, CategoryMovie category) async {
     _state = RequestState.Loading;
     notifyListeners();
