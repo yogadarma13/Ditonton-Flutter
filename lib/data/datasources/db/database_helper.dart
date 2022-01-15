@@ -5,6 +5,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _databaseHelper;
+
   DatabaseHelper._instance() {
     _databaseHelper = this;
   }
@@ -37,7 +38,8 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY,
         title TEXT,
         overview TEXT,
-        posterPath TEXT
+        posterPath TEXT,
+        category TEXT
       );
     ''');
     await db.execute('''
@@ -83,9 +85,11 @@ class DatabaseHelper {
     );
   }
 
-  Future<int> insertWatchlist(MovieTable movie) async {
+  Future<int> insertWatchlist(MovieTable movie, String category) async {
     final db = await database;
-    return await db!.insert(_tblWatchlist, movie.toJson());
+    final movieJson = movie.toJson();
+    movieJson['category'] = category;
+    return await db!.insert(_tblWatchlist, movieJson);
   }
 
   Future<int> removeWatchlist(MovieTable movie) async {

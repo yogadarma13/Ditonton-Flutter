@@ -96,8 +96,8 @@ class MockMovieRepository extends _i1.Mock implements _i6.MovieRepository {
           .Future<_i2.Either<_i8.Failure, List<_i9.Movie>>>);
   @override
   _i7.Future<_i2.Either<_i8.Failure, String>> saveWatchlist(
-          _i10.MovieDetail? movie) =>
-      (super.noSuchMethod(Invocation.method(#saveWatchlist, [movie]),
+          _i10.MovieDetail? movie, String? category) =>
+      (super.noSuchMethod(Invocation.method(#saveWatchlist, [movie, category]),
               returnValue: Future<_i2.Either<_i8.Failure, String>>.value(
                   _FakeEither_0<_i8.Failure, String>()))
           as _i7.Future<_i2.Either<_i8.Failure, String>>);
@@ -251,8 +251,10 @@ class MockMovieLocalDataSource extends _i1.Mock
   }
 
   @override
-  _i7.Future<String> insertWatchlist(_i15.MovieTable? movie) =>
-      (super.noSuchMethod(Invocation.method(#insertWatchlist, [movie]),
+  _i7.Future<String> insertWatchlist(
+          _i15.MovieTable? movie, String? category) =>
+      (super.noSuchMethod(
+          Invocation.method(#insertWatchlist, [movie, category]),
           returnValue: Future<String>.value('')) as _i7.Future<String>);
   @override
   _i7.Future<String> removeWatchlist(_i15.MovieTable? movie) =>
@@ -326,8 +328,9 @@ class MockDatabaseHelper extends _i1.Mock implements _i16.DatabaseHelper {
       (super.noSuchMethod(Invocation.method(#clearCache, [category]),
           returnValue: Future<int>.value(0)) as _i7.Future<int>);
   @override
-  _i7.Future<int> insertWatchlist(_i15.MovieTable? movie) =>
-      (super.noSuchMethod(Invocation.method(#insertWatchlist, [movie]),
+  _i7.Future<int> insertWatchlist(_i15.MovieTable? movie, String? category) =>
+      (super.noSuchMethod(
+          Invocation.method(#insertWatchlist, [movie, category]),
           returnValue: Future<int>.value(0)) as _i7.Future<int>);
   @override
   _i7.Future<int> removeWatchlist(_i15.MovieTable? movie) =>

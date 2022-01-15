@@ -3,7 +3,7 @@ import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/models/movie_table.dart';
 
 abstract class MovieLocalDataSource {
-  Future<String> insertWatchlist(MovieTable movie);
+  Future<String> insertWatchlist(MovieTable movie, String category);
 
   Future<String> removeWatchlist(MovieTable movie);
 
@@ -27,9 +27,9 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   MovieLocalDataSourceImpl({required this.databaseHelper});
 
   @override
-  Future<String> insertWatchlist(MovieTable movie) async {
+  Future<String> insertWatchlist(MovieTable movie, String category) async {
     try {
-      await databaseHelper.insertWatchlist(movie);
+      await databaseHelper.insertWatchlist(movie, category);
       return 'Added to Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
