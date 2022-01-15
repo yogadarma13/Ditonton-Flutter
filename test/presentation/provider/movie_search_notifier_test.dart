@@ -90,6 +90,17 @@ void main() {
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });
+
+    test('should change search result data when reset data', () async {
+      // arrange
+      when(mockSearchMoviesUseCase.execute(tQuery))
+          .thenAnswer((_) async => Right(tMovieList));
+      // act
+      await provider.fetchMovieSearch(tQuery, CategoryMovie.Movies);
+      provider.resetData();
+      // assert
+      expect(provider.searchResult, []);
+    });
   });
 
   group('search tv series', () {
@@ -126,6 +137,17 @@ void main() {
       expect(provider.state, RequestState.Error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
+    });
+
+    test('should change search result data when reset data', () async {
+      // arrange
+      when(mockSearchTvSeriesUseCase.execute(tQuery2))
+          .thenAnswer((_) async => Right(tMovieList2));
+      // act
+      await provider.fetchMovieSearch(tQuery2, CategoryMovie.TvSeries);
+      provider.resetData();
+      // assert
+      expect(provider.searchResult, []);
     });
   });
 }
