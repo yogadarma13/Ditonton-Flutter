@@ -98,8 +98,8 @@ class MovieDetailNotifier extends ChangeNotifier {
 
   String get watchlistMessage => _watchlistMessage;
 
-  Future<void> addWatchlist(MovieDetail movie) async {
-    final result = await saveWatchlist.execute(movie);
+  Future<void> addWatchlist(MovieDetail movie, String category) async {
+    final result = await saveWatchlist.execute(movie, category);
 
     await result.fold(
       (failure) async {

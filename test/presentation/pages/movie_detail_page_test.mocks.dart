@@ -133,10 +133,11 @@ class MockMovieDetailNotifier extends _i1.Mock
               returnValueForMissingStub: Future<void>.value())
           as _i13.Future<void>);
   @override
-  _i13.Future<void> addWatchlist(_i9.MovieDetail? movie) => (super.noSuchMethod(
-      Invocation.method(#addWatchlist, [movie]),
-      returnValue: Future<void>.value(),
-      returnValueForMissingStub: Future<void>.value()) as _i13.Future<void>);
+  _i13.Future<void> addWatchlist(_i9.MovieDetail? movie, String? category) =>
+      (super.noSuchMethod(Invocation.method(#addWatchlist, [movie, category]),
+              returnValue: Future<void>.value(),
+              returnValueForMissingStub: Future<void>.value())
+          as _i13.Future<void>);
   @override
   _i13.Future<void> removeFromWatchlist(_i9.MovieDetail? movie) =>
       (super.noSuchMethod(Invocation.method(#removeFromWatchlist, [movie]),

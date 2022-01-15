@@ -132,8 +132,9 @@ class MockSaveWatchlistUseCase extends _i1.Mock
   }
 
   @override
-  _i4.Future<_i2.Either<_i5.Failure, String>> execute(_i6.MovieDetail? movie) =>
-      (super.noSuchMethod(Invocation.method(#execute, [movie]),
+  _i4.Future<_i2.Either<_i5.Failure, String>> execute(
+          _i6.MovieDetail? movie, String? category) =>
+      (super.noSuchMethod(Invocation.method(#execute, [movie, category]),
               returnValue: Future<_i2.Either<_i5.Failure, String>>.value(
                   _FakeEither_0<_i5.Failure, String>()))
           as _i4.Future<_i2.Either<_i5.Failure, String>>);
