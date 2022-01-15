@@ -420,7 +420,8 @@ void main() {
               testMovieTable, CategoryMovie.Movies.name))
           .thenAnswer((_) async => 'Added to Watchlist');
       // act
-      final result = await repository.saveWatchlist(testMovieDetail);
+      final result = await repository.saveWatchlist(
+          testMovieDetail, CategoryMovie.Movies.name);
       // assert
       expect(result, Right('Added to Watchlist'));
     });
@@ -431,7 +432,8 @@ void main() {
               testMovieTable, CategoryMovie.Movies.name))
           .thenThrow(DatabaseException('Failed to add watchlist'));
       // act
-      final result = await repository.saveWatchlist(testMovieDetail);
+      final result = await repository.saveWatchlist(
+          testMovieDetail, CategoryMovie.Movies.name);
       // assert
       expect(result, Left(DatabaseFailure('Failed to add watchlist')));
     });
