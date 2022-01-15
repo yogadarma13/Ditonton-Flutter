@@ -20,7 +20,8 @@ void main() {
     test('should return success message when insert to database is success',
         () async {
       // arrange
-      when(mockDatabaseHelper.insertWatchlist(testMovieTable, CategoryMovie.Movies.name))
+      when(mockDatabaseHelper.insertWatchlist(
+              testMovieTable, CategoryMovie.Movies.name))
           .thenAnswer((_) async => 1);
       // act
       final result = await dataSource.insertWatchlist(
@@ -32,7 +33,8 @@ void main() {
     test('should throw DatabaseException when insert to database is failed',
         () async {
       // arrange
-      when(mockDatabaseHelper.insertWatchlist(testMovieTable, CategoryMovie.Movies.name))
+      when(mockDatabaseHelper.insertWatchlist(
+              testMovieTable, CategoryMovie.Movies.name))
           .thenThrow(Exception());
       // act
       final call =

@@ -104,10 +104,10 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, String>> saveWatchlist(MovieDetail movie) async {
+  Future<Either<Failure, String>> saveWatchlist(MovieDetail movie, String category) async {
     try {
       final result =
-          await localDataSource.insertWatchlist(MovieTable.fromEntity(movie));
+          await localDataSource.insertWatchlist(MovieTable.fromEntity(movie), category);
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));

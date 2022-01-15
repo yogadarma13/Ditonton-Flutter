@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/common/failure.dart';
+import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_model.dart';
@@ -415,7 +416,8 @@ void main() {
   group('save watchlist', () {
     test('should return success message when saving successful', () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testMovieTable))
+      when(mockLocalDataSource.insertWatchlist(
+              testMovieTable, CategoryMovie.Movies.name))
           .thenAnswer((_) async => 'Added to Watchlist');
       // act
       final result = await repository.saveWatchlist(testMovieDetail);
@@ -425,7 +427,8 @@ void main() {
 
     test('should return DatabaseFailure when saving unsuccessful', () async {
       // arrange
-      when(mockLocalDataSource.insertWatchlist(testMovieTable))
+      when(mockLocalDataSource.insertWatchlist(
+              testMovieTable, CategoryMovie.Movies.name))
           .thenThrow(DatabaseException('Failed to add watchlist'));
       // act
       final result = await repository.saveWatchlist(testMovieDetail);
