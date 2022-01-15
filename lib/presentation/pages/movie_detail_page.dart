@@ -47,6 +47,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             return SafeArea(
               child: DetailContent(
                 movie,
+                widget.arguments.category.name,
                 provider.movieRecommendations,
                 provider.isAddedToWatchlist,
               ),
@@ -62,10 +63,16 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
+  final String category;
   final List<Movie> recommendations;
   final bool isAddedWatchlist;
 
-  DetailContent(this.movie, this.recommendations, this.isAddedWatchlist);
+  DetailContent(
+    this.movie,
+    this.category,
+    this.recommendations,
+    this.isAddedWatchlist,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +120,7 @@ class DetailContent extends StatelessWidget {
                                   await Provider.of<MovieDetailNotifier>(
                                           context,
                                           listen: false)
-                                      .addWatchlist(movie);
+                                      .addWatchlist(movie, category);
                                 } else {
                                   await Provider.of<MovieDetailNotifier>(
                                           context,
