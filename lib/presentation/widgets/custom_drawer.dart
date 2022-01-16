@@ -1,7 +1,7 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/pages/home_movie_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:ditonton/presentation/pages/home_movie_page.dart';
+import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -48,7 +48,8 @@ class _CustomDrawerState extends State<CustomDrawer>
             leading: Icon(Icons.movie),
             title: Text('Movies'),
             onTap: () {
-              Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME, arguments: CategoryMovie.Movies);
+              Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME,
+                  arguments: CategoryMovie.Movies);
               _animationController.reverse();
             },
           ),
@@ -56,7 +57,8 @@ class _CustomDrawerState extends State<CustomDrawer>
             leading: Icon(Icons.tv),
             title: Text('TV Series'),
             onTap: () {
-              Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME, arguments: CategoryMovie.TvSeries);
+              Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME,
+                  arguments: CategoryMovie.TvSeries);
               _animationController.reverse();
             },
           ),
@@ -64,7 +66,7 @@ class _CustomDrawerState extends State<CustomDrawer>
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist'),
             onTap: () {
-              Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+              Navigator.pushNamed(context, WatchlistPage.ROUTE_NAME);
               _animationController.reverse();
             },
           ),

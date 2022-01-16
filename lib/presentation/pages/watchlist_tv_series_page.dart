@@ -4,18 +4,18 @@ import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WatchlistMoviesPage extends StatefulWidget {
+class WatchlistTvSeriesPage extends StatefulWidget {
   @override
-  _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
+  _WatchlistTvSeriesPageState createState() => _WatchlistTvSeriesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
+class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
         Provider.of<WatchlistMovieNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
+            .fetchWatchlistTvSeries());
   }
 
   @override
@@ -24,17 +24,17 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> {
       padding: const EdgeInsets.all(8.0),
       child: Consumer<WatchlistMovieNotifier>(
         builder: (context, data, child) {
-          if (data.watchlistState == RequestState.Loading) {
+          if (data.watchlistTvState == RequestState.Loading) {
             return Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.Loaded) {
+          } else if (data.watchlistTvState == RequestState.Loaded) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final movie = data.watchlistMovies[index];
-                return MovieCard(movie, CategoryMovie.Movies);
+                final movie = data.watchlistTvSeries[index];
+                return MovieCard(movie, CategoryMovie.TvSeries);
               },
-              itemCount: data.watchlistMovies.length,
+              itemCount: data.watchlistTvSeries.length,
             );
           } else {
             return Center(

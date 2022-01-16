@@ -8,9 +8,17 @@ class WatchlistMovieNotifier extends ChangeNotifier {
 
   List<Movie> get watchlistMovies => _watchlistMovies;
 
+  var _watchlistTvSeries = <Movie>[];
+
+  List<Movie> get watchlistTvSeries => _watchlistTvSeries;
+
   var _watchlistState = RequestState.Empty;
 
   RequestState get watchlistState => _watchlistState;
+
+  var _watchlistTvState = RequestState.Empty;
+
+  RequestState get watchlistTvState => _watchlistTvState;
 
   String _message = '';
 
@@ -20,11 +28,11 @@ class WatchlistMovieNotifier extends ChangeNotifier {
 
   WatchlistMovieNotifier({required this.getWatchlistMovies});
 
-  Future<void> fetchWatchlistMovies(CategoryMovie category) async {
+  Future<void> fetchWatchlistMovies() async {
     _watchlistState = RequestState.Loading;
     notifyListeners();
 
-    final result = await getWatchlistMovies.execute(category.name);
+    final result = await getWatchlistMovies.execute(CategoryMovie.Movies.name);
     result.fold(
       (failure) {
         _watchlistState = RequestState.Error;
@@ -34,6 +42,26 @@ class WatchlistMovieNotifier extends ChangeNotifier {
       (moviesData) {
         _watchlistState = RequestState.Loaded;
         _watchlistMovies = moviesData;
+        notifyListeners();
+      },
+    );
+  }
+
+  Future<void> fetchWatchlistTvSeries() async {
+    _watchlistTvState = RequestState.Loading;
+    notifyListeners();
+
+    final result =
+        await getWatchlistMovies.execute(CategoryMovie.TvSeries.name);
+    result.fold(
+      (failure) {
+        _watchlistTvState = RequestState.Error;
+        _message = failure.message;
+        notifyListeners();
+      },
+      (tvData) {
+        _watchlistTvState = RequestState.Loaded;
+        _watchlistTvSeries = tvData;
         notifyListeners();
       },
     );
