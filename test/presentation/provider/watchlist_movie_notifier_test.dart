@@ -66,5 +66,17 @@ void main() {
       expect(provider.watchlistTvSeries, [testWatchlistMovie]);
       expect(listenerCallCount, 2);
     });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.TvSeries.name))
+          .thenAnswer((_) async => Left(DatabaseFailure("Can't get data")));
+      // act
+      await provider.fetchWatchlistTvSeries();
+      // assert
+      expect(provider.watchlistTvState, RequestState.Error);
+      expect(provider.message, "Can't get data");
+      expect(listenerCallCount, 2);
+    });
   });
 }
