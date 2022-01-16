@@ -9,7 +9,7 @@ abstract class MovieLocalDataSource {
 
   Future<MovieTable?> getMovieById(int id);
 
-  Future<List<MovieTable>> getWatchlistMovies();
+  Future<List<MovieTable>> getWatchlistMovies(String category);
 
   Future<void> cacheNowPlayingMovies(List<MovieTable> movies);
 
@@ -57,8 +57,8 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
   }
 
   @override
-  Future<List<MovieTable>> getWatchlistMovies() async {
-    final result = await databaseHelper.getWatchlistMovies();
+  Future<List<MovieTable>> getWatchlistMovies(String category) async {
+    final result = await databaseHelper.getWatchlistMovies(category);
     return result.map((data) => MovieTable.fromMap(data)).toList();
   }
 
