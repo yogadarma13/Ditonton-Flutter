@@ -26,27 +26,45 @@ void main() {
       });
   });
 
-  test('should change movies data when data is gotten successfully', () async {
-    // arrange
-    when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
-        .thenAnswer((_) async => Right([testWatchlistMovie]));
-    // act
-    await provider.fetchWatchlistMovies();
-    // assert
-    expect(provider.watchlistState, RequestState.Loaded);
-    expect(provider.watchlistMovies, [testWatchlistMovie]);
-    expect(listenerCallCount, 2);
+  group('watchlist movies', () {
+    test('should change movies data when data is gotten successfully',
+        () async {
+      // arrange
+      when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
+          .thenAnswer((_) async => Right([testWatchlistMovie]));
+      // act
+      await provider.fetchWatchlistMovies();
+      // assert
+      expect(provider.watchlistState, RequestState.Loaded);
+      expect(provider.watchlistMovies, [testWatchlistMovie]);
+      expect(listenerCallCount, 2);
+    });
+
+    test('should return error when data is unsuccessful', () async {
+      // arrange
+      when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
+          .thenAnswer((_) async => Left(DatabaseFailure("Can't get data")));
+      // act
+      await provider.fetchWatchlistMovies();
+      // assert
+      expect(provider.watchlistState, RequestState.Error);
+      expect(provider.message, "Can't get data");
+      expect(listenerCallCount, 2);
+    });
   });
 
-  test('should return error when data is unsuccessful', () async {
-    // arrange
-    when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
-        .thenAnswer((_) async => Left(DatabaseFailure("Can't get data")));
-    // act
-    await provider.fetchWatchlistMovies();
-    // assert
-    expect(provider.watchlistState, RequestState.Error);
-    expect(provider.message, "Can't get data");
-    expect(listenerCallCount, 2);
+  group('watchlist tv series', () {
+    test('should change tv series data when data is gotten successfully',
+        () async {
+      // arrange
+      when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.TvSeries.name))
+          .thenAnswer((_) async => Right([testWatchlistMovie]));
+      // act
+      await provider.fetchWatchlistTvSeries();
+      // assert
+      expect(provider.watchlistTvState, RequestState.Loaded);
+      expect(provider.watchlistTvSeries, [testWatchlistMovie]);
+      expect(listenerCallCount, 2);
+    });
   });
 }
