@@ -134,8 +134,8 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, List<Movie>>> getWatchlistMovies() async {
-    final result = await localDataSource.getWatchlistMovies();
+  Future<Either<Failure, List<Movie>>> getWatchlistMovies(String category) async {
+    final result = await localDataSource.getWatchlistMovies(category);
     return Right(result.map((data) => data.toEntity()).toList());
   }
 
