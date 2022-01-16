@@ -28,10 +28,10 @@ void main() {
 
   test('should change movies data when data is gotten successfully', () async {
     // arrange
-    when(mockGetWatchlistMoviesUseCase.execute())
+    when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
         .thenAnswer((_) async => Right([testWatchlistMovie]));
     // act
-    await provider.fetchWatchlistMovies();
+    await provider.fetchWatchlistMovies(CategoryMovie.Movies);
     // assert
     expect(provider.watchlistState, RequestState.Loaded);
     expect(provider.watchlistMovies, [testWatchlistMovie]);
@@ -40,10 +40,10 @@ void main() {
 
   test('should return error when data is unsuccessful', () async {
     // arrange
-    when(mockGetWatchlistMoviesUseCase.execute())
+    when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
         .thenAnswer((_) async => Left(DatabaseFailure("Can't get data")));
     // act
-    await provider.fetchWatchlistMovies();
+    await provider.fetchWatchlistMovies(CategoryMovie.Movies);
     // assert
     expect(provider.watchlistState, RequestState.Error);
     expect(provider.message, "Can't get data");

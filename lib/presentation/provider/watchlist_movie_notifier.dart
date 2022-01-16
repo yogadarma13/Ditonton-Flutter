@@ -5,23 +5,26 @@ import 'package:flutter/foundation.dart';
 
 class WatchlistMovieNotifier extends ChangeNotifier {
   var _watchlistMovies = <Movie>[];
+
   List<Movie> get watchlistMovies => _watchlistMovies;
 
   var _watchlistState = RequestState.Empty;
+
   RequestState get watchlistState => _watchlistState;
 
   String _message = '';
+
   String get message => _message;
 
   final GetWatchlistMoviesUseCase getWatchlistMovies;
 
   WatchlistMovieNotifier({required this.getWatchlistMovies});
 
-  Future<void> fetchWatchlistMovies() async {
+  Future<void> fetchWatchlistMovies(CategoryMovie category) async {
     _watchlistState = RequestState.Loading;
     notifyListeners();
 
-    final result = await getWatchlistMovies.execute();
+    final result = await getWatchlistMovies.execute(category.name);
     result.fold(
       (failure) {
         _watchlistState = RequestState.Error;
