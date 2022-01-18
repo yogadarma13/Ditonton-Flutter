@@ -65,7 +65,10 @@ class SearchPage extends StatelessWidget {
                   );
                 } else {
                   return Expanded(
-                    child: Container(),
+                    child: Center(
+                      key: Key('error_message'),
+                      child: Text(data.message),
+                    ),
                   );
                 }
               },
