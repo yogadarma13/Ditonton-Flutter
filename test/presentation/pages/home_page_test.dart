@@ -57,4 +57,20 @@ void main() {
 
     expect(listViewFinder, findsWidgets);
   });
+
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
+    when(mockNotifier.nowPlayingState).thenReturn(RequestState.Error);
+    when(mockNotifier.message).thenReturn('Failed');
+    when(mockNotifier.airingTodayState).thenReturn(RequestState.Error);
+    when(mockNotifier.message).thenReturn('Failed');
+    when(mockNotifier.popularMoviesState).thenReturn(RequestState.Error);
+    when(mockNotifier.message).thenReturn('Failed');
+    when(mockNotifier.popularTvSeriesState).thenReturn(RequestState.Error);
+    when(mockNotifier.message).thenReturn('Failed');
+
+    await tester.pumpWidget(_makeTestableWidget(HomePage()));
+
+    expect(find.text('Failed'), findsWidgets);
+  });
 }
