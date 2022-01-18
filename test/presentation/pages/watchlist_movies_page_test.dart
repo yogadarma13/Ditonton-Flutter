@@ -51,4 +51,16 @@ void main() {
 
     expect(listViewFinder, findsOneWidget);
   });
+
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
+    when(mockNotifier.watchlistState).thenReturn(RequestState.Error);
+    when(mockNotifier.message).thenReturn('Error message');
+
+    final textFinder = find.byKey(Key('error_message'));
+
+    await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+
+    expect(textFinder, findsOneWidget);
+  });
 }
