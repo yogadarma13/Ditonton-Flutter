@@ -1,4 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
@@ -37,5 +38,23 @@ void main() {
 
     await tester.pumpWidget(_makeTestableWidget(HomePage()));
     expect(progressBarFinder, findsWidgets);
+  });
+
+  testWidgets('Page should display ListView when data is loaded',
+      (WidgetTester tester) async {
+    when(mockNotifier.nowPlayingState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.nowPlayingMovies).thenReturn(<Movie>[]);
+    when(mockNotifier.airingTodayState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.airingTodayTvSeries).thenReturn(<Movie>[]);
+    when(mockNotifier.popularMoviesState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.popularMovies).thenReturn(<Movie>[]);
+    when(mockNotifier.popularTvSeriesState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.popularTvSeries).thenReturn(<Movie>[]);
+
+    final listViewFinder = find.byType(ListView);
+
+    await tester.pumpWidget(_makeTestableWidget(HomePage()));
+
+    expect(listViewFinder, findsWidgets);
   });
 }
