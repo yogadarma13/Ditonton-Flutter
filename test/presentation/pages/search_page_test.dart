@@ -1,4 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:flutter/material.dart';
@@ -47,5 +48,18 @@ void main() {
         .pumpWidget(_makeTestableWidget(SearchPage(CategoryMovie.Movies)));
 
     expect(progressBarFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display ListView when data is loaded',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockNotifier.searchResult).thenReturn(<Movie>[]);
+
+    final listViewFinder = find.byType(ListView);
+
+    await tester
+        .pumpWidget(_makeTestableWidget(SearchPage(CategoryMovie.Movies)));
+
+    expect(listViewFinder, findsOneWidget);
   });
 }
