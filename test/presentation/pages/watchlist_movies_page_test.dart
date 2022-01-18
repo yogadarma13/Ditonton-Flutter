@@ -1,4 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter/material.dart';
@@ -37,5 +38,17 @@ void main() {
 
     expect(centerFinder, findsOneWidget);
     expect(progressFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display when data is loaded',
+      (WidgetTester tester) async {
+    when(mockNotifier.watchlistState).thenReturn(RequestState.Loaded);
+    when(mockNotifier.watchlistMovies).thenReturn(<Movie>[]);
+
+    final listViewFinder = find.byType(ListView);
+
+    await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+
+    expect(listViewFinder, findsOneWidget);
   });
 }
