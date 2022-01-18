@@ -36,4 +36,16 @@ void main() {
     expect(find.byType(TextField), findsOneWidget);
     expect(find.text('Search title'), findsOneWidget);
   });
+
+  testWidgets('Page should display progress bar when loading',
+      (WidgetTester tester) async {
+    when(mockNotifier.state).thenReturn(RequestState.Loading);
+
+    final progressBarFinder = find.byType(CircularProgressIndicator);
+
+    await tester
+        .pumpWidget(_makeTestableWidget(SearchPage(CategoryMovie.Movies)));
+
+    expect(progressBarFinder, findsOneWidget);
+  });
 }
