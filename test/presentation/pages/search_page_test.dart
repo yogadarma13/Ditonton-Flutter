@@ -27,17 +27,6 @@ void main() {
     );
   }
 
-  testWidgets('Page should display TextField for search movies or tv series',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Empty);
-
-    await tester
-        .pumpWidget(_makeTestableWidget(SearchPage(CategoryMovie.Movies)));
-
-    expect(find.byType(TextField), findsOneWidget);
-    expect(find.text('Search title'), findsOneWidget);
-  });
-
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
     when(mockNotifier.state).thenReturn(RequestState.Loading);

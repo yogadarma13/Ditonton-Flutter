@@ -47,7 +47,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
             return SafeArea(
               child: DetailContent(
                 movie,
-                widget.arguments.category.name,
+                widget.arguments.category,
                 provider.movieRecommendations,
                 provider.isAddedToWatchlist,
               ),
@@ -63,7 +63,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
 class DetailContent extends StatelessWidget {
   final MovieDetail movie;
-  final String category;
+  final CategoryMovie category;
   final List<Movie> recommendations;
   final bool isAddedWatchlist;
 
@@ -120,7 +120,7 @@ class DetailContent extends StatelessWidget {
                                   await Provider.of<MovieDetailNotifier>(
                                           context,
                                           listen: false)
-                                      .addWatchlist(movie, category);
+                                      .addWatchlist(movie, category.name);
                                 } else {
                                   await Provider.of<MovieDetailNotifier>(
                                           context,
@@ -219,7 +219,10 @@ class DetailContent extends StatelessWidget {
                                               Navigator.pushReplacementNamed(
                                                 context,
                                                 MovieDetailPage.ROUTE_NAME,
-                                                arguments: movie.id,
+                                                arguments:
+                                                    DetailScreenArguments(
+                                                        id: movie.id,
+                                                        category: category),
                                               );
                                             },
                                             child: ClipRRect(

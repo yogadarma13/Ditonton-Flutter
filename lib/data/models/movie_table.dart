@@ -39,11 +39,11 @@ class MovieTable extends Equatable {
       );
 
   factory MovieTable.fromTvDTO(TvModel tv) => MovieTable(
-    id: tv.id,
-    title: tv.name,
-    posterPath: tv.posterPath,
-    overview: tv.overview,
-  );
+        id: tv.id,
+        title: tv.name,
+        posterPath: tv.posterPath,
+        overview: tv.overview,
+      );
 
   Map<String, dynamic> toJson() => {
         'id': id,

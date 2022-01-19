@@ -188,14 +188,16 @@ void main() {
 
     test('should execute save watchlist when function called', () async {
       // arrange
-      when(mockSaveWatchlistUseCase.execute(testMovieDetail, CategoryMovie.Movies.name))
+      when(mockSaveWatchlistUseCase.execute(
+              testMovieDetail, CategoryMovie.Movies.name))
           .thenAnswer((_) async => Right('Success'));
       when(mockGetWatchlistStatusUseCase.execute(testMovieDetail.id))
           .thenAnswer((_) async => true);
       // act
       await provider.addWatchlist(testMovieDetail, CategoryMovie.Movies.name);
       // assert
-      verify(mockSaveWatchlistUseCase.execute(testMovieDetail, CategoryMovie.Movies.name));
+      verify(mockSaveWatchlistUseCase.execute(
+          testMovieDetail, CategoryMovie.Movies.name));
     });
 
     test('should execute remove watchlist when function called', () async {
@@ -212,7 +214,8 @@ void main() {
 
     test('should update watchlist status when add watchlist success', () async {
       // arrange
-      when(mockSaveWatchlistUseCase.execute(testMovieDetail, CategoryMovie.Movies.name))
+      when(mockSaveWatchlistUseCase.execute(
+              testMovieDetail, CategoryMovie.Movies.name))
           .thenAnswer((_) async => Right('Added to Watchlist'));
       when(mockGetWatchlistStatusUseCase.execute(testMovieDetail.id))
           .thenAnswer((_) async => true);
@@ -227,7 +230,8 @@ void main() {
 
     test('should update watchlist message when add watchlist failed', () async {
       // arrange
-      when(mockSaveWatchlistUseCase.execute(testMovieDetail, CategoryMovie.Movies.name))
+      when(mockSaveWatchlistUseCase.execute(
+              testMovieDetail, CategoryMovie.Movies.name))
           .thenAnswer((_) async => Left(DatabaseFailure('Failed')));
       when(mockGetWatchlistStatusUseCase.execute(testMovieDetail.id))
           .thenAnswer((_) async => false);

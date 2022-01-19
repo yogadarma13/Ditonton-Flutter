@@ -479,7 +479,8 @@ void main() {
       when(mockLocalDataSource.getWatchlistMovies(CategoryMovie.Movies.name))
           .thenAnswer((_) async => [testMovieTable]);
       // act
-      final result = await repository.getWatchlistMovies(CategoryMovie.Movies.name);
+      final result =
+          await repository.getWatchlistMovies(CategoryMovie.Movies.name);
       // assert
       final resultList = result.getOrElse(() => []);
       expect(resultList, [testWatchlistMovie]);

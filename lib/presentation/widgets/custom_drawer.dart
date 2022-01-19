@@ -35,10 +35,10 @@ class _CustomDrawerState extends State<CustomDrawer>
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
               backgroundImage: NetworkImage(
-                  'https://d17ivq9b7rppb3.cloudfront.net/original/jobs/turut_berkontribusi_memajungan_dunia_it_di_indonesia_270619074639.jpeg'),
+                  'https://avatars.githubusercontent.com/u/37299231?v=4'),
             ),
-            accountName: Text('Ditonton'),
-            accountEmail: Text('ditonton@dicoding.com'),
+            accountName: Text('Yoga Darma'),
+            accountEmail: Text('kadekyoga125@gmail.com'),
           ),
           ListTile(
             leading: Icon(Icons.home_filled),

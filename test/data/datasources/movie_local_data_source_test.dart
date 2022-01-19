@@ -97,7 +97,8 @@ void main() {
       when(mockDatabaseHelper.getWatchlistMovies(CategoryMovie.Movies.name))
           .thenAnswer((_) async => [testMovieMap]);
       // act
-      final result = await dataSource.getWatchlistMovies(CategoryMovie.Movies.name);
+      final result =
+          await dataSource.getWatchlistMovies(CategoryMovie.Movies.name);
       // assert
       expect(result, [testMovieTable]);
     });
