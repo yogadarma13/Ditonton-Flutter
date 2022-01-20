@@ -5,8 +5,10 @@ import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
+import 'package:ditonton/presentation/widgets/season_tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -189,6 +191,30 @@ class DetailContent extends StatelessWidget {
                             Text(
                               movie.overview,
                             ),
+                            if (category == CategoryMovie.TvSeries ||
+                                movie.seasons != null)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(height: 16),
+                                  Text(
+                                    'Seasons',
+                                    style: kHeading6,
+                                  ),
+                                  Container(
+                                    height: 200,
+                                    child: ListView.builder(
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final season = movie.seasons![index];
+                                        return SeasonTvCardList(season);
+                                      },
+                                      itemCount: movie.seasons?.length,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             SizedBox(height: 16),
                             Text(
                               'Recommendations',

@@ -1,5 +1,6 @@
 import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:equatable/equatable.dart';
 
 class TvDetailResponse extends Equatable {
@@ -20,6 +21,7 @@ class TvDetailResponse extends Equatable {
     required this.overview,
     required this.popularity,
     required this.posterPath,
+    required this.seasons,
     required this.status,
     required this.tagline,
     required this.type,
@@ -43,6 +45,7 @@ class TvDetailResponse extends Equatable {
   final String overview;
   final double popularity;
   final String posterPath;
+  final List<SeasonModel> seasons;
   final String? status;
   final String? tagline;
   final String? type;
@@ -68,6 +71,8 @@ class TvDetailResponse extends Equatable {
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
         posterPath: json["poster_path"],
+        seasons: List<SeasonModel>.from(
+            json["seasons"].map((x) => SeasonModel.fromJson(x))),
         status: json["status"],
         tagline: json["tagline"],
         type: json["type"],
@@ -92,6 +97,7 @@ class TvDetailResponse extends Equatable {
         "overview": overview,
         "popularity": popularity,
         "poster_path": posterPath,
+        "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
         "status": status,
         "tagline": tagline,
         "type": type,
@@ -109,6 +115,7 @@ class TvDetailResponse extends Equatable {
       runtime: episodeRunTime[0],
       title: this.name,
       voteAverage: this.voteAverage,
+      seasons: this.seasons.map((season) => season.toEntity()).toList(),
     );
   }
 
@@ -130,10 +137,67 @@ class TvDetailResponse extends Equatable {
         overview,
         popularity,
         posterPath,
+        seasons,
         status,
         tagline,
         type,
         voteAverage,
         voteCount
       ];
+}
+
+class SeasonModel extends Equatable {
+  SeasonModel({
+    required this.airDate,
+    required this.episodeCount,
+    required this.id,
+    required this.name,
+    required this.overview,
+    required this.posterPath,
+    required this.seasonNumber,
+  });
+
+  final String? airDate;
+  final int episodeCount;
+  final int id;
+  final String? name;
+  final String? overview;
+  final String? posterPath;
+  final int seasonNumber;
+
+  factory SeasonModel.fromJson(Map<String, dynamic> json) => SeasonModel(
+        airDate: json["air_date"],
+        episodeCount: json["episode_count"],
+        id: json["id"],
+        name: json["name"],
+        overview: json["overview"],
+        posterPath: json["poster_path"],
+        seasonNumber: json["season_number"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "air_date": airDate,
+        "episode_count": episodeCount,
+        "id": id,
+        "name": name,
+        "overview": overview,
+        "poster_path": posterPath,
+        "season_number": seasonNumber,
+      };
+
+  Season toEntity() {
+    return Season(
+      airDate: this.airDate,
+      episodeCount: this.episodeCount,
+      id: this.id,
+      name: this.name,
+      overview: this.overview,
+      posterPath: this.posterPath,
+      seasonNumber: this.seasonNumber,
+    );
+  }
+
+  @override
+  List<Object?> get props =>
+      [airDate, episodeCount, id, name, overview, posterPath, seasonNumber];
 }

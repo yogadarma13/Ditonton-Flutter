@@ -29,7 +29,9 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Popular Movies'),
+        title: Text(widget.category == CategoryMovie.Movies
+            ? 'Popular Movies'
+            : 'Popular TV Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

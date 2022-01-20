@@ -1,6 +1,8 @@
 {
   "backdrop_path": "/tv-series-backdrop.jpg",
-  "episode_run_time": [80],
+  "episode_run_time": [
+    80
+  ],
   "first_air_date": "2022-01-01",
   "genres": [
     {
@@ -24,6 +26,17 @@
   "overview": "Overview TV",
   "popularity": 369.594,
   "poster_path": "/tv-series.jpg",
+  "seasons": [
+    {
+      "air_date": "2022-01-01",
+      "episode_count": 64,
+      "id": 1111,
+      "name": "Season 1",
+      "overview": "overview",
+      "poster_path": "posterPath",
+      "season_number": 1
+    }
+  ],
   "status": "Ended",
   "tagline": "Winter Is Coming",
   "type": "Scripted",

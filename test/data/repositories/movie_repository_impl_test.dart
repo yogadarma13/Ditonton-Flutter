@@ -656,7 +656,7 @@ void main() {
     });
   });
 
-  group('Get Movie Detail', () {
+  group('Get TV Detail', () {
     final tId = 13;
     final detailTvResponse = TvDetailResponse(
         backdropPath: "/tv-series-backdrop.jpg",
@@ -675,6 +675,16 @@ void main() {
         overview: "Overview TV",
         popularity: 369.594,
         posterPath: "/tv-series.jpg",
+        seasons: [
+          SeasonModel(
+              airDate: '2022-01-01',
+              episodeCount: 64,
+              id: 1111,
+              name: 'Season 1',
+              overview: 'overview',
+              posterPath: 'posterPath',
+              seasonNumber: 1)
+        ],
         status: "Ended",
         tagline: "Winter Is Coming",
         type: "Scripted",

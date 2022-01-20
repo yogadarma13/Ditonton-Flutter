@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieDetail extends Equatable {
@@ -11,6 +12,7 @@ class MovieDetail extends Equatable {
     required this.runtime,
     required this.title,
     required this.voteAverage,
+    required this.seasons,
   });
 
   final List<Genre> genres;
@@ -21,6 +23,7 @@ class MovieDetail extends Equatable {
   final int runtime;
   final String title;
   final double voteAverage;
+  final List<Season>? seasons;
 
   @override
   List<Object?> get props => [
@@ -31,5 +34,6 @@ class MovieDetail extends Equatable {
         releaseDate,
         title,
         voteAverage,
+        seasons
       ];
 }
