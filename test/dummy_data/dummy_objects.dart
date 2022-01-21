@@ -105,6 +105,13 @@ final testWatchlistMovie = Movie.watchlist(
   overview: 'overview',
 );
 
+final testWatchlistTvSeries = Movie.watchlist(
+  id: 13,
+  title: 'TV Series Dicoding',
+  posterPath: '/tv-series.jpg',
+  overview: 'Overview TV',
+);
+
 final testMovieTable = MovieTable(
   id: 1,
   title: 'title',

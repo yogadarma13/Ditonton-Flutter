@@ -878,4 +878,18 @@ void main() {
       expect(result, false);
     });
   });
+
+  group('get watchlist tv series', () {
+    test('should return list of Tv Series', () async {
+      // arrange
+      when(mockLocalDataSource.getWatchlistMovies(CategoryMovie.TvSeries.name))
+          .thenAnswer((_) async => [testTVTable]);
+      // act
+      final result =
+      await repository.getWatchlistMovies(CategoryMovie.TvSeries.name);
+      // assert
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, [testWatchlistTvSeries]);
+    });
+  });
 }
