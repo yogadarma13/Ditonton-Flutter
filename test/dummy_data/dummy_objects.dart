@@ -112,6 +112,13 @@ final testMovieTable = MovieTable(
   overview: 'overview',
 );
 
+final testTVTable = MovieTable(
+  id: 13,
+  title: 'TV Series Dicoding',
+  posterPath: '/tv-series.jpg',
+  overview: 'Overview TV',
+);
+
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
