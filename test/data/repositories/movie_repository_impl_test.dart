@@ -866,4 +866,16 @@ void main() {
       expect(result, Left(DatabaseFailure('Failed to remove watchlist')));
     });
   });
+
+  group('get watchlist tv series status', () {
+    test('should return watch status whether data is found', () async {
+      // arrange
+      final tId = 13;
+      when(mockLocalDataSource.getMovieById(tId)).thenAnswer((_) async => null);
+      // act
+      final result = await repository.isAddedToWatchlist(tId);
+      // assert
+      expect(result, false);
+    });
+  });
 }
