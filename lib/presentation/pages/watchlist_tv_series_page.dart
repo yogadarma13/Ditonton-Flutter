@@ -1,4 +1,5 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,25 @@ class WatchlistTvSeriesPage extends StatefulWidget {
   _WatchlistTvSeriesPageState createState() => _WatchlistTvSeriesPageState();
 }
 
-class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage> {
+class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
+    with RouteAware {
   @override
   void initState() {
     super.initState();
     Future.microtask(() =>
         Provider.of<WatchlistMovieNotifier>(context, listen: false)
             .fetchWatchlistTvSeries());
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)!);
+  }
+
+  void didPopNext() {
+    Provider.of<WatchlistMovieNotifier>(context, listen: false)
+        .fetchWatchlistTvSeries();
   }
 
   @override
@@ -45,5 +58,11 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage> {
         },
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
   }
 }

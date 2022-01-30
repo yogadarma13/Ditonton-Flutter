@@ -21,6 +21,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'common/utils.dart';
+
 void main() {
   di.init();
   runApp(MyApp());
@@ -67,6 +69,7 @@ class MyApp extends StatelessWidget {
             content: HomePage(),
           ),
         ),
+        navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
