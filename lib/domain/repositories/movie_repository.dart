@@ -14,12 +14,4 @@ abstract class MovieRepository {
   Future<Either<Failure, String>> removeWatchlist(MovieDetail movie);
   Future<bool> isAddedToWatchlist(int id);
   Future<Either<Failure, List<Movie>>> getWatchlistMovies(String category);
-
-  // TV SERIES
-  Future<Either<Failure, List<Movie>>> getAiringTodayTVSeries();
-  Future<Either<Failure, List<Movie>>> getPopularTVSeries();
-  Future<Either<Failure, List<Movie>>> getTopRatedTVSeries();
-  Future<Either<Failure, MovieDetail>> getTVSeriesDetail(int id);
-  Future<Either<Failure, List<Movie>>> getTVSeriesRecommendations(int id);
-  Future<Either<Failure, List<Movie>>> searchTVSeries(String query);
 }

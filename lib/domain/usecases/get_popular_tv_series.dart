@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:ditonton/domain/repositories/tv_repository.dart';
 
 abstract class GetPopularTvSeriesUseCase {
   Future<Either<Failure, List<Movie>>> execute();
 }
 
 class GetPopularTvSeries implements GetPopularTvSeriesUseCase {
-  final MovieRepository repository;
+  final TvRepository repository;
 
   GetPopularTvSeries(this.repository);
 

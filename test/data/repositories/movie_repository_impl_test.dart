@@ -886,7 +886,7 @@ void main() {
           .thenAnswer((_) async => [testTVTable]);
       // act
       final result =
-      await repository.getWatchlistMovies(CategoryMovie.TvSeries.name);
+          await repository.getWatchlistMovies(CategoryMovie.TvSeries.name);
       // assert
       final resultList = result.getOrElse(() => []);
       expect(resultList, [testWatchlistTvSeries]);

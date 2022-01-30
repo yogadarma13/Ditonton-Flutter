@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:ditonton/domain/repositories/tv_repository.dart';
 
 abstract class SearchTvSeriesUseCase {
   Future<Either<Failure, List<Movie>>> execute(String query);
 }
 
 class SearchTvSeries implements SearchTvSeriesUseCase {
-  final MovieRepository repository;
+  final TvRepository repository;
 
   SearchTvSeries(this.repository);
 
