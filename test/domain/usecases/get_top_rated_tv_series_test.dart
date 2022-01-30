@@ -8,18 +8,18 @@ import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetTopRatedTvSeries useCase;
-  late MockMovieRepository mockMovieRepository;
+  late MockTvRepository mockTvRepository;
 
   setUp(() {
-    mockMovieRepository = MockMovieRepository();
-    useCase = GetTopRatedTvSeries(mockMovieRepository);
+    mockTvRepository = MockTvRepository();
+    useCase = GetTopRatedTvSeries(mockTvRepository);
   });
 
   final topRatedTvSeries = <Movie>[];
 
   test('should get list of top rated tv series from repository', () async {
     // arrange
-    when(mockMovieRepository.getTopRatedTVSeries())
+    when(mockTvRepository.getTopRatedTVSeries())
         .thenAnswer((_) async => Right(topRatedTvSeries));
     // act
     final result = await useCase.execute();

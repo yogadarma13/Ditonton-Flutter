@@ -8,18 +8,18 @@ import '../../helpers/test_helper.mocks.dart';
 
 void main() {
   late GetAiringTodayTvSeries useCase;
-  late MockMovieRepository mockMovieRepository;
+  late MockTvRepository mockTvRepository;
 
   setUp(() {
-    mockMovieRepository = MockMovieRepository();
-    useCase = GetAiringTodayTvSeries(mockMovieRepository);
+    mockTvRepository = MockTvRepository();
+    useCase = GetAiringTodayTvSeries(mockTvRepository);
   });
 
   final tvSeries = <Movie>[];
 
   test('should get list of airing today tv series from the repository',
       () async {
-    when(mockMovieRepository.getAiringTodayTVSeries())
+    when(mockTvRepository.getAiringTodayTVSeries())
         .thenAnswer((_) async => Right(tvSeries));
 
     final result = await useCase.execute();
