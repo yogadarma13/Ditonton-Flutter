@@ -80,31 +80,6 @@ class TvDetailResponse extends Equatable {
         voteCount: json["vote_count"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "backdrop_path": backdropPath,
-        "episode_run_time": List<dynamic>.from(episodeRunTime.map((x) => x)),
-        "first_air_date": firstAirDate,
-        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
-        "id": id,
-        "languages": List<dynamic>.from(languages.map((x) => x)),
-        "last_air_date": lastAirDate,
-        "name": name,
-        "number_of_episodes": numberOfEpisodes,
-        "number_of_seasons": numberOfSeasons,
-        "origin_country": List<dynamic>.from(originCountry.map((x) => x)),
-        "original_language": originalLanguage,
-        "original_name": originalName,
-        "overview": overview,
-        "popularity": popularity,
-        "poster_path": posterPath,
-        "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
-        "status": status,
-        "tagline": tagline,
-        "type": type,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
-      };
-
   MovieDetail toEntity() {
     return MovieDetail(
       genres: this.genres.map((genre) => genre.toEntity()).toList(),
