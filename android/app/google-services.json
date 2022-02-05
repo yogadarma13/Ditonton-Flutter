@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "878846346104",
+    "project_id": "ditonton-flutter",
+    "storage_bucket": "ditonton-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878846346104:android:e21627fe21bdcbf2c7fe8d",
+        "android_client_info": {
+          "package_name": "com.yogadarma.ditonton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "878846346104-er1tafcui89k7tmnol2b9t2b14k69l7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY2Z7dZ4dgr5WVpFZmYAJ3eRd5972Q6cI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "878846346104-er1tafcui89k7tmnol2b9t2b14k69l7g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
