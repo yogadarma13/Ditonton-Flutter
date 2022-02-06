@@ -3,6 +3,7 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/presentation/bloc/popular/popular_bloc.dart';
 import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
+import 'package:ditonton/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
@@ -65,6 +66,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<PopularBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedBloc>(),
         ),
       ],
       child: MaterialApp(
