@@ -21,7 +21,7 @@ class DatabaseHelper {
     return _database;
   }
 
-  static const String _tblWatchlist = 'watchlist';
+  static const String _tblWatchlist = 'watchlist_movies';
   static const String _tblCache = 'cache';
 
   Future<Database> _initDb() async {
