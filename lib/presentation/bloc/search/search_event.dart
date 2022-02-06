@@ -14,5 +14,5 @@ class OnQueryChanged extends SearchEvent {
   OnQueryChanged(this.query, this.category);
 
   @override
-  List<Object> get props => [query];
+  List<Object> get props => [query, category];
 }
