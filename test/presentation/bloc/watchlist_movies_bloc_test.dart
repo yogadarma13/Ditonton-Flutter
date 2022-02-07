@@ -3,9 +3,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_movies.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist/watchlist_event.dart';
-import 'package:ditonton/presentation/bloc/watchlist/watchlist_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -24,11 +24,11 @@ void main() {
   });
 
   test('initial state should be empty', () {
-    expect(watchlistBloc.state, WatchlistEmpty());
+    expect(watchlistBloc.state, StateEmpty());
   });
 
   group('Watchlist Movies', () {
-    blocTest<WatchlistMoviesBloc, WatchlistState>(
+    blocTest<WatchlistMoviesBloc, BlocState>(
       'Should emit [Loading, HasData] when data watchlist_movies movies is gotten successfully',
       build: () {
         when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
@@ -38,8 +38,8 @@ void main() {
       act: (bloc) => bloc.add(OnWatchlistRequest()),
       wait: const Duration(milliseconds: 100),
       expect: () => [
-        WatchlistLoading(),
-        WatchlistHasData([testWatchlistMovie]),
+        StateLoading(),
+        StateHasData([testWatchlistMovie]),
       ],
       verify: (bloc) {
         verify(
@@ -47,7 +47,7 @@ void main() {
       },
     );
 
-    blocTest<WatchlistMoviesBloc, WatchlistState>(
+    blocTest<WatchlistMoviesBloc, BlocState>(
       'Should emit [Loading, Error] when get watchlist_movies movies is unsuccessful',
       build: () {
         when(mockGetWatchlistMoviesUseCase.execute(CategoryMovie.Movies.name))
@@ -56,8 +56,8 @@ void main() {
       },
       act: (bloc) => bloc.add(OnWatchlistRequest()),
       expect: () => [
-        WatchlistLoading(),
-        WatchlistError('Server Failure'),
+        StateLoading(),
+        StateError('Server Failure'),
       ],
       verify: (bloc) {
         verify(

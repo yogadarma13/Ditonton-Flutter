@@ -1,5 +1,7 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/top_rated/top_rated_bloc.dart';
+import 'package:ditonton/presentation/bloc/top_rated/top_rated_event.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,13 +35,13 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<TopRatedBloc, TopRatedState>(
+        child: BlocBuilder<TopRatedBloc, BlocState>(
           builder: (context, state) {
-            if (state is TopRatedLoading) {
+            if (state is StateLoading) {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is TopRatedHasData) {
+            } else if (state is StateHasData) {
               final result = state.result;
               return ListView.builder(
                 itemBuilder: (context, index) {
@@ -48,7 +50,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
                 },
                 itemCount: result.length,
               );
-            } else if (state is TopRatedError) {
+            } else if (state is StateError) {
               return Center(
                 key: Key('error_message'),
                 child: Text(state.message),

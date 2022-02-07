@@ -1,13 +1,7 @@
-part of 'search_bloc.dart';
+import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
 
-abstract class SearchEvent extends Equatable {
-  const SearchEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-class OnQueryChanged extends SearchEvent {
+class OnQueryChanged extends BlocEvent {
   final String query;
   final CategoryMovie category;
 

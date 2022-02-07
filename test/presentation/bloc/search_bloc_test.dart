@@ -5,7 +5,9 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/domain/usecases/search_tv_series.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
+import 'package:ditonton/presentation/bloc/search/search_event.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -50,11 +52,11 @@ void main() {
   final tQuery2 = 'victoria';
 
   test('initial state should be empty', () {
-    expect(searchBloc.state, SearchEmpty());
+    expect(searchBloc.state, StateEmpty());
   });
 
   group('Search Movies', () {
-    blocTest<SearchBloc, SearchState>(
+    blocTest<SearchBloc, BlocState>(
       'Should emit [Loading, HasData] when data movies is gotten successfully',
       build: () {
         when(mockSearchMoviesUseCase.execute(tQuery))
@@ -64,15 +66,15 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChanged(tQuery, CategoryMovie.Movies)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        SearchLoading(),
-        SearchHasData(tMovieList),
+        StateLoading(),
+        StateHasData(tMovieList),
       ],
       verify: (bloc) {
         verify(mockSearchMoviesUseCase.execute(tQuery));
       },
     );
 
-    blocTest<SearchBloc, SearchState>(
+    blocTest<SearchBloc, BlocState>(
       'Should emit [Loading, Error] when get search movies is unsuccessful',
       build: () {
         when(mockSearchMoviesUseCase.execute(tQuery))
@@ -82,8 +84,8 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChanged(tQuery, CategoryMovie.Movies)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        SearchLoading(),
-        SearchError('Server Failure'),
+        StateLoading(),
+        StateError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockSearchMoviesUseCase.execute(tQuery));
@@ -92,7 +94,7 @@ void main() {
   });
 
   group('Search TV Series', () {
-    blocTest<SearchBloc, SearchState>(
+    blocTest<SearchBloc, BlocState>(
       'Should emit [Loading, HasData] when data tv series is gotten successfully',
       build: () {
         when(mockSearchTvSeriesUseCase.execute(tQuery2))
@@ -102,15 +104,15 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChanged(tQuery2, CategoryMovie.TvSeries)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        SearchLoading(),
-        SearchHasData(tMovieList2),
+        StateLoading(),
+        StateHasData(tMovieList2),
       ],
       verify: (bloc) {
         verify(mockSearchTvSeriesUseCase.execute(tQuery2));
       },
     );
 
-    blocTest<SearchBloc, SearchState>(
+    blocTest<SearchBloc, BlocState>(
       'Should emit [Loading, Error] when get search tv series is unsuccessful',
       build: () {
         when(mockSearchTvSeriesUseCase.execute(tQuery2))
@@ -120,8 +122,8 @@ void main() {
       act: (bloc) => bloc.add(OnQueryChanged(tQuery2, CategoryMovie.TvSeries)),
       wait: const Duration(milliseconds: 500),
       expect: () => [
-        SearchLoading(),
-        SearchError('Server Failure'),
+        StateLoading(),
+        StateError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockSearchTvSeriesUseCase.execute(tQuery2));

@@ -1,5 +1,7 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
+import 'package:ditonton/presentation/bloc/search/search_event.dart';
 import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,13 +46,13 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            BlocBuilder<SearchBloc, SearchState>(
+            BlocBuilder<SearchBloc, BlocState>(
               builder: (context, state) {
-                if (state is SearchLoading) {
+                if (state is StateLoading) {
                   return Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (state is SearchHasData) {
+                } else if (state is StateHasData) {
                   final result = state.result;
                   return Expanded(
                     child: ListView.builder(
@@ -62,7 +64,7 @@ class SearchPage extends StatelessWidget {
                       itemCount: result.length,
                     ),
                   );
-                } else if (state is SearchError) {
+                } else if (state is StateError) {
                   return Expanded(
                     child: Center(
                       key: Key('error_message'),

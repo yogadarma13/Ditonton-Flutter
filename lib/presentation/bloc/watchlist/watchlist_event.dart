@@ -1,14 +1,6 @@
-import 'package:equatable/equatable.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
 
-abstract class WatchlistEvent extends Equatable {
-  const WatchlistEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-class OnWatchlistRequest extends WatchlistEvent {
-
+class OnWatchlistRequest extends BlocEvent {
   OnWatchlistRequest();
 
   @override

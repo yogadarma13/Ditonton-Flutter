@@ -1,13 +1,7 @@
-part of 'top_rated_bloc.dart';
+import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
 
-abstract class TopRatedEvent extends Equatable {
-  const TopRatedEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-class OnTopRatedRequest extends TopRatedEvent {
+class OnTopRatedRequest extends BlocEvent {
   final CategoryMovie category;
 
   OnTopRatedRequest(this.category);

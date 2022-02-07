@@ -1,34 +1,32 @@
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
 import 'package:ditonton/domain/usecases/search_tv_series.dart';
-import 'package:equatable/equatable.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
+import 'package:ditonton/presentation/bloc/search/search_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-part 'search_event.dart';
-part 'search_state.dart';
-
-class SearchBloc extends Bloc<SearchEvent, SearchState> {
+class SearchBloc extends Bloc<BlocEvent, BlocState> {
   final SearchMoviesUseCase _searchMovies;
   final SearchTvSeriesUseCase _searchTvSeries;
 
-  SearchBloc(this._searchMovies, this._searchTvSeries) : super(SearchEmpty()) {
+  SearchBloc(this._searchMovies, this._searchTvSeries) : super(StateEmpty()) {
     on<OnQueryChanged>((event, emit) async {
       final query = event.query;
       final category = event.category;
 
-      emit(SearchLoading());
+      emit(StateLoading());
       final result = category == CategoryMovie.Movies
           ? await _searchMovies.execute(query)
           : await _searchTvSeries.execute(query);
 
       result.fold(
         (failure) {
-          emit(SearchError(failure.message));
+          emit(StateError(failure.message));
         },
         (data) {
-          emit(SearchHasData(data));
+          emit(StateHasData(data));
         },
       );
     }, transformer: debounce(const Duration(milliseconds: 500)));

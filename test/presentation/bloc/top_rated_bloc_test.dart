@@ -5,7 +5,9 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_tv_series.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/top_rated/top_rated_bloc.dart';
+import 'package:ditonton/presentation/bloc/top_rated/top_rated_event.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -47,11 +49,11 @@ void main() {
   final tMovieList2 = <Movie>[tMovie2];
 
   test('initial state should be empty', () {
-    expect(topRatedBloc.state, TopRatedEmpty());
+    expect(topRatedBloc.state, StateEmpty());
   });
 
   group('Top Rated Movies', () {
-    blocTest<TopRatedBloc, TopRatedState>(
+    blocTest<TopRatedBloc, BlocState>(
       'Should emit [Loading, HasData] when data top rated movies is gotten successfully',
       build: () {
         when(mockGetTopRatedMoviesUseCase.execute())
@@ -61,15 +63,15 @@ void main() {
       act: (bloc) => bloc.add(OnTopRatedRequest(CategoryMovie.Movies)),
       wait: const Duration(milliseconds: 100),
       expect: () => [
-        TopRatedLoading(),
-        TopRatedHasData(tMovieList),
+        StateLoading(),
+        StateHasData(tMovieList),
       ],
       verify: (bloc) {
         verify(mockGetTopRatedMoviesUseCase.execute());
       },
     );
 
-    blocTest<TopRatedBloc, TopRatedState>(
+    blocTest<TopRatedBloc, BlocState>(
       'Should emit [Loading, Error] when get top rated movies is unsuccessful',
       build: () {
         when(mockGetTopRatedMoviesUseCase.execute())
@@ -78,8 +80,8 @@ void main() {
       },
       act: (bloc) => bloc.add(OnTopRatedRequest(CategoryMovie.Movies)),
       expect: () => [
-        TopRatedLoading(),
-        TopRatedError('Server Failure'),
+        StateLoading(),
+        StateError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetTopRatedMoviesUseCase.execute());
@@ -88,7 +90,7 @@ void main() {
   });
 
   group('Top Rated TV Series', () {
-    blocTest<TopRatedBloc, TopRatedState>(
+    blocTest<TopRatedBloc, BlocState>(
       'Should emit [Loading, HasData] when data top rated tv series is gotten successfully',
       build: () {
         when(mockGetTopRatedTvSeriesUseCase.execute())
@@ -98,15 +100,15 @@ void main() {
       act: (bloc) => bloc.add(OnTopRatedRequest(CategoryMovie.TvSeries)),
       wait: const Duration(milliseconds: 100),
       expect: () => [
-        TopRatedLoading(),
-        TopRatedHasData(tMovieList2),
+        StateLoading(),
+        StateHasData(tMovieList2),
       ],
       verify: (bloc) {
         verify(mockGetTopRatedTvSeriesUseCase.execute());
       },
     );
 
-    blocTest<TopRatedBloc, TopRatedState>(
+    blocTest<TopRatedBloc, BlocState>(
       'Should emit [Loading, Error] when get top rated tv series is unsuccessful',
       build: () {
         when(mockGetTopRatedTvSeriesUseCase.execute())
@@ -115,8 +117,8 @@ void main() {
       },
       act: (bloc) => bloc.add(OnTopRatedRequest(CategoryMovie.TvSeries)),
       expect: () => [
-        TopRatedLoading(),
-        TopRatedError('Server Failure'),
+        StateLoading(),
+        StateError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetTopRatedTvSeriesUseCase.execute());
