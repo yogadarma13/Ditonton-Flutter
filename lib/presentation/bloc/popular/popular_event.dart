@@ -1,13 +1,7 @@
-part of 'popular_bloc.dart';
+import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
 
-abstract class PopularEvent extends Equatable {
-  const PopularEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-class OnPopularRequest extends PopularEvent {
+class OnPopularRequest extends BlocEvent {
   final CategoryMovie category;
 
   OnPopularRequest(this.category);

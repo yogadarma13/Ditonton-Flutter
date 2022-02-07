@@ -5,7 +5,9 @@ import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_popular_movies.dart';
 import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/popular/popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/popular/popular_event.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -47,11 +49,11 @@ void main() {
   final tMovieList2 = <Movie>[tMovie2];
 
   test('initial state should be empty', () {
-    expect(popularBloc.state, PopularEmpty());
+    expect(popularBloc.state, StateEmpty());
   });
 
   group('Popular Movies', () {
-    blocTest<PopularBloc, PopularState>(
+    blocTest<PopularBloc, BlocState>(
       'Should emit [Loading, HasData] when data popular movies is gotten successfully',
       build: () {
         when(mockGetPopularMoviesUseCase.execute())
@@ -61,15 +63,15 @@ void main() {
       act: (bloc) => bloc.add(OnPopularRequest(CategoryMovie.Movies)),
       wait: const Duration(milliseconds: 100),
       expect: () => [
-        PopularLoading(),
-        PopularHasData(tMovieList),
+        StateLoading(),
+        StateHasData(tMovieList),
       ],
       verify: (bloc) {
         verify(mockGetPopularMoviesUseCase.execute());
       },
     );
 
-    blocTest<PopularBloc, PopularState>(
+    blocTest<PopularBloc, BlocState>(
       'Should emit [Loading, Error] when get popular movies is unsuccessful',
       build: () {
         when(mockGetPopularMoviesUseCase.execute())
@@ -78,8 +80,8 @@ void main() {
       },
       act: (bloc) => bloc.add(OnPopularRequest(CategoryMovie.Movies)),
       expect: () => [
-        PopularLoading(),
-        PopularError('Server Failure'),
+        StateLoading(),
+        StateError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetPopularMoviesUseCase.execute());
@@ -88,7 +90,7 @@ void main() {
   });
 
   group('Popular TV Series', () {
-    blocTest<PopularBloc, PopularState>(
+    blocTest<PopularBloc, BlocState>(
       'Should emit [Loading, HasData] when data popular tv series is gotten successfully',
       build: () {
         when(mockGetPopularTvSeriesUseCase.execute())
@@ -98,15 +100,15 @@ void main() {
       act: (bloc) => bloc.add(OnPopularRequest(CategoryMovie.TvSeries)),
       wait: const Duration(milliseconds: 100),
       expect: () => [
-        PopularLoading(),
-        PopularHasData(tMovieList2),
+        StateLoading(),
+        StateHasData(tMovieList2),
       ],
       verify: (bloc) {
         verify(mockGetPopularTvSeriesUseCase.execute());
       },
     );
 
-    blocTest<PopularBloc, PopularState>(
+    blocTest<PopularBloc, BlocState>(
       'Should emit [Loading, Error] when get popular tv series is unsuccessful',
       build: () {
         when(mockGetPopularTvSeriesUseCase.execute())
@@ -115,8 +117,8 @@ void main() {
       },
       act: (bloc) => bloc.add(OnPopularRequest(CategoryMovie.TvSeries)),
       expect: () => [
-        PopularLoading(),
-        PopularError('Server Failure'),
+        StateLoading(),
+        StateError('Server Failure'),
       ],
       verify: (bloc) {
         verify(mockGetPopularTvSeriesUseCase.execute());
