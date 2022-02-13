@@ -20,6 +20,10 @@ import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
+import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_movies/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
 import 'package:ditonton/presentation/bloc/popular/popular_bloc.dart';
 import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated/top_rated_bloc.dart';
@@ -43,6 +47,18 @@ final locator = GetIt.instance;
 
 void init() {
   // bloc
+  locator.registerFactory(
+    () => NowPlayingBloc(locator()),
+  );
+  locator.registerFactory(
+    () => AiringTodayBloc(locator()),
+  );
+  locator.registerFactory(
+    () => PopularMoviesBloc(locator()),
+  );
+  locator.registerFactory(
+    () => PopularTvSeriesBloc(locator()),
+  );
   locator.registerFactory(
     () => SearchBloc(locator(), locator()),
   );

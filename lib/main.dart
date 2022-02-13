@@ -1,6 +1,10 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_movies/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
 import 'package:ditonton/presentation/bloc/popular/popular_bloc.dart';
 import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated/top_rated_bloc.dart';
@@ -62,6 +66,18 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<NowPlayingBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<AiringTodayBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularMoviesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularTvSeriesBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<SearchBloc>(),
