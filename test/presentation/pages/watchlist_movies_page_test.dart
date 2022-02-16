@@ -1,26 +1,36 @@
-import 'package:ditonton/common/state_enum.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
+import 'package:ditonton/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'watchlist_movies_page_test.mocks.dart';
+class MockWatchlistMoviesBloc extends MockBloc<BlocEvent, BlocState>
+    implements WatchlistMoviesBloc {}
 
-@GenerateMocks([WatchlistMovieNotifier])
+class WatchlistEventFake extends Fake implements BlocEvent {}
+
+class WatchlistStateFake extends Fake implements BlocState {}
+
 void main() {
-  late MockWatchlistMovieNotifier mockNotifier;
+  late MockWatchlistMoviesBloc mockWatchlistMoviesBloc;
+
+  setUpAll(() {
+    registerFallbackValue(WatchlistEventFake());
+    registerFallbackValue(WatchlistStateFake());
+  });
 
   setUp(() {
-    mockNotifier = MockWatchlistMovieNotifier();
+    mockWatchlistMoviesBloc = MockWatchlistMoviesBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<WatchlistMovieNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<WatchlistMoviesBloc>(
+      create: (context) => mockWatchlistMoviesBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -29,7 +39,7 @@ void main() {
 
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
-    when(mockNotifier.watchlistState).thenReturn(RequestState.Loading);
+    when(() => mockWatchlistMoviesBloc.state).thenReturn(StateLoading());
 
     final progressFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
@@ -42,8 +52,8 @@ void main() {
 
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.watchlistState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.watchlistMovies).thenReturn(<Movie>[]);
+    when(() => mockWatchlistMoviesBloc.state)
+        .thenReturn(StateHasData(<Movie>[]));
 
     final listViewFinder = find.byType(ListView);
 
@@ -54,8 +64,8 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(mockNotifier.watchlistState).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Error message');
+    when(() => mockWatchlistMoviesBloc.state)
+        .thenReturn(StateError('Error message'));
 
     final textFinder = find.byKey(Key('error_message'));
 
