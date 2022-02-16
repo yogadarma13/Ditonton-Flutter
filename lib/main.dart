@@ -1,5 +1,6 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/data/datasources/client/IOHttpClient.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:ditonton/presentation/bloc/detail/detail_movie/detail_bloc.dart';
 import 'package:ditonton/presentation/bloc/detail/recommendation/recommendation_bloc.dart';
@@ -41,6 +42,7 @@ import 'common/utils.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await IOHttpClient.init();
   di.init();
   runApp(MyApp());
 }
