@@ -20,6 +20,9 @@ import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_watchlist.dart';
 import 'package:ditonton/domain/usecases/search_movies.dart';
+import 'package:ditonton/presentation/bloc/detail/detail_movie/detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/detail/recommendation/recommendation_bloc.dart';
+import 'package:ditonton/presentation/bloc/detail/watchlist/watchlist_bloc.dart';
 import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_bloc.dart';
 import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_bloc.dart';
 import 'package:ditonton/presentation/bloc/home/popular_movies/popular_movies_bloc.dart';
@@ -77,6 +80,15 @@ void init() {
   );
   locator.registerFactory(
     () => WatchlistTvSeriesBloc(locator()),
+  );
+  locator.registerFactory(
+    () => DetailBloc(locator(), locator()),
+  );
+  locator.registerFactory(
+    () => RecommendationBloc(locator(), locator()),
+  );
+  locator.registerFactory(
+    () => WatchlistBloc(locator(), locator(), locator()),
   );
 
   // provider

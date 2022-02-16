@@ -1,6 +1,9 @@
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:ditonton/presentation/bloc/detail/detail_movie/detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/detail/recommendation/recommendation_bloc.dart';
+import 'package:ditonton/presentation/bloc/detail/watchlist/watchlist_bloc.dart';
 import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_bloc.dart';
 import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_bloc.dart';
 import 'package:ditonton/presentation/bloc/home/popular_movies/popular_movies_bloc.dart';
@@ -97,6 +100,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<WatchlistTvSeriesBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<DetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<RecommendationBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistBloc>(),
         ),
       ],
       child: MaterialApp(
