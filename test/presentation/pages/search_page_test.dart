@@ -1,26 +1,37 @@
+import 'package:bloc_test/bloc_test.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
+import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'search_page_test.mocks.dart';
+class MockSearchBloc extends MockBloc<BlocEvent, BlocState>
+    implements SearchBloc {}
 
-@GenerateMocks([MovieSearchNotifier])
+class SearchEventFake extends Fake implements BlocEvent {}
+
+class SearchStateFake extends Fake implements BlocState {}
+
 void main() {
-  late MockMovieSearchNotifier mockNotifier;
+  late MockSearchBloc mockSearchBloc;
+
+  setUpAll(() {
+    registerFallbackValue(SearchEventFake());
+    registerFallbackValue(SearchStateFake());
+  });
 
   setUp(() {
-    mockNotifier = MockMovieSearchNotifier();
+    mockSearchBloc = MockSearchBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<MovieSearchNotifier>.value(
-      value: mockNotifier,
+    return BlocProvider<SearchBloc>(
+      create: (context) => mockSearchBloc,
       child: MaterialApp(
         home: body,
       ),
@@ -29,7 +40,7 @@ void main() {
 
   testWidgets('Page should display progress bar when loading',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loading);
+    when(() => mockSearchBloc.state).thenReturn(StateLoading());
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
 
@@ -41,8 +52,7 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.searchResult).thenReturn(<Movie>[]);
+    when(() => mockSearchBloc.state).thenReturn(StateHasData(<Movie>[]));
 
     final listViewFinder = find.byType(ListView);
 
@@ -54,8 +64,7 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Error message');
+    when(() => mockSearchBloc.state).thenReturn(StateError('Error message'));
 
     final textFinder = find.byKey(Key('error_message'));
 
