@@ -1,26 +1,67 @@
-import 'package:ditonton/common/state_enum.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/presentation/bloc/bloc_event.dart';
+import 'package:ditonton/presentation/bloc/bloc_state.dart';
+import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_movies/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
-import 'package:ditonton/presentation/provider/home_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:mocktail/mocktail.dart';
 
-import 'home_page_test.mocks.dart';
+class MockNowPlayingBloc extends MockBloc<BlocEvent, BlocState>
+    implements NowPlayingBloc {}
 
-@GenerateMocks([HomeNotifier])
+class MockAiringTodayBloc extends MockBloc<BlocEvent, BlocState>
+    implements AiringTodayBloc {}
+
+class MockPopularMoviesBloc extends MockBloc<BlocEvent, BlocState>
+    implements PopularMoviesBloc {}
+
+class MockPopularTvSeriesBloc extends MockBloc<BlocEvent, BlocState>
+    implements PopularTvSeriesBloc {}
+
+class HomeEventFake extends Fake implements BlocEvent {}
+
+class HomeStateFake extends Fake implements BlocState {}
+
 void main() {
-  late MockHomeNotifier mockNotifier;
+  late MockNowPlayingBloc mockNowPlayingBloc;
+  late MockAiringTodayBloc mockAiringTodayBloc;
+  late MockPopularMoviesBloc mockPopularMoviesBloc;
+  late MockPopularTvSeriesBloc mockPopularTvSeriesBloc;
+
+  setUpAll(() {
+    registerFallbackValue(HomeEventFake());
+    registerFallbackValue(HomeStateFake());
+  });
 
   setUp(() {
-    mockNotifier = MockHomeNotifier();
+    mockNowPlayingBloc = MockNowPlayingBloc();
+    mockAiringTodayBloc = MockAiringTodayBloc();
+    mockPopularMoviesBloc = MockPopularMoviesBloc();
+    mockPopularTvSeriesBloc = MockPopularTvSeriesBloc();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<HomeNotifier>.value(
-      value: mockNotifier,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NowPlayingBloc>(
+          create: (context) => mockNowPlayingBloc,
+        ),
+        BlocProvider<AiringTodayBloc>(
+          create: (context) => mockAiringTodayBloc,
+        ),
+        BlocProvider<PopularMoviesBloc>(
+          create: (context) => mockPopularMoviesBloc,
+        ),
+        BlocProvider<PopularTvSeriesBloc>(
+          create: (context) => mockPopularTvSeriesBloc,
+        ),
+      ],
       child: MaterialApp(
         home: body,
       ),
@@ -29,10 +70,10 @@ void main() {
 
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
-    when(mockNotifier.nowPlayingState).thenReturn(RequestState.Loading);
-    when(mockNotifier.airingTodayState).thenReturn(RequestState.Loading);
-    when(mockNotifier.popularMoviesState).thenReturn(RequestState.Loading);
-    when(mockNotifier.popularTvSeriesState).thenReturn(RequestState.Loading);
+    when(() => mockNowPlayingBloc.state).thenReturn(StateLoading());
+    when(() => mockAiringTodayBloc.state).thenReturn(StateLoading());
+    when(() => mockPopularMoviesBloc.state).thenReturn(StateLoading());
+    when(() => mockPopularTvSeriesBloc.state).thenReturn(StateLoading());
 
     final progressBarFinder = find.byType(CircularProgressIndicator);
 
@@ -42,14 +83,11 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    when(mockNotifier.nowPlayingState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.nowPlayingMovies).thenReturn(<Movie>[]);
-    when(mockNotifier.airingTodayState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.airingTodayTvSeries).thenReturn(<Movie>[]);
-    when(mockNotifier.popularMoviesState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.popularMovies).thenReturn(<Movie>[]);
-    when(mockNotifier.popularTvSeriesState).thenReturn(RequestState.Loaded);
-    when(mockNotifier.popularTvSeries).thenReturn(<Movie>[]);
+    when(() => mockNowPlayingBloc.state).thenReturn(StateHasData(<Movie>[]));
+    when(() => mockAiringTodayBloc.state).thenReturn(StateHasData(<Movie>[]));
+    when(() => mockPopularMoviesBloc.state).thenReturn(StateHasData(<Movie>[]));
+    when(() => mockPopularTvSeriesBloc.state)
+        .thenReturn(StateHasData(<Movie>[]));
 
     final listViewFinder = find.byType(ListView);
 
@@ -60,14 +98,10 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(mockNotifier.nowPlayingState).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Failed');
-    when(mockNotifier.airingTodayState).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Failed');
-    when(mockNotifier.popularMoviesState).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Failed');
-    when(mockNotifier.popularTvSeriesState).thenReturn(RequestState.Error);
-    when(mockNotifier.message).thenReturn('Failed');
+    when(() => mockNowPlayingBloc.state).thenReturn(StateError('Failed'));
+    when(() => mockAiringTodayBloc.state).thenReturn(StateError('Failed'));
+    when(() => mockPopularMoviesBloc.state).thenReturn(StateError('Failed'));
+    when(() => mockPopularTvSeriesBloc.state).thenReturn(StateError('Failed'));
 
     await tester.pumpWidget(_makeTestableWidget(HomePage()));
 
