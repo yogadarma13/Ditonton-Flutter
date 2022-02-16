@@ -4,8 +4,8 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
 import 'package:ditonton/presentation/bloc/bloc_state.dart';
-import 'package:ditonton/presentation/bloc/home/home_event.dart';
 import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_event.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -44,7 +44,7 @@ void main() {
           .thenAnswer((_) async => Right(tMovieList));
       return nowPlayingBloc;
     },
-    act: (bloc) => bloc.add(OnHomeRequest()),
+    act: (bloc) => bloc.add(OnNowPlayingRequest()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       StateLoading(),
@@ -62,7 +62,7 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return nowPlayingBloc;
     },
-    act: (bloc) => bloc.add(OnHomeRequest()),
+    act: (bloc) => bloc.add(OnNowPlayingRequest()),
     expect: () => [
       StateLoading(),
       StateError('Server Failure'),

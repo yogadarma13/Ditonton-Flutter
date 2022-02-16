@@ -1,7 +1,7 @@
 import 'package:ditonton/presentation/bloc/bloc_event.dart';
 
-class OnHomeRequest extends BlocEvent {
-  OnHomeRequest();
+class OnPopularMoviesRequest extends BlocEvent {
+  OnPopularMoviesRequest();
 
   @override
   List<Object> get props => [];

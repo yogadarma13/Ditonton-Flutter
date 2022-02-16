@@ -5,7 +5,7 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_bloc.dart';
-import 'package:ditonton/presentation/bloc/home/home_event.dart';
+import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_event.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -44,7 +44,7 @@ void main() {
           .thenAnswer((_) async => Right(tMovieList));
       return airingTodayBloc;
     },
-    act: (bloc) => bloc.add(OnHomeRequest()),
+    act: (bloc) => bloc.add(OnAiringTodayRequest()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       StateLoading(),
@@ -62,7 +62,7 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return airingTodayBloc;
     },
-    act: (bloc) => bloc.add(OnHomeRequest()),
+    act: (bloc) => bloc.add(OnAiringTodayRequest()),
     expect: () => [
       StateLoading(),
       StateError('Server Failure'),

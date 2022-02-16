@@ -2,10 +2,13 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_bloc.dart';
-import 'package:ditonton/presentation/bloc/home/home_event.dart';
+import 'package:ditonton/presentation/bloc/home/airing_today/airing_today_event.dart';
 import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/now_playing/now_playing_event.dart';
 import 'package:ditonton/presentation/bloc/home/popular_movies/popular_movies_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_movies/popular_movies_event.dart';
 import 'package:ditonton/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_tv_series/popular_tv_series_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,10 +24,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Future.microtask(() => {
-          context.read<NowPlayingBloc>().add(OnHomeRequest()),
-          context.read<AiringTodayBloc>().add(OnHomeRequest()),
-          context.read<PopularMoviesBloc>().add(OnHomeRequest()),
-          context.read<PopularTvSeriesBloc>().add(OnHomeRequest())
+          context.read<NowPlayingBloc>().add(OnNowPlayingRequest()),
+          context.read<AiringTodayBloc>().add(OnAiringTodayRequest()),
+          context.read<PopularMoviesBloc>().add(OnPopularMoviesRequest()),
+          context.read<PopularTvSeriesBloc>().add(OnPopularTvSeriesRequest())
         });
     // Provider.of<HomeNotifier>(context, listen: false)
     //   ..fetchNowPlayingMovies()

@@ -4,8 +4,8 @@ import 'package:ditonton/common/failure.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/usecases/get_popular_tv_series.dart';
 import 'package:ditonton/presentation/bloc/bloc_state.dart';
-import 'package:ditonton/presentation/bloc/home/home_event.dart';
 import 'package:ditonton/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
+import 'package:ditonton/presentation/bloc/home/popular_tv_series/popular_tv_series_event.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -44,7 +44,7 @@ void main() {
           .thenAnswer((_) async => Right(tMovieList));
       return popularTvSeriesBloc;
     },
-    act: (bloc) => bloc.add(OnHomeRequest()),
+    act: (bloc) => bloc.add(OnPopularTvSeriesRequest()),
     wait: const Duration(milliseconds: 100),
     expect: () => [
       StateLoading(),
@@ -62,7 +62,7 @@ void main() {
           .thenAnswer((_) async => Left(ServerFailure('Server Failure')));
       return popularTvSeriesBloc;
     },
-    act: (bloc) => bloc.add(OnHomeRequest()),
+    act: (bloc) => bloc.add(OnPopularTvSeriesRequest()),
     expect: () => [
       StateLoading(),
       StateError('Server Failure'),
