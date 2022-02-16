@@ -12,6 +12,10 @@ class SearchBloc extends Bloc<BlocEvent, BlocState> {
   final SearchTvSeriesUseCase _searchTvSeries;
 
   SearchBloc(this._searchMovies, this._searchTvSeries) : super(StateEmpty()) {
+    on<OnResetData>((event, emit) async {
+      emit(StateHasData([]));
+    });
+
     on<OnQueryChanged>((event, emit) async {
       final query = event.query;
       final category = event.category;

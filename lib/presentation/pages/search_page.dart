@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/search/search_bloc.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   static const ROUTE_NAME = '/search';
 
   final CategoryMovie category;
@@ -16,11 +16,24 @@ class SearchPage extends StatelessWidget {
   SearchPage(this.category);
 
   @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() => {
+          context.read<SearchBloc>().add(OnResetData()),
+        });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          category == CategoryMovie.Movies
+          widget.category == CategoryMovie.Movies
               ? 'Search Movies'
               : 'Search TV Series',
         ),
@@ -32,7 +45,9 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onChanged: (query) {
-                context.read<SearchBloc>().add(OnQueryChanged(query, category));
+                context
+                    .read<SearchBloc>()
+                    .add(OnQueryChanged(query, widget.category));
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -59,7 +74,7 @@ class SearchPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
                         final movie = result[index];
-                        return MovieCard(movie, category);
+                        return MovieCard(movie, widget.category);
                       },
                       itemCount: result.length,
                     ),

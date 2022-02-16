@@ -91,6 +91,20 @@ void main() {
         verify(mockSearchMoviesUseCase.execute(tQuery));
       },
     );
+
+    blocTest<SearchBloc, BlocState>(
+      'Should emit empty data when function reset called',
+      build: () {
+        when(mockSearchMoviesUseCase.execute(tQuery))
+            .thenAnswer((_) async => Right(tMovieList));
+        return searchBloc;
+      },
+      act: (bloc) => {bloc.add(OnResetData())},
+      wait: const Duration(milliseconds: 100),
+      expect: () => [
+        StateHasData([]),
+      ],
+    );
   });
 
   group('Search TV Series', () {
@@ -128,6 +142,20 @@ void main() {
       verify: (bloc) {
         verify(mockSearchTvSeriesUseCase.execute(tQuery2));
       },
+    );
+
+    blocTest<SearchBloc, BlocState>(
+      'Should emit empty data when function reset called',
+      build: () {
+        when(mockSearchTvSeriesUseCase.execute(tQuery2))
+            .thenAnswer((_) async => Right(tMovieList2));
+        return searchBloc;
+      },
+      act: (bloc) => {bloc.add(OnResetData())},
+      wait: const Duration(milliseconds: 100),
+      expect: () => [
+        StateHasData([]),
+      ],
     );
   });
 }
