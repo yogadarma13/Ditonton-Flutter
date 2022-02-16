@@ -92,53 +92,53 @@ void init() {
   );
 
   // provider
-  locator.registerFactory(
-    () => HomeNotifier(
-        getNowPlayingMovies: locator(),
-        getAiringTodayTvSeries: locator(),
-        getPopularMovies: locator(),
-        getPopularTvSeries: locator()),
-  );
-  locator.registerFactory(
-    () => MovieListNotifier(
-        getNowPlayingMovies: locator(),
-        getAiringTodayTvSeries: locator(),
-        getPopularMovies: locator(),
-        getPopularTvSeries: locator(),
-        getTopRatedMovies: locator(),
-        getTopRatedTvSeries: locator()),
-  );
-  locator.registerFactory(
-    () => MovieDetailNotifier(
-      getMovieDetail: locator(),
-      getMovieRecommendations: locator(),
-      getTvSeriesDetail: locator(),
-      getTvSeriesRecommendations: locator(),
-      getWatchListStatus: locator(),
-      saveWatchlist: locator(),
-      removeWatchlist: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => MovieSearchNotifier(
-      searchMovies: locator(),
-      searchTvSeries: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => PopularMoviesNotifier(locator(), locator()),
-  );
-  locator.registerFactory(
-    () => TopRatedMoviesNotifier(
-      getTopRatedMovies: locator(),
-      getTopRatedTvSeries: locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
-    ),
-  );
+  // locator.registerFactory(
+  //   () => HomeNotifier(
+  //       getNowPlayingMovies: locator(),
+  //       getAiringTodayTvSeries: locator(),
+  //       getPopularMovies: locator(),
+  //       getPopularTvSeries: locator()),
+  // );
+  // locator.registerFactory(
+  //   () => MovieListNotifier(
+  //       getNowPlayingMovies: locator(),
+  //       getAiringTodayTvSeries: locator(),
+  //       getPopularMovies: locator(),
+  //       getPopularTvSeries: locator(),
+  //       getTopRatedMovies: locator(),
+  //       getTopRatedTvSeries: locator()),
+  // );
+  // locator.registerFactory(
+  //   () => MovieDetailNotifier(
+  //     getMovieDetail: locator(),
+  //     getMovieRecommendations: locator(),
+  //     getTvSeriesDetail: locator(),
+  //     getTvSeriesRecommendations: locator(),
+  //     getWatchListStatus: locator(),
+  //     saveWatchlist: locator(),
+  //     removeWatchlist: locator(),
+  //   ),
+  // );
+  // locator.registerFactory(
+  //   () => MovieSearchNotifier(
+  //     searchMovies: locator(),
+  //     searchTvSeries: locator(),
+  //   ),
+  // );
+  // locator.registerFactory(
+  //   () => PopularMoviesNotifier(locator(), locator()),
+  // );
+  // locator.registerFactory(
+  //   () => TopRatedMoviesNotifier(
+  //     getTopRatedMovies: locator(),
+  //     getTopRatedTvSeries: locator(),
+  //   ),
+  // );
+  // locator.registerFactory(
+  //   () => WatchlistMovieNotifier(
+  //     getWatchlistMovies: locator(),
+  //   ),
+  // );
 
   // use case
   locator.registerLazySingleton<GetNowPlayingMoviesUseCase>(
