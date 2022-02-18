@@ -1,8 +1,7 @@
+import 'package:core/domain/entities/movie.dart';
+import 'package:core/domain/repositories/tv_repository.dart';
+import 'package:core/utils/failure.dart';
 import 'package:dartz/dartz.dart';
-
-import '../../utils/failure.dart';
-import '../entities/movie.dart';
-import '../repositories/tv_repository.dart';
 
 abstract class SearchTvSeriesUseCase {
   Future<Either<Failure, List<Movie>>> execute(String query);

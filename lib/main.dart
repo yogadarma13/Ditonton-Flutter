@@ -10,7 +10,6 @@ import 'package:core/presentation/bloc/home/popular_movies/popular_movies_bloc.d
 import 'package:core/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
 import 'package:core/presentation/bloc/home_movie/playing_today_bloc.dart';
 import 'package:core/presentation/bloc/popular/popular_bloc.dart';
-import 'package:core/presentation/bloc/search/search_bloc.dart';
 import 'package:core/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:core/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
 import 'package:core/presentation/bloc/watchlist/tv_series/watchlist_tv_series_bloc.dart';
@@ -18,7 +17,6 @@ import 'package:core/presentation/pages/home_movie_page.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:core/presentation/pages/movie_detail_page.dart';
 import 'package:core/presentation/pages/popular_movies_page.dart';
-import 'package:core/presentation/pages/search_page.dart';
 import 'package:core/presentation/pages/top_rated_movies_page.dart';
 import 'package:core/presentation/pages/watchlist_page.dart';
 import 'package:core/presentation/widgets/custom_drawer.dart';
@@ -30,6 +28,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:search/search.dart';
 
 import '../injection.dart' as di;
 

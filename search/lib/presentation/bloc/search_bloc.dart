@@ -1,12 +1,12 @@
-import 'package:core/presentation/bloc/search/search_event.dart';
+import 'package:core/presentation/bloc/bloc_event.dart';
+import 'package:core/presentation/bloc/bloc_state.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../domain/usecases/search_movies.dart';
-import '../../../domain/usecases/search_tv_series.dart';
-import '../../../utils/state_enum.dart';
-import '../bloc_event.dart';
-import '../bloc_state.dart';
+import '../../domain/search_movies.dart';
+import '../../domain/search_tv_series.dart';
+import 'search_event.dart';
 
 class SearchBloc extends Bloc<BlocEvent, BlocState> {
   final SearchMoviesUseCase _searchMovies;
@@ -14,7 +14,7 @@ class SearchBloc extends Bloc<BlocEvent, BlocState> {
 
   SearchBloc(this._searchMovies, this._searchTvSeries) : super(StateEmpty()) {
     on<OnResetData>((event, emit) async {
-      emit(StateHasData(const []));
+      emit(const StateHasData([]));
     });
 
     on<OnQueryChanged>((event, emit) async {

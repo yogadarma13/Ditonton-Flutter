@@ -2,13 +2,13 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/bloc/bloc_event.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/bloc/search/search_bloc.dart';
-import 'package:core/presentation/pages/search_page.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:search/presentation/bloc/search_bloc.dart';
+import 'package:search/presentation/page/search_page.dart';
 
 class MockSearchBloc extends MockBloc<BlocEvent, BlocState>
     implements SearchBloc {}

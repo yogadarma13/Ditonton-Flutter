@@ -1,12 +1,12 @@
+import 'package:core/presentation/bloc/bloc_state.dart';
+import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/styles/text_styles.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../styles/text_styles.dart';
-import '../../utils/state_enum.dart';
-import '../bloc/bloc_state.dart';
-import '../bloc/search/search_bloc.dart';
-import '../bloc/search/search_event.dart';
-import '../widgets/movie_card_list.dart';
+import '../bloc/search_bloc.dart';
+import '../bloc/search_event.dart';
 
 class SearchPage extends StatefulWidget {
   final CategoryMovie category;
@@ -22,7 +22,7 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     Future.microtask(() => {
-          context.read<SearchBloc>().add(OnResetData()),
+          context.read<SearchBloc>().add(const OnResetData()),
         });
   }
 
