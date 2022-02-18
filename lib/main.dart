@@ -1,3 +1,4 @@
+import 'package:about/about.dart';
 import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/data/datasources/client/IOHttpClient.dart';
@@ -15,7 +16,6 @@ import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist/tv_series/watchlist_tv_series_bloc.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/home_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';

@@ -1,5 +1,5 @@
+import 'package:about/about.dart';
 import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_page.dart';
 import 'package:flutter/material.dart';
