@@ -4,6 +4,7 @@ import 'package:ditonton/presentation/bloc/bloc_event.dart';
 import 'package:ditonton/presentation/bloc/bloc_state.dart';
 import 'package:ditonton/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
+import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,6 +28,15 @@ void main() {
   setUp(() {
     mockWatchlistMoviesBloc = MockWatchlistMoviesBloc();
   });
+
+  final tMovie = Movie(
+    id: 1,
+    overview: 'overview',
+    posterPath: 'posterPath',
+    releaseDate: 'releaseDate',
+    title: 'title',
+    voteAverage: 1,
+  );
 
   Widget _makeTestableWidget(Widget body) {
     return BlocProvider<WatchlistMoviesBloc>(
@@ -53,13 +63,25 @@ void main() {
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
     when(() => mockWatchlistMoviesBloc.state)
-        .thenReturn(StateHasData(<Movie>[]));
+        .thenReturn(StateHasData(<Movie>[tMovie]));
 
-    final listViewFinder = find.byType(ListView);
+    final listViewFinder = find.byType(MovieCard);
 
     await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
 
     expect(listViewFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display key empty when data is empty',
+      (WidgetTester tester) async {
+    when(() => mockWatchlistMoviesBloc.state)
+        .thenReturn(StateHasData(<Movie>[]));
+
+    final keyFinder = find.byKey(Key('empty_message'));
+
+    await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
+
+    expect(keyFinder, findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',

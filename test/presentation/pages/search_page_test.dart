@@ -29,6 +29,15 @@ void main() {
     mockSearchBloc = MockSearchBloc();
   });
 
+  final tMovie = Movie(
+    id: 1,
+    overview: 'overview',
+    posterPath: 'posterPath',
+    releaseDate: 'releaseDate',
+    title: 'title',
+    voteAverage: 1,
+  );
+
   Widget _makeTestableWidget(Widget body) {
     return BlocProvider<SearchBloc>(
       create: (context) => mockSearchBloc,
@@ -52,7 +61,7 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    when(() => mockSearchBloc.state).thenReturn(StateHasData(<Movie>[]));
+    when(() => mockSearchBloc.state).thenReturn(StateHasData(<Movie>[tMovie]));
 
     final listViewFinder = find.byType(ListView);
 
@@ -60,6 +69,18 @@ void main() {
         .pumpWidget(_makeTestableWidget(SearchPage(CategoryMovie.Movies)));
 
     expect(listViewFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display key empty when data is empty',
+      (WidgetTester tester) async {
+    when(() => mockSearchBloc.state).thenReturn(StateHasData(<Movie>[]));
+
+    final keyFinder = find.byKey(Key('empty_message'));
+
+    await tester
+        .pumpWidget(_makeTestableWidget(SearchPage(CategoryMovie.Movies)));
+
+    expect(keyFinder, findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',

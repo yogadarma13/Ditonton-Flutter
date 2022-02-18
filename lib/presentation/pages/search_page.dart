@@ -81,6 +81,7 @@ class _SearchPageState extends State<SearchPage> {
                           )
                         : SingleChildScrollView(
                             child: Center(
+                              key: Key('empty_message'),
                               child: Column(
                                 children: [
                                   Image.asset(

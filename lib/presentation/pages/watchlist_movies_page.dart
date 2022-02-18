@@ -33,48 +33,51 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: BlocBuilder<WatchlistMoviesBloc, BlocState>(
-        builder: (context, state) {
-          if (state is StateLoading) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is StateHasData) {
-            final result = state.result;
-            return result.isNotEmpty
-                ? ListView.builder(
-                    itemBuilder: (context, index) {
-                      final movie = result[index];
-                      return MovieCard(movie, CategoryMovie.Movies);
-                    },
-                    itemCount: result.length,
-                  )
-                : Center(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          'assets/empty.png',
-                          width: 240,
-                          height: 240,
-                        ),
-                        Text(
-                          'No Data',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
-                  );
-          } else if (state is StateError) {
-            return Center(
-              key: Key('error_message'),
-              child: Text(state.message),
-            );
-          } else {
-            return Container();
-          }
-        },
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: BlocBuilder<WatchlistMoviesBloc, BlocState>(
+          builder: (context, state) {
+            if (state is StateLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is StateHasData) {
+              final result = state.result;
+              return result.isNotEmpty
+                  ? ListView.builder(
+                      itemBuilder: (context, index) {
+                        final movie = result[index];
+                        return MovieCard(movie, CategoryMovie.Movies);
+                      },
+                      itemCount: result.length,
+                    )
+                  : Center(
+                      key: Key('empty_message'),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            'assets/empty.png',
+                            width: 240,
+                            height: 240,
+                          ),
+                          Text(
+                            'No Data',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    );
+            } else if (state is StateError) {
+              return Center(
+                key: Key('error_message'),
+                child: Text(state.message),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
     );
   }

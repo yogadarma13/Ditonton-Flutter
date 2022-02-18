@@ -28,6 +28,15 @@ void main() {
     mockWatchlistTvSeriesBloc = MockWatchlistTvSeriesBloc();
   });
 
+  final tMovie = Movie(
+    id: 1,
+    overview: 'overview',
+    posterPath: 'posterPath',
+    releaseDate: 'releaseDate',
+    title: 'title',
+    voteAverage: 1,
+  );
+
   Widget _makeTestableWidget(Widget body) {
     return BlocProvider<WatchlistTvSeriesBloc>(
       create: (context) => mockWatchlistTvSeriesBloc,
@@ -53,13 +62,25 @@ void main() {
   testWidgets('Page should display when data is loaded',
       (WidgetTester tester) async {
     when(() => mockWatchlistTvSeriesBloc.state)
-        .thenReturn(StateHasData(<Movie>[]));
+        .thenReturn(StateHasData(<Movie>[tMovie]));
 
     final listViewFinder = find.byType(ListView);
 
     await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
 
     expect(listViewFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display key empty when data is empty',
+      (WidgetTester tester) async {
+    when(() => mockWatchlistTvSeriesBloc.state)
+        .thenReturn(StateHasData(<Movie>[]));
+
+    final keyFinder = find.byKey(Key('empty_message'));
+
+    await tester.pumpWidget(_makeTestableWidget(WatchlistTvSeriesPage()));
+
+    expect(keyFinder, findsOneWidget);
   });
 
   testWidgets('Page should display text with message when Error',
