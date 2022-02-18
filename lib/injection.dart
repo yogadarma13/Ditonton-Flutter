@@ -34,13 +34,6 @@ import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
 import 'package:ditonton/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist/tv_series/watchlist_tv_series_bloc.dart';
-import 'package:ditonton/presentation/provider/home_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:get_it/get_it.dart';
 
 import 'data/repositories/tv_repository_impl.dart';
@@ -90,55 +83,6 @@ void init() {
   locator.registerFactory(
     () => WatchlistBloc(locator(), locator(), locator()),
   );
-
-  // provider
-  // locator.registerFactory(
-  //   () => HomeNotifier(
-  //       getNowPlayingMovies: locator(),
-  //       getAiringTodayTvSeries: locator(),
-  //       getPopularMovies: locator(),
-  //       getPopularTvSeries: locator()),
-  // );
-  // locator.registerFactory(
-  //   () => MovieListNotifier(
-  //       getNowPlayingMovies: locator(),
-  //       getAiringTodayTvSeries: locator(),
-  //       getPopularMovies: locator(),
-  //       getPopularTvSeries: locator(),
-  //       getTopRatedMovies: locator(),
-  //       getTopRatedTvSeries: locator()),
-  // );
-  // locator.registerFactory(
-  //   () => MovieDetailNotifier(
-  //     getMovieDetail: locator(),
-  //     getMovieRecommendations: locator(),
-  //     getTvSeriesDetail: locator(),
-  //     getTvSeriesRecommendations: locator(),
-  //     getWatchListStatus: locator(),
-  //     saveWatchlist: locator(),
-  //     removeWatchlist: locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => MovieSearchNotifier(
-  //     searchMovies: locator(),
-  //     searchTvSeries: locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => PopularMoviesNotifier(locator(), locator()),
-  // );
-  // locator.registerFactory(
-  //   () => TopRatedMoviesNotifier(
-  //     getTopRatedMovies: locator(),
-  //     getTopRatedTvSeries: locator(),
-  //   ),
-  // );
-  // locator.registerFactory(
-  //   () => WatchlistMovieNotifier(
-  //     getWatchlistMovies: locator(),
-  //   ),
-  // );
 
   // use case
   locator.registerLazySingleton<GetNowPlayingMoviesUseCase>(

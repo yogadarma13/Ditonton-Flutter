@@ -60,28 +60,6 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
             }
           },
         ),
-        // Consumer<TopRatedMoviesNotifier>(
-        //   builder: (context, data, child) {
-        //     if (data.state == RequestState.Loading) {
-        //       return Center(
-        //         child: CircularProgressIndicator(),
-        //       );
-        //     } else if (data.state == RequestState.Loaded) {
-        //       return ListView.builder(
-        //         itemBuilder: (context, index) {
-        //           final movie = data.movies[index];
-        //           return MovieCard(movie, widget.category);
-        //         },
-        //         itemCount: data.movies.length,
-        //       );
-        //     } else {
-        //       return Center(
-        //         key: Key('error_message'),
-        //         child: Text(data.message),
-        //       );
-        //     }
-        //   },
-        // ),
       ),
     );
   }

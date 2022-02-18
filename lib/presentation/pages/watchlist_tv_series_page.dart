@@ -60,28 +60,6 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
           }
         },
       ),
-      // Consumer<WatchlistMovieNotifier>(
-      //   builder: (context, data, child) {
-      //     if (data.watchlistTvState == RequestState.Loading) {
-      //       return Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     } else if (data.watchlistTvState == RequestState.Loaded) {
-      //       return ListView.builder(
-      //         itemBuilder: (context, index) {
-      //           final movie = data.watchlistTvSeries[index];
-      //           return MovieCard(movie, CategoryMovie.TvSeries);
-      //         },
-      //         itemCount: data.watchlistTvSeries.length,
-      //       );
-      //     } else {
-      //       return Center(
-      //         key: Key('error_message'),
-      //         child: Text(data.message),
-      //       );
-      //     }
-      //   },
-      // ),
     );
   }
 

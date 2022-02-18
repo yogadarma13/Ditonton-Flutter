@@ -93,34 +93,6 @@ class _SearchPageState extends State<SearchPage> {
                 }
               },
             ),
-            // Consumer<MovieSearchNotifier>(
-            //   builder: (context, data, child) {
-            //     if (data.state == RequestState.Loading) {
-            //       return Center(
-            //         child: CircularProgressIndicator(),
-            //       );
-            //     } else if (data.state == RequestState.Loaded) {
-            //       final result = data.searchResult;
-            //       return Expanded(
-            //         child: ListView.builder(
-            //           padding: const EdgeInsets.all(8),
-            //           itemBuilder: (context, index) {
-            //             final movie = data.searchResult[index];
-            //             return MovieCard(movie, category);
-            //           },
-            //           itemCount: result.length,
-            //         ),
-            //       );
-            //     } else {
-            //       return Expanded(
-            //         child: Center(
-            //           key: Key('error_message'),
-            //           child: Text(data.message),
-            //         ),
-            //       );
-            //     }
-            //   },
-            // ),
           ],
         ),
       ),

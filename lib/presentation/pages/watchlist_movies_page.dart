@@ -60,28 +60,6 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
           }
         },
       ),
-      // Consumer<WatchlistMovieNotifier>(
-      //   builder: (context, data, child) {
-      //     if (data.watchlistState == RequestState.Loading) {
-      //       return Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     } else if (data.watchlistState == RequestState.Loaded) {
-      //       return ListView.builder(
-      //         itemBuilder: (context, index) {
-      //           final movie = data.watchlistMovies[index];
-      //           return MovieCard(movie, CategoryMovie.Movies);
-      //         },
-      //         itemCount: data.watchlistMovies.length,
-      //       );
-      //     } else {
-      //       return Center(
-      //         key: Key('error_message'),
-      //         child: Text(data.message),
-      //       );
-      //     }
-      //   },
-      // ),
     );
   }
 

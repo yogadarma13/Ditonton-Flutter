@@ -29,11 +29,6 @@ class _HomePageState extends State<HomePage> {
           context.read<PopularMoviesBloc>().add(OnPopularMoviesRequest()),
           context.read<PopularTvSeriesBloc>().add(OnPopularTvSeriesRequest())
         });
-    // Provider.of<HomeNotifier>(context, listen: false)
-    //   ..fetchNowPlayingMovies()
-    //   ..fetchAiringTodayTvSeries()
-    //   ..fetchPopularMovies()
-    //   ..fetchPopularTvSeries());
   }
 
   @override
@@ -69,18 +64,6 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-              // Consumer<HomeNotifier>(builder: (context, data, child) {
-              //   final state = data.nowPlayingState;
-              //   if (state == RequestState.Loading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state == RequestState.Loaded) {
-              //     return MovieList(data.nowPlayingMovies, CategoryMovie.Movies);
-              //   } else {
-              //     return Text('Failed');
-              //   }
-              // }),
               SizedBox(
                 height: 10,
               ),
@@ -104,19 +87,6 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-              // Consumer<HomeNotifier>(builder: (context, data, child) {
-              //   final state = data.airingTodayState;
-              //   if (state == RequestState.Loading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state == RequestState.Loaded) {
-              //     return MovieList(
-              //         data.airingTodayTvSeries, CategoryMovie.TvSeries);
-              //   } else {
-              //     return Text('Failed');
-              //   }
-              // }),
               SizedBox(
                 height: 10,
               ),
@@ -140,18 +110,6 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-              // Consumer<HomeNotifier>(builder: (context, data, child) {
-              //   final state = data.popularMoviesState;
-              //   if (state == RequestState.Loading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state == RequestState.Loaded) {
-              //     return MovieList(data.popularMovies, CategoryMovie.Movies);
-              //   } else {
-              //     return Text('Failed');
-              //   }
-              // }),
               SizedBox(
                 height: 10,
               ),
@@ -175,19 +133,6 @@ class _HomePageState extends State<HomePage> {
                   }
                 },
               ),
-              // Consumer<HomeNotifier>(builder: (context, data, child) {
-              //   final state = data.popularTvSeriesState;
-              //   if (state == RequestState.Loading) {
-              //     return Center(
-              //       child: CircularProgressIndicator(),
-              //     );
-              //   } else if (state == RequestState.Loaded) {
-              //     return MovieList(
-              //         data.popularTvSeries, CategoryMovie.TvSeries);
-              //   } else {
-              //     return Text('Failed');
-              //   }
-              // }),
             ],
           ),
         ),
