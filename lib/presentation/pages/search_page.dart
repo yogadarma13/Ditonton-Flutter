@@ -70,14 +70,32 @@ class _SearchPageState extends State<SearchPage> {
                 } else if (state is StateHasData) {
                   final result = state.result;
                   return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final movie = result[index];
-                        return MovieCard(movie, widget.category);
-                      },
-                      itemCount: result.length,
-                    ),
+                    child: result.isNotEmpty
+                        ? ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemBuilder: (context, index) {
+                              final movie = result[index];
+                              return MovieCard(movie, widget.category);
+                            },
+                            itemCount: result.length,
+                          )
+                        : SingleChildScrollView(
+                            child: Center(
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    'assets/empty.png',
+                                    width: 240,
+                                    height: 240,
+                                  ),
+                                  Text(
+                                    'No Data',
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                   );
                 } else if (state is StateError) {
                   return Expanded(

@@ -43,13 +43,29 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
             );
           } else if (state is StateHasData) {
             final result = state.result;
-            return ListView.builder(
-              itemBuilder: (context, index) {
-                final movie = result[index];
-                return MovieCard(movie, CategoryMovie.TvSeries);
-              },
-              itemCount: result.length,
-            );
+            return result.isNotEmpty
+                ? ListView.builder(
+                    itemBuilder: (context, index) {
+                      final movie = result[index];
+                      return MovieCard(movie, CategoryMovie.TvSeries);
+                    },
+                    itemCount: result.length,
+                  )
+                : Center(
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/empty.png',
+                          width: 240,
+                          height: 240,
+                        ),
+                        Text(
+                          'No Data',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  );
           } else if (state is StateError) {
             return Center(
               key: Key('error_message'),
