@@ -3,8 +3,8 @@ import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/usecases/get_top_rated_movies.dart';
 import 'package:core/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/bloc/top_rated/top_rated_bloc.dart';
-import 'package:core/presentation/bloc/top_rated/top_rated_event.dart';
+import 'package:core/presentation/bloc/home_movie/top_rated/top_rated_movie_bloc.dart';
+import 'package:core/presentation/bloc/home_movie/top_rated/top_rated_movie_event.dart';
 import 'package:core/utils/failure.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:dartz/dartz.dart';
@@ -12,18 +12,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'top_rated_bloc_test.mocks.dart';
+import 'top_rated_movie_bloc_test.mocks.dart';
 
 @GenerateMocks([GetTopRatedMoviesUseCase, GetTopRatedTvSeriesUseCase])
 void main() {
-  late TopRatedBloc topRatedBloc;
+  late TopRatedMovieBloc topRatedBloc;
   late MockGetTopRatedMoviesUseCase mockGetTopRatedMoviesUseCase;
   late MockGetTopRatedTvSeriesUseCase mockGetTopRatedTvSeriesUseCase;
 
   setUp(() {
     mockGetTopRatedMoviesUseCase = MockGetTopRatedMoviesUseCase();
     mockGetTopRatedTvSeriesUseCase = MockGetTopRatedTvSeriesUseCase();
-    topRatedBloc = TopRatedBloc(
+    topRatedBloc = TopRatedMovieBloc(
         mockGetTopRatedMoviesUseCase, mockGetTopRatedTvSeriesUseCase);
   });
 
@@ -53,7 +53,7 @@ void main() {
   });
 
   group('Top Rated Movies', () {
-    blocTest<TopRatedBloc, BlocState>(
+    blocTest<TopRatedMovieBloc, BlocState>(
       'Should emit [Loading, HasData] when data top rated movies is gotten successfully',
       build: () {
         when(mockGetTopRatedMoviesUseCase.execute())
@@ -71,7 +71,7 @@ void main() {
       },
     );
 
-    blocTest<TopRatedBloc, BlocState>(
+    blocTest<TopRatedMovieBloc, BlocState>(
       'Should emit [Loading, Error] when get top rated movies is unsuccessful',
       build: () {
         when(mockGetTopRatedMoviesUseCase.execute())
@@ -90,7 +90,7 @@ void main() {
   });
 
   group('Top Rated TV Series', () {
-    blocTest<TopRatedBloc, BlocState>(
+    blocTest<TopRatedMovieBloc, BlocState>(
       'Should emit [Loading, HasData] when data top rated tv series is gotten successfully',
       build: () {
         when(mockGetTopRatedTvSeriesUseCase.execute())
@@ -108,7 +108,7 @@ void main() {
       },
     );
 
-    blocTest<TopRatedBloc, BlocState>(
+    blocTest<TopRatedMovieBloc, BlocState>(
       'Should emit [Loading, Error] when get top rated tv series is unsuccessful',
       build: () {
         when(mockGetTopRatedTvSeriesUseCase.execute())

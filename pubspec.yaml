@@ -45,6 +45,8 @@ dependencies:
     path: detail
   popular:
     path: popular
+  top_rated:
+    path: top_rated
 
 dev_dependencies:
   flutter_test:

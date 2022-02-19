@@ -4,7 +4,7 @@ import 'package:core/presentation/bloc/bloc_event.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
 import 'package:core/presentation/bloc/home_movie/playing_today/playing_today_bloc.dart';
 import 'package:core/presentation/bloc/home_movie/popular/popular_movie_bloc.dart';
-import 'package:core/presentation/bloc/top_rated/top_rated_bloc.dart';
+import 'package:core/presentation/bloc/home_movie/top_rated/top_rated_movie_bloc.dart';
 import 'package:core/presentation/pages/home_movie_page.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class MockPopularBloc extends MockBloc<BlocEvent, BlocState>
     implements PopularMovieBloc {}
 
 class MockTopRatedBloc extends MockBloc<BlocEvent, BlocState>
-    implements TopRatedBloc {}
+    implements TopRatedMovieBloc {}
 
 class HomeMovieEventFake extends Fake implements BlocEvent {}
 
@@ -50,7 +50,7 @@ void main() {
         BlocProvider<PopularMovieBloc>(
           create: (context) => mockPopularBloc,
         ),
-        BlocProvider<TopRatedBloc>(
+        BlocProvider<TopRatedMovieBloc>(
           create: (context) => mockTopRatedBloc,
         ),
       ],

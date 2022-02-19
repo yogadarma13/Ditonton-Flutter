@@ -1,11 +1,10 @@
-import 'package:core/presentation/bloc/top_rated/top_rated_event.dart';
+import 'package:core/domain/usecases/get_top_rated_movies.dart';
+import 'package:core/domain/usecases/get_top_rated_tv_series.dart';
+import 'package:core/presentation/bloc/bloc_event.dart';
+import 'package:core/presentation/bloc/bloc_state.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../domain/usecases/get_top_rated_movies.dart';
-import '../../../domain/usecases/get_top_rated_tv_series.dart';
-import '../../../utils/state_enum.dart';
-import '../bloc_event.dart';
-import '../bloc_state.dart';
+import 'package:top_rated/presentation/bloc/top_rated_event.dart';
 
 class TopRatedBloc extends Bloc<BlocEvent, BlocState> {
   final GetTopRatedMoviesUseCase _getTopRatedMovies;

@@ -19,12 +19,13 @@ import 'package:core/presentation/bloc/home/popular_movies/popular_movies_bloc.d
 import 'package:core/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
 import 'package:core/presentation/bloc/home_movie/playing_today/playing_today_bloc.dart';
 import 'package:core/presentation/bloc/home_movie/popular/popular_movie_bloc.dart';
-import 'package:core/presentation/bloc/top_rated/top_rated_bloc.dart';
+import 'package:core/presentation/bloc/home_movie/top_rated/top_rated_movie_bloc.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:detail/detail.dart';
 import 'package:get_it/get_it.dart';
 import 'package:popular/popular.dart';
 import 'package:search/search.dart';
+import 'package:top_rated/top_rated.dart';
 import 'package:watchlist/watchlist.dart';
 
 final locator = GetIt.instance;
@@ -48,6 +49,9 @@ void init() {
   );
   locator.registerFactory(
     () => PopularMovieBloc(locator(), locator()),
+  );
+  locator.registerFactory(
+    () => TopRatedMovieBloc(locator(), locator()),
   );
   locator.registerFactory(
     () => SearchBloc(locator(), locator()),
