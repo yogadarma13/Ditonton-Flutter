@@ -41,6 +41,8 @@ dependencies:
     path: search
   watchlist:
     path: watchlist
+  detail:
+    path: detail
 
 dev_dependencies:
   flutter_test:

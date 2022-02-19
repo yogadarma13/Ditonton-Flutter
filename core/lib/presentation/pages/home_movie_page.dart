@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/utils/routes.dart';
+import 'package:detail/detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +15,6 @@ import '../bloc/popular/popular_bloc.dart';
 import '../bloc/popular/popular_event.dart';
 import '../bloc/top_rated/top_rated_bloc.dart';
 import '../bloc/top_rated/top_rated_event.dart';
-import 'movie_detail_page.dart';
 
 class HomeMoviePage extends StatefulWidget {
   final CategoryMovie category;

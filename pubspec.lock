@@ -115,6 +115,13 @@ packages:
       url: "https://github.com/chornthorn/data_connection_checker.git"
     source: git
     version: "0.3.4"
+  detail:
+    dependency: "direct main"
+    description:
+      path: detail
+      relative: true
+    source: path
+    version: "0.0.1"
   equatable:
     dependency: transitive
     description:
