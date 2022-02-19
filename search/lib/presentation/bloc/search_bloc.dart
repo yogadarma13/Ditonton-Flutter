@@ -4,8 +4,8 @@ import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../domain/search_movies.dart';
-import '../../domain/search_tv_series.dart';
+import '../../domain/usecases/search_movies.dart';
+import '../../domain/usecases/search_tv_series.dart';
 import 'search_event.dart';
 
 class SearchBloc extends Bloc<BlocEvent, BlocState> {

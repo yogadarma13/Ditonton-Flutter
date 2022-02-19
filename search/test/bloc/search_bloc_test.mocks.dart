@@ -8,8 +8,8 @@ import 'package:core/domain/entities/movie.dart' as _i6;
 import 'package:core/utils/failure.dart' as _i5;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:search/domain/search_movies.dart' as _i3;
-import 'package:search/domain/search_tv_series.dart' as _i7;
+import 'package:search/domain/usecases/search_movies.dart' as _i3;
+import 'package:search/domain/usecases/search_tv_series.dart' as _i7;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
