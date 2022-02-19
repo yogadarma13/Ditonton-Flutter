@@ -1,11 +1,11 @@
+import 'package:core/presentation/bloc/bloc_state.dart';
+import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../utils/state_enum.dart';
-import '../bloc/bloc_state.dart';
-import '../bloc/popular/popular_bloc.dart';
-import '../bloc/popular/popular_event.dart';
-import '../widgets/movie_card_list.dart';
+import '../bloc/popular_bloc.dart';
+import '../bloc/popular_event.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   final CategoryMovie category;

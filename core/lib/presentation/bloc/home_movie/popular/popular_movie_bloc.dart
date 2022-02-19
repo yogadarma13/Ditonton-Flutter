@@ -1,17 +1,17 @@
-import 'package:core/presentation/bloc/popular/popular_event.dart';
+import 'package:core/presentation/bloc/home_movie/popular/popular_movie_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/usecases/get_popular_movies.dart';
-import '../../../domain/usecases/get_popular_tv_series.dart';
-import '../../../utils/state_enum.dart';
-import '../bloc_event.dart';
-import '../bloc_state.dart';
+import '../../../../domain/usecases/get_popular_movies.dart';
+import '../../../../domain/usecases/get_popular_tv_series.dart';
+import '../../../../utils/state_enum.dart';
+import '../../bloc_event.dart';
+import '../../bloc_state.dart';
 
-class PopularBloc extends Bloc<BlocEvent, BlocState> {
+class PopularMovieBloc extends Bloc<BlocEvent, BlocState> {
   final GetPopularMoviesUseCase _getPopularMovies;
   final GetPopularTvSeriesUseCase _getPopularTvSeries;
 
-  PopularBloc(this._getPopularMovies, this._getPopularTvSeries)
+  PopularMovieBloc(this._getPopularMovies, this._getPopularTvSeries)
       : super(StateEmpty()) {
     on<OnPopularRequest>((event, emit) async {
       final category = event.category;

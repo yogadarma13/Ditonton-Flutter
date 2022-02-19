@@ -9,10 +9,10 @@ import '../../styles/text_styles.dart';
 import '../../utils/constants.dart';
 import '../../utils/state_enum.dart';
 import '../bloc/bloc_state.dart';
-import '../bloc/home_movie/playing_today_bloc.dart';
-import '../bloc/home_movie/playing_today_event.dart';
-import '../bloc/popular/popular_bloc.dart';
-import '../bloc/popular/popular_event.dart';
+import '../bloc/home_movie/playing_today/playing_today_bloc.dart';
+import '../bloc/home_movie/playing_today/playing_today_event.dart';
+import '../bloc/home_movie/popular/popular_movie_bloc.dart';
+import '../bloc/home_movie/popular/popular_movie_event.dart';
 import '../bloc/top_rated/top_rated_bloc.dart';
 import '../bloc/top_rated/top_rated_event.dart';
 
@@ -33,7 +33,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           context
               .read<PlayingTodayBloc>()
               .add(OnPlayingTodayRequest(widget.category)),
-          context.read<PopularBloc>().add(OnPopularRequest(widget.category)),
+          context.read<PopularMovieBloc>().add(OnPopularRequest(widget.category)),
           context.read<TopRatedBloc>().add(OnTopRatedRequest(widget.category)),
         });
   }
@@ -91,7 +91,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   arguments: widget.category,
                 ),
               ),
-              BlocBuilder<PopularBloc, BlocState>(
+              BlocBuilder<PopularMovieBloc, BlocState>(
                 builder: (context, state) {
                   if (state is StateLoading) {
                     return const Center(

@@ -2,13 +2,13 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/bloc/bloc_event.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/bloc/popular/popular_bloc.dart';
-import 'package:core/presentation/pages/popular_movies_page.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:popular/presentation/bloc/popular_bloc.dart';
+import 'package:popular/presentation/pages/popular_movies_page.dart';
 
 class MockPopularBloc extends MockBloc<BlocEvent, BlocState>
     implements PopularBloc {}

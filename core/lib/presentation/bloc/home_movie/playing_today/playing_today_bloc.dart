@@ -1,11 +1,11 @@
-import 'package:core/presentation/bloc/home_movie/playing_today_event.dart';
+import 'package:core/presentation/bloc/home_movie/playing_today/playing_today_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../domain/usecases/get_airing_today_tv_series.dart';
-import '../../../domain/usecases/get_now_playing_movies.dart';
-import '../../../utils/state_enum.dart';
-import '../bloc_event.dart';
-import '../bloc_state.dart';
+import '../../../../domain/usecases/get_airing_today_tv_series.dart';
+import '../../../../domain/usecases/get_now_playing_movies.dart';
+import '../../../../utils/state_enum.dart';
+import '../../bloc_event.dart';
+import '../../bloc_state.dart';
 
 class PlayingTodayBloc extends Bloc<BlocEvent, BlocState> {
   final GetNowPlayingMoviesUseCase _getNowPlayingMovies;

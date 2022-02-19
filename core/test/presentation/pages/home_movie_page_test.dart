@@ -2,8 +2,8 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/bloc/bloc_event.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/bloc/home_movie/playing_today_bloc.dart';
-import 'package:core/presentation/bloc/popular/popular_bloc.dart';
+import 'package:core/presentation/bloc/home_movie/playing_today/playing_today_bloc.dart';
+import 'package:core/presentation/bloc/home_movie/popular/popular_movie_bloc.dart';
 import 'package:core/presentation/bloc/top_rated/top_rated_bloc.dart';
 import 'package:core/presentation/pages/home_movie_page.dart';
 import 'package:core/utils/state_enum.dart';
@@ -16,7 +16,7 @@ class MockPlayingTodayBloc extends MockBloc<BlocEvent, BlocState>
     implements PlayingTodayBloc {}
 
 class MockPopularBloc extends MockBloc<BlocEvent, BlocState>
-    implements PopularBloc {}
+    implements PopularMovieBloc {}
 
 class MockTopRatedBloc extends MockBloc<BlocEvent, BlocState>
     implements TopRatedBloc {}
@@ -47,7 +47,7 @@ void main() {
         BlocProvider<PlayingTodayBloc>(
           create: (context) => mockPlayingTodayBloc,
         ),
-        BlocProvider<PopularBloc>(
+        BlocProvider<PopularMovieBloc>(
           create: (context) => mockPopularBloc,
         ),
         BlocProvider<TopRatedBloc>(
