@@ -1,4 +1,4 @@
-import '../bloc_event.dart';
+import 'package:core/presentation/bloc/bloc_event.dart';
 
 class OnWatchlistRequest extends BlocEvent {
   const OnWatchlistRequest();

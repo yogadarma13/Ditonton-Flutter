@@ -1,6 +1,6 @@
-import 'package:core/presentation/pages/watchlist_movies_page.dart';
-import 'package:core/presentation/pages/watchlist_tv_series_page.dart';
 import 'package:flutter/material.dart';
+import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
+import 'package:watchlist/presentation/page/watchlist_tv_series_page.dart';
 
 class WatchlistPage extends StatelessWidget {
   @override

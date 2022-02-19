@@ -1,12 +1,12 @@
+import 'package:core/common/utils.dart';
+import 'package:core/presentation/bloc/bloc_state.dart';
+import 'package:core/presentation/widgets/movie_card_list.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../common/utils.dart';
-import '../../utils/state_enum.dart';
-import '../bloc/bloc_state.dart';
-import '../bloc/watchlist/tv_series/watchlist_tv_series_bloc.dart';
-import '../bloc/watchlist/watchlist_event.dart';
-import '../widgets/movie_card_list.dart';
+import '../bloc/tv_series/watchlist_tv_series_bloc.dart';
+import '../bloc/watchlist_event.dart';
 
 class WatchlistTvSeriesPage extends StatefulWidget {
   @override
@@ -18,8 +18,8 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-        () => context.read<WatchlistTvSeriesBloc>().add(OnWatchlistRequest()));
+    Future.microtask(() =>
+        context.read<WatchlistTvSeriesBloc>().add(const OnWatchlistRequest()));
   }
 
   @override
@@ -30,7 +30,7 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
 
   @override
   void didPopNext() {
-    context.read<WatchlistTvSeriesBloc>().add(OnWatchlistRequest());
+    context.read<WatchlistTvSeriesBloc>().add(const OnWatchlistRequest());
   }
 
   @override

@@ -2,13 +2,13 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/bloc/bloc_event.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
-import 'package:core/presentation/pages/watchlist_movies_page.dart';
 import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:watchlist/presentation/bloc/movies/watchlist_movies_bloc.dart';
+import 'package:watchlist/presentation/page/watchlist_movies_page.dart';
 
 class MockWatchlistMoviesBloc extends MockBloc<BlocEvent, BlocState>
     implements WatchlistMoviesBloc {}

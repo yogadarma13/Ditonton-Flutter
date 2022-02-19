@@ -2,12 +2,12 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/bloc/bloc_event.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/bloc/watchlist/tv_series/watchlist_tv_series_bloc.dart';
-import 'package:core/presentation/pages/watchlist_tv_series_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:watchlist/presentation/bloc/tv_series/watchlist_tv_series_bloc.dart';
+import 'package:watchlist/presentation/page/watchlist_tv_series_page.dart';
 
 class MockWatchlistTvSeriesBloc extends MockBloc<BlocEvent, BlocState>
     implements WatchlistTvSeriesBloc {}

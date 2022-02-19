@@ -11,14 +11,11 @@ import 'package:core/presentation/bloc/home/popular_tv_series/popular_tv_series_
 import 'package:core/presentation/bloc/home_movie/playing_today_bloc.dart';
 import 'package:core/presentation/bloc/popular/popular_bloc.dart';
 import 'package:core/presentation/bloc/top_rated/top_rated_bloc.dart';
-import 'package:core/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
-import 'package:core/presentation/bloc/watchlist/tv_series/watchlist_tv_series_bloc.dart';
 import 'package:core/presentation/pages/home_movie_page.dart';
 import 'package:core/presentation/pages/home_page.dart';
 import 'package:core/presentation/pages/movie_detail_page.dart';
 import 'package:core/presentation/pages/popular_movies_page.dart';
 import 'package:core/presentation/pages/top_rated_movies_page.dart';
-import 'package:core/presentation/pages/watchlist_page.dart';
 import 'package:core/presentation/widgets/custom_drawer.dart';
 import 'package:core/styles/colors.dart';
 import 'package:core/styles/text_styles.dart';
@@ -29,6 +26,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search/search.dart';
+import 'package:watchlist/watchlist.dart';
 
 import '../injection.dart' as di;
 

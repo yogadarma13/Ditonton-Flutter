@@ -17,7 +17,6 @@ import 'package:core/domain/usecases/get_top_rated_movies.dart';
 import 'package:core/domain/usecases/get_top_rated_tv_series.dart';
 import 'package:core/domain/usecases/get_tv_series_detail.dart';
 import 'package:core/domain/usecases/get_tv_series_recommendations.dart';
-import 'package:core/domain/usecases/get_watchlist_movies.dart';
 import 'package:core/domain/usecases/get_watchlist_status.dart';
 import 'package:core/domain/usecases/remove_watchlist.dart';
 import 'package:core/domain/usecases/save_watchlist.dart';
@@ -31,11 +30,10 @@ import 'package:core/presentation/bloc/home/popular_tv_series/popular_tv_series_
 import 'package:core/presentation/bloc/home_movie/playing_today_bloc.dart';
 import 'package:core/presentation/bloc/popular/popular_bloc.dart';
 import 'package:core/presentation/bloc/top_rated/top_rated_bloc.dart';
-import 'package:core/presentation/bloc/watchlist/movies/watchlist_movies_bloc.dart';
-import 'package:core/presentation/bloc/watchlist/tv_series/watchlist_tv_series_bloc.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:search/search.dart';
+import 'package:watchlist/watchlist.dart';
 
 final locator = GetIt.instance;
 
