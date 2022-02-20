@@ -190,7 +190,7 @@ class DetailContent extends StatelessWidget {
                                     style: kHeading6,
                                   ),
                                   SizedBox(
-                                    height: 200,
+                                    height: 210,
                                     child: ListView.builder(
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,

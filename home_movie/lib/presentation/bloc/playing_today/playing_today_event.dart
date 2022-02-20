@@ -1,5 +1,5 @@
-import '../../../../utils/state_enum.dart';
-import '../../bloc_event.dart';
+import 'package:core/presentation/bloc/bloc_event.dart';
+import 'package:core/utils/state_enum.dart';
 
 class OnPlayingTodayRequest extends BlocEvent {
   final CategoryMovie category;

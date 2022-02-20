@@ -12,9 +12,11 @@ import '../bloc/home/popular_movies/popular_movies_bloc.dart';
 import '../bloc/home/popular_movies/popular_movies_event.dart';
 import '../bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
 import '../bloc/home/popular_tv_series/popular_tv_series_event.dart';
-import 'home_movie_page.dart';
+import '../widgets/movie_list.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -24,10 +26,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     Future.microtask(() => {
-          context.read<NowPlayingBloc>().add(OnNowPlayingRequest()),
-          context.read<AiringTodayBloc>().add(OnAiringTodayRequest()),
-          context.read<PopularMoviesBloc>().add(OnPopularMoviesRequest()),
-          context.read<PopularTvSeriesBloc>().add(OnPopularTvSeriesRequest())
+          context.read<NowPlayingBloc>().add(const OnNowPlayingRequest()),
+          context.read<AiringTodayBloc>().add(const OnAiringTodayRequest()),
+          context.read<PopularMoviesBloc>().add(const OnPopularMoviesRequest()),
+          context
+              .read<PopularTvSeriesBloc>()
+              .add(const OnPopularTvSeriesRequest())
         });
   }
 

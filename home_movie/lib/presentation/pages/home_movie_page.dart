@@ -1,20 +1,17 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/presentation/bloc/bloc_state.dart';
+import 'package:core/presentation/widgets/movie_list.dart';
+import 'package:core/styles/text_styles.dart';
 import 'package:core/utils/routes.dart';
-import 'package:detail/detail.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../domain/entities/movie.dart';
-import '../../styles/text_styles.dart';
-import '../../utils/constants.dart';
-import '../../utils/state_enum.dart';
-import '../bloc/bloc_state.dart';
-import '../bloc/home_movie/playing_today/playing_today_bloc.dart';
-import '../bloc/home_movie/playing_today/playing_today_event.dart';
-import '../bloc/home_movie/popular/popular_movie_bloc.dart';
-import '../bloc/home_movie/popular/popular_movie_event.dart';
-import '../bloc/home_movie/top_rated/top_rated_movie_bloc.dart';
-import '../bloc/home_movie/top_rated/top_rated_movie_event.dart';
+import '../bloc/playing_today/playing_today_bloc.dart';
+import '../bloc/playing_today/playing_today_event.dart';
+import '../bloc/popular/popular_movie_bloc.dart';
+import '../bloc/popular/popular_movie_event.dart';
+import '../bloc/top_rated/top_rated_movie_bloc.dart';
+import '../bloc/top_rated/top_rated_movie_event.dart';
 
 class HomeMoviePage extends StatefulWidget {
   final CategoryMovie category;
@@ -160,50 +157,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           ),
         ),
       ],
-    );
-  }
-}
-
-class MovieList extends StatelessWidget {
-  final List<Movie> movies;
-  final CategoryMovie category;
-
-  const MovieList(this.movies, this.category);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          final movie = movies[index];
-          return Container(
-            padding: const EdgeInsets.all(8),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  DETAIL_ROUTE,
-                  arguments:
-                      DetailScreenArguments(id: movie.id, category: category),
-                );
-              },
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
-              ),
-            ),
-          );
-        },
-        itemCount: movies.length,
-      ),
     );
   }
 }

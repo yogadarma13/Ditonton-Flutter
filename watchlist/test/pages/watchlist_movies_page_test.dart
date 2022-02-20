@@ -2,7 +2,6 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:core/domain/entities/movie.dart';
 import 'package:core/presentation/bloc/bloc_event.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -65,7 +64,7 @@ void main() {
     when(() => mockWatchlistMoviesBloc.state)
         .thenReturn(StateHasData(<Movie>[tMovie]));
 
-    final listViewFinder = find.byType(MovieCard);
+    final listViewFinder = find.byType(ListView);
 
     await tester.pumpWidget(_makeTestableWidget(WatchlistMoviesPage()));
 

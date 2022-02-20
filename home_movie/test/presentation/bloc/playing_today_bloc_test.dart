@@ -3,12 +3,12 @@ import 'package:core/domain/entities/movie.dart';
 import 'package:core/domain/usecases/get_airing_today_tv_series.dart';
 import 'package:core/domain/usecases/get_now_playing_movies.dart';
 import 'package:core/presentation/bloc/bloc_state.dart';
-import 'package:core/presentation/bloc/home_movie/playing_today/playing_today_bloc.dart';
-import 'package:core/presentation/bloc/home_movie/playing_today/playing_today_event.dart';
 import 'package:core/utils/failure.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:home_movie/presentation/bloc/playing_today/playing_today_bloc.dart';
+import 'package:home_movie/presentation/bloc/playing_today/playing_today_event.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
