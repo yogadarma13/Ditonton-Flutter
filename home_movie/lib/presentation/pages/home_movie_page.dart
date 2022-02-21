@@ -54,7 +54,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 arguments: widget.category,
               );
             },
-            icon: const Icon(Icons.search),
+            icon: const Icon(
+              Icons.search,
+              key: Key('search'),
+            ),
           )
         ],
       ),

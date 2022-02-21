@@ -86,6 +86,7 @@ class _SearchPageState extends State<SearchPage> {
                                     'assets/empty.png',
                                     width: 240,
                                     height: 240,
+                                    key: const Key('empty_image'),
                                   ),
                                   const Text(
                                     'No Data',
