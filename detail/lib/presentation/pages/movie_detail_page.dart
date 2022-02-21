@@ -83,6 +83,7 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
+          key: const Key('image_detail'),
           imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => const Center(
@@ -116,10 +117,12 @@ class DetailContent extends StatelessWidget {
                             Text(
                               movie.title,
                               style: kHeading5,
+                              key: const Key('title_detail'),
                             ),
                             BlocBuilder<WatchlistBloc, WatchlistStatusState>(
                                 builder: (context, state) {
                               return ElevatedButton(
+                                key: const Key('watchlist_button'),
                                 onPressed: () async {
                                   if (!state.isAddedToWatchlist) {
                                     context.read<WatchlistBloc>().add(
@@ -153,11 +156,14 @@ class DetailContent extends StatelessWidget {
                             }),
                             Text(
                               _showGenres(movie.genres),
+                              key: const Key('genres'),
                             ),
                             Text(
                               _showDuration(movie.runtime),
+                              key: const Key('duration'),
                             ),
                             Row(
+                              key: const Key('rating'),
                               children: [
                                 RatingBarIndicator(
                                   rating: movie.voteAverage / 2,
@@ -178,6 +184,7 @@ class DetailContent extends StatelessWidget {
                             ),
                             Text(
                               movie.overview,
+                              key: const Key('overview_value'),
                             ),
                             if (category == CategoryMovie.TvSeries ||
                                 movie.seasons != null)
@@ -192,6 +199,7 @@ class DetailContent extends StatelessWidget {
                                   SizedBox(
                                     height: 210,
                                     child: ListView.builder(
+                                      key: const Key('seasons_list'),
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
@@ -219,6 +227,7 @@ class DetailContent extends StatelessWidget {
                                   return SizedBox(
                                     height: 150,
                                     child: ListView.builder(
+                                      key: const Key('recommendation_list'),
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
                                         final movie = result[index];
@@ -293,6 +302,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
+              key: const Key('back_button_detail'),
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);

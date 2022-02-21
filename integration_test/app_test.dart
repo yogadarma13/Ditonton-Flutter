@@ -1,5 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/presentation/pages/home_page.dart';
+import 'package:detail/detail.dart';
 import 'package:ditonton/main.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -224,6 +225,34 @@ void main() {
     await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Back'));
+    await tester.pumpAndSettle();
+    expect(find.byType(HomePage), findsOneWidget);
+  });
+
+  testWidgets('open movie detail page', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final listView = find.byType(ListView);
+    expect(listView, findsWidgets);
+    await tester.tap(listView.first);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    expect(find.byKey(Key('image_detail')), findsOneWidget);
+    expect(find.byKey(Key('title_detail')), findsOneWidget);
+    expect(find.byKey(Key('genres')), findsOneWidget);
+    expect(find.byKey(Key('duration')), findsOneWidget);
+    expect(find.byKey(Key('rating')), findsOneWidget);
+    expect(find.text('Overview'), findsOneWidget);
+    expect(find.byKey(Key('overview_value')), findsOneWidget);
+    expect(find.text('Recommendations'), findsOneWidget);
+    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
+    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    expect(backButton, findsOneWidget);
+    await tester.tap(backButton);
     await tester.pumpAndSettle();
     expect(find.byType(HomePage), findsOneWidget);
   });
