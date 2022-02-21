@@ -195,6 +195,39 @@ void main() {
     expect(find.byType(HomePage), findsOneWidget);
   });
 
+  testWidgets('open top rated tv series page', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final menuIcon = find.byKey(Key("menu_button"));
+    await tester.tap(menuIcon);
+    await tester.pumpAndSettle();
+
+    final movieButton = find.text('TV Series');
+    expect(movieButton, findsOneWidget);
+    await tester.tap(movieButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(HomeMoviePage), findsWidgets);
+    expect(find.text('Top Rated'), findsOneWidget);
+    expect(find.byType(ListView), findsWidgets);
+
+    final seeMoreText = find.text('See More');
+    expect(seeMoreText, findsWidgets);
+    await tester.tap(seeMoreText.last);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(TopRatedMoviesPage), findsOneWidget);
+    expect(find.text('Top Rated TV Series'), findsOneWidget);
+    expect(find.byType(ListView), findsWidgets);
+
+    await tester.tap(find.byTooltip('Back'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Back'));
+    await tester.pumpAndSettle();
+    expect(find.byType(HomePage), findsOneWidget);
+  });
+
   testWidgets('open about page', (tester) async {
     app.main();
     await tester.pumpAndSettle();
