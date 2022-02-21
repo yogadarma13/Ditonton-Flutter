@@ -257,6 +257,36 @@ void main() {
     expect(find.byType(HomePage), findsOneWidget);
   });
 
+  testWidgets('open tv series detail page', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final listView = find.byType(ListView);
+    expect(listView, findsWidgets);
+    await tester.tap(listView.at(1));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    expect(find.byKey(Key('image_detail')), findsOneWidget);
+    expect(find.byKey(Key('title_detail')), findsOneWidget);
+    expect(find.byKey(Key('genres')), findsOneWidget);
+    expect(find.byKey(Key('duration')), findsOneWidget);
+    expect(find.byKey(Key('rating')), findsOneWidget);
+    expect(find.text('Overview'), findsOneWidget);
+    expect(find.byKey(Key('overview_value')), findsOneWidget);
+    expect(find.text('Seasons'), findsOneWidget);
+    expect(find.byKey(Key('seasons_list')), findsOneWidget);
+    expect(find.text('Recommendations'), findsOneWidget);
+    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
+    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    expect(backButton, findsOneWidget);
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
+    expect(find.byType(HomePage), findsOneWidget);
+  });
+
   testWidgets('open about page', (tester) async {
     app.main();
     await tester.pumpAndSettle();
