@@ -39,7 +39,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.menu),
+        leading: const Icon(
+          Icons.menu,
+          key: Key("menu_button"),
+        ),
         title: const Text('Ditonton'),
       ),
       body: Padding(
