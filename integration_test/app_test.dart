@@ -7,6 +7,7 @@ import 'package:home_movie/home_movie.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:popular/popular.dart';
 import 'package:search/presentation/page/search_page.dart';
+import 'package:top_rated/presentation/pages/top_rated_movies_page.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -152,6 +153,39 @@ void main() {
 
     expect(find.byType(PopularMoviesPage), findsOneWidget);
     expect(find.text('Popular TV Series'), findsOneWidget);
+    expect(find.byType(ListView), findsWidgets);
+
+    await tester.tap(find.byTooltip('Back'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byTooltip('Back'));
+    await tester.pumpAndSettle();
+    expect(find.byType(HomePage), findsOneWidget);
+  });
+
+  testWidgets('open top rated movies page', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final menuIcon = find.byKey(Key("menu_button"));
+    await tester.tap(menuIcon);
+    await tester.pumpAndSettle();
+
+    final movieButton = find.text('Movies');
+    expect(movieButton, findsOneWidget);
+    await tester.tap(movieButton);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(HomeMoviePage), findsWidgets);
+    expect(find.text('Top Rated'), findsOneWidget);
+    expect(find.byType(ListView), findsWidgets);
+
+    final seeMoreText = find.text('See More');
+    expect(seeMoreText, findsWidgets);
+    await tester.tap(seeMoreText.last);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(TopRatedMoviesPage), findsOneWidget);
+    expect(find.text('Top Rated Movies'), findsOneWidget);
     expect(find.byType(ListView), findsWidgets);
 
     await tester.tap(find.byTooltip('Back'));
