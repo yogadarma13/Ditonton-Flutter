@@ -73,7 +73,11 @@ class _SearchPageState extends State<SearchPage> {
                             padding: const EdgeInsets.all(8),
                             itemBuilder: (context, index) {
                               final movie = result[index];
-                              return MovieCard(movie, widget.category);
+                              return MovieCard(
+                                key: Key('item_$index'),
+                                movie: movie,
+                                category: widget.category,
+                              );
                             },
                             itemCount: result.length,
                           )

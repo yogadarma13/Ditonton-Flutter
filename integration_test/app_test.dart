@@ -9,6 +9,7 @@ import 'package:integration_test/integration_test.dart';
 import 'package:popular/popular.dart';
 import 'package:search/presentation/page/search_page.dart';
 import 'package:top_rated/presentation/pages/top_rated_movies_page.dart';
+import 'package:watchlist/presentation/page/watchlist_page.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -285,6 +286,62 @@ void main() {
     await tester.tap(backButton);
     await tester.pumpAndSettle();
     expect(find.byType(HomePage), findsOneWidget);
+  });
+
+  testWidgets('save and remove watchlist movie', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final listView = find.byType(ListView);
+    expect(listView, findsWidgets);
+    await tester.tap(listView.first);
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    final watchlistButton = find.byKey(Key('watchlist_button'));
+    expect(watchlistButton, findsOneWidget);
+    expect(find.byIcon(Icons.add), findsOneWidget);
+    await tester.tap(watchlistButton);
+    await tester.pump(Duration(milliseconds: 50));
+    expect(find.byIcon(Icons.check), findsOneWidget);
+    expect(find.byType(SnackBar), findsOneWidget);
+    expect(find.text('Added to Watchlist'), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
+
+    final menuIcon = find.byKey(Key("menu_button"));
+    await tester.tap(menuIcon);
+    await tester.pumpAndSettle();
+
+    final watchlistMenu = find.text('Watchlist');
+    expect(watchlistMenu, findsOneWidget);
+    await tester.tap(watchlistMenu);
+    await tester.pumpAndSettle();
+    expect(find.byType(WatchlistPage), findsOneWidget);
+    expect(find.byType(TabBar), findsOneWidget);
+
+    final watchlistMovie = find.byKey(Key('movie_watchlist_list'));
+    expect(watchlistMovie, findsOneWidget);
+    await tester.tap(find.byKey(Key('item_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    final watchlistButton2 = find.byKey(Key('watchlist_button'));
+    expect(watchlistButton2, findsOneWidget);
+    expect(find.byIcon(Icons.check), findsOneWidget);
+    await tester.tap(watchlistButton2);
+    await tester.pump(Duration(seconds: 1));
+    expect(find.byIcon(Icons.add), findsOneWidget);
+    expect(find.byType(SnackBar), findsOneWidget);
+    expect(find.text('Removed from Watchlist'), findsOneWidget);
+
+    final backButton2 = find.byKey(Key('back_button_detail'));
+    await tester.tap(backButton2);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(Key('empty_message')), findsOneWidget);
   });
 
   testWidgets('open about page', (tester) async {

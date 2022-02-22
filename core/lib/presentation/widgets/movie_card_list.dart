@@ -12,7 +12,7 @@ class MovieCard extends StatelessWidget {
   final Movie movie;
   final CategoryMovie category;
 
-  const MovieCard(this.movie, this.category);
+  const MovieCard({Key? key, required this.movie, required this.category}): super(key: key);
 
   @override
   Widget build(BuildContext context) {

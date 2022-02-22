@@ -46,7 +46,11 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = result[index];
-                  return MovieCard(movie, widget.category);
+                  return MovieCard(
+                    key: Key('item_$index'),
+                    movie: movie,
+                    category: widget.category,
+                  );
                 },
                 itemCount: result.length,
               );

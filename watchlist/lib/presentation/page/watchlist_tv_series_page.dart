@@ -50,7 +50,11 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
                   ? ListView.builder(
                       itemBuilder: (context, index) {
                         final movie = result[index];
-                        return MovieCard(movie, CategoryMovie.TvSeries);
+                        return MovieCard(
+                          key: Key('item_$index'),
+                          movie: movie,
+                          category: CategoryMovie.TvSeries,
+                        );
                       },
                       itemCount: result.length,
                     )

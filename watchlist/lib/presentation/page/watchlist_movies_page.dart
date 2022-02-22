@@ -48,9 +48,14 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
               final result = state.result;
               return result.isNotEmpty
                   ? ListView.builder(
+                      key: const Key('movie_watchlist_list'),
                       itemBuilder: (context, index) {
                         final movie = result[index];
-                        return MovieCard(movie, CategoryMovie.Movies);
+                        return MovieCard(
+                          key: Key('item_$index'),
+                          movie: movie,
+                          category: CategoryMovie.Movies,
+                        );
                       },
                       itemCount: result.length,
                     )

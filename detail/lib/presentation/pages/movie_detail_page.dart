@@ -134,6 +134,9 @@ class DetailContent extends StatelessWidget {
                                           OnRemoveWatchlistRequest(movie),
                                         );
                                   }
+                                  ScaffoldMessenger.of(context)
+                                      .hideCurrentSnackBar();
+
                                   await Future.delayed(
                                       const Duration(milliseconds: 50));
 
