@@ -1,5 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/common/utils.dart';
+import 'package:core/core.dart';
 import 'package:core/data/datasources/client/IOHttpClient.dart';
 import 'package:core/presentation/bloc/home/airing_today/airing_today_bloc.dart';
 import 'package:core/presentation/bloc/home/now_playing/now_playing_bloc.dart';
@@ -24,11 +25,11 @@ import 'package:watchlist/watchlist.dart';
 
 import '../injection.dart' as di;
 
-void main() async {
+void main({Environment environment = Environment.Prod}) async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await IOHttpClient.init();
-  di.init();
+  di.init(environment);
   runApp(MyApp());
 }
 

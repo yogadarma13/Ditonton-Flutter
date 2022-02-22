@@ -1,5 +1,6 @@
 import 'package:about/about.dart';
 import 'package:core/presentation/pages/home_page.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:detail/detail.dart';
 import 'package:ditonton/main.dart' as app;
 import 'package:flutter/material.dart';
@@ -14,8 +15,11 @@ import 'package:watchlist/presentation/page/watchlist_page.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  setUp(() {
+    app.main(environment: Environment.Test);
+  });
+
   testWidgets('open movie detail page', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final listView = find.byType(ListView);
@@ -43,7 +47,6 @@ void main() {
   });
 
   testWidgets('open tv series detail page', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final listView = find.byType(ListView);
@@ -73,7 +76,6 @@ void main() {
   });
 
   testWidgets('open movies page and search movie', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final menuIcon = find.byKey(Key("menu_button"));
@@ -115,7 +117,6 @@ void main() {
   });
 
   testWidgets('open TV Series page and search tv series', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final menuIcon = find.byKey(Key("menu_button"));
@@ -157,7 +158,6 @@ void main() {
   });
 
   testWidgets('open popular movies page', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final menuIcon = find.byKey(Key("menu_button"));
@@ -208,7 +208,6 @@ void main() {
   });
 
   testWidgets('open popular tv series page', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final menuIcon = find.byKey(Key("menu_button"));
@@ -259,7 +258,6 @@ void main() {
   });
 
   testWidgets('open top rated movies page', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final menuIcon = find.byKey(Key("menu_button"));
@@ -310,7 +308,6 @@ void main() {
   });
 
   testWidgets('open top rated tv series page', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final menuIcon = find.byKey(Key("menu_button"));
@@ -361,7 +358,6 @@ void main() {
   });
 
   testWidgets('save and remove watchlist movie', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final listView = find.byType(ListView);
@@ -417,7 +413,6 @@ void main() {
   });
 
   testWidgets('save and remove watchlist tv series', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final listView = find.byType(ListView);
@@ -475,7 +470,6 @@ void main() {
   });
 
   testWidgets('open about page', (tester) async {
-    app.main();
     await tester.pumpAndSettle();
 
     final menuIcon = find.byKey(Key("menu_button"));

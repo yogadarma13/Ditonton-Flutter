@@ -17,6 +17,7 @@ import 'package:core/presentation/bloc/home/airing_today/airing_today_bloc.dart'
 import 'package:core/presentation/bloc/home/now_playing/now_playing_bloc.dart';
 import 'package:core/presentation/bloc/home/popular_movies/popular_movies_bloc.dart';
 import 'package:core/presentation/bloc/home/popular_tv_series/popular_tv_series_bloc.dart';
+import 'package:core/utils/state_enum.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:detail/detail.dart';
 import 'package:get_it/get_it.dart';
@@ -28,7 +29,10 @@ import 'package:watchlist/watchlist.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+void init(Environment environment) {
+  if (environment == Environment.Test) {
+    locator.allowReassignment = true;
+  }
   // bloc
   locator.registerFactory(
     () => NowPlayingBloc(locator()),
