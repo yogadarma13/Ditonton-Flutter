@@ -14,6 +14,64 @@ import 'package:watchlist/presentation/page/watchlist_page.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  testWidgets('open movie detail page', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final listView = find.byType(ListView);
+    expect(listView, findsWidgets);
+    await tester.tap(find.byKey(Key('now_playing_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    expect(find.byKey(Key('image_detail')), findsOneWidget);
+    expect(find.byKey(Key('title_detail')), findsOneWidget);
+    expect(find.byKey(Key('genres')), findsOneWidget);
+    expect(find.byKey(Key('duration')), findsOneWidget);
+    expect(find.byKey(Key('rating')), findsOneWidget);
+    expect(find.text('Overview'), findsOneWidget);
+    expect(find.byKey(Key('overview_value')), findsOneWidget);
+    expect(find.text('Recommendations'), findsOneWidget);
+    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
+    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    expect(backButton, findsOneWidget);
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
+    expect(find.byType(HomePage), findsOneWidget);
+  });
+
+  testWidgets('open tv series detail page', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final listView = find.byType(ListView);
+    expect(listView, findsWidgets);
+    await tester.tap(find.byKey(Key('airing_today_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    expect(find.byKey(Key('image_detail')), findsOneWidget);
+    expect(find.byKey(Key('title_detail')), findsOneWidget);
+    expect(find.byKey(Key('genres')), findsOneWidget);
+    expect(find.byKey(Key('duration')), findsOneWidget);
+    expect(find.byKey(Key('rating')), findsOneWidget);
+    expect(find.text('Overview'), findsOneWidget);
+    expect(find.byKey(Key('overview_value')), findsOneWidget);
+    expect(find.text('Seasons'), findsOneWidget);
+    expect(find.byKey(Key('seasons_list')), findsOneWidget);
+    expect(find.text('Recommendations'), findsOneWidget);
+    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
+    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    expect(backButton, findsOneWidget);
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
+    expect(find.byType(HomePage), findsOneWidget);
+  });
+
   testWidgets('open movies page and search movie', (tester) async {
     app.main();
     await tester.pumpAndSettle();
@@ -124,6 +182,24 @@ void main() {
     expect(find.text('Popular Movies'), findsOneWidget);
     expect(find.byType(ListView), findsWidgets);
 
+    await tester.tap(find.byKey(Key('item_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    expect(find.byKey(Key('image_detail')), findsOneWidget);
+    expect(find.byKey(Key('title_detail')), findsOneWidget);
+    expect(find.byKey(Key('genres')), findsOneWidget);
+    expect(find.byKey(Key('duration')), findsOneWidget);
+    expect(find.byKey(Key('rating')), findsOneWidget);
+    expect(find.text('Overview'), findsOneWidget);
+    expect(find.byKey(Key('overview_value')), findsOneWidget);
+    expect(find.text('Recommendations'), findsOneWidget);
+    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
+    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Back'));
@@ -157,6 +233,24 @@ void main() {
     expect(find.text('Popular TV Series'), findsOneWidget);
     expect(find.byType(ListView), findsWidgets);
 
+    await tester.tap(find.byKey(Key('item_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    expect(find.byKey(Key('image_detail')), findsOneWidget);
+    expect(find.byKey(Key('title_detail')), findsOneWidget);
+    expect(find.byKey(Key('genres')), findsOneWidget);
+    expect(find.byKey(Key('duration')), findsOneWidget);
+    expect(find.byKey(Key('rating')), findsOneWidget);
+    expect(find.text('Overview'), findsOneWidget);
+    expect(find.byKey(Key('overview_value')), findsOneWidget);
+    expect(find.text('Recommendations'), findsOneWidget);
+    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
+    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Back'));
@@ -190,6 +284,24 @@ void main() {
     expect(find.text('Top Rated Movies'), findsOneWidget);
     expect(find.byType(ListView), findsWidgets);
 
+    await tester.tap(find.byKey(Key('item_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    expect(find.byKey(Key('image_detail')), findsOneWidget);
+    expect(find.byKey(Key('title_detail')), findsOneWidget);
+    expect(find.byKey(Key('genres')), findsOneWidget);
+    expect(find.byKey(Key('duration')), findsOneWidget);
+    expect(find.byKey(Key('rating')), findsOneWidget);
+    expect(find.text('Overview'), findsOneWidget);
+    expect(find.byKey(Key('overview_value')), findsOneWidget);
+    expect(find.text('Recommendations'), findsOneWidget);
+    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
+    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
     await tester.tap(find.byTooltip('Back'));
@@ -223,20 +335,7 @@ void main() {
     expect(find.text('Top Rated TV Series'), findsOneWidget);
     expect(find.byType(ListView), findsWidgets);
 
-    await tester.tap(find.byTooltip('Back'));
-    await tester.pumpAndSettle();
-    await tester.tap(find.byTooltip('Back'));
-    await tester.pumpAndSettle();
-    expect(find.byType(HomePage), findsOneWidget);
-  });
-
-  testWidgets('open movie detail page', (tester) async {
-    app.main();
-    await tester.pumpAndSettle();
-
-    final listView = find.byType(ListView);
-    expect(listView, findsWidgets);
-    await tester.tap(find.byKey(Key('now_playing_0')));
+    await tester.tap(find.byKey(Key('item_0')));
     await tester.pumpAndSettle();
 
     expect(find.byType(MovieDetailPage), findsOneWidget);
@@ -252,38 +351,11 @@ void main() {
     expect(find.byKey(Key('watchlist_button')), findsOneWidget);
 
     final backButton = find.byKey(Key('back_button_detail'));
-    expect(backButton, findsOneWidget);
     await tester.tap(backButton);
     await tester.pumpAndSettle();
-    expect(find.byType(HomePage), findsOneWidget);
-  });
-
-  testWidgets('open tv series detail page', (tester) async {
-    app.main();
+    await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
-
-    final listView = find.byType(ListView);
-    expect(listView, findsWidgets);
-    await tester.tap(find.byKey(Key('airing_today_0')));
-    await tester.pumpAndSettle();
-
-    expect(find.byType(MovieDetailPage), findsOneWidget);
-    expect(find.byKey(Key('image_detail')), findsOneWidget);
-    expect(find.byKey(Key('title_detail')), findsOneWidget);
-    expect(find.byKey(Key('genres')), findsOneWidget);
-    expect(find.byKey(Key('duration')), findsOneWidget);
-    expect(find.byKey(Key('rating')), findsOneWidget);
-    expect(find.text('Overview'), findsOneWidget);
-    expect(find.byKey(Key('overview_value')), findsOneWidget);
-    expect(find.text('Seasons'), findsOneWidget);
-    expect(find.byKey(Key('seasons_list')), findsOneWidget);
-    expect(find.text('Recommendations'), findsOneWidget);
-    expect(find.byKey(Key('recommendation_list')), findsOneWidget);
-    expect(find.byKey(Key('watchlist_button')), findsOneWidget);
-
-    final backButton = find.byKey(Key('back_button_detail'));
-    expect(backButton, findsOneWidget);
-    await tester.tap(backButton);
+    await tester.tap(find.byTooltip('Back'));
     await tester.pumpAndSettle();
     expect(find.byType(HomePage), findsOneWidget);
   });
