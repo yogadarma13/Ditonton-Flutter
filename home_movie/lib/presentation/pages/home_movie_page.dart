@@ -79,7 +79,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     );
                   } else if (state is StateHasData) {
                     final result = state.result;
-                    return MovieList(result, widget.category);
+                    return MovieList('now_playing', result, widget.category);
                   } else if (state is StateError) {
                     return const Text('Failed');
                   } else {
@@ -103,7 +103,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     );
                   } else if (state is StateHasData) {
                     final result = state.result;
-                    return MovieList(result, widget.category);
+                    return MovieList('popular', result, widget.category);
                   } else if (state is StateError) {
                     return const Text('Failed');
                   } else {
@@ -127,7 +127,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                     );
                   } else if (state is StateHasData) {
                     final result = state.result;
-                    return MovieList(result, widget.category);
+                    return MovieList('top_rated', result, widget.category);
                   } else if (state is StateError) {
                     return const Text('Failed');
                   } else {

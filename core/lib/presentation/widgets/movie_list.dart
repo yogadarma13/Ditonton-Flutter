@@ -8,10 +8,11 @@ import '../../utils/routes.dart';
 import '../../utils/state_enum.dart';
 
 class MovieList extends StatelessWidget {
+  final String parentKey;
   final List<Movie> movies;
   final CategoryMovie category;
 
-  const MovieList(this.movies, this.category);
+  const MovieList(this.parentKey, this.movies, this.category);
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,7 @@ class MovieList extends StatelessWidget {
         itemBuilder: (context, index) {
           final movie = movies[index];
           return Container(
+            key: Key("${parentKey}_$index"),
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
@@ -29,7 +31,7 @@ class MovieList extends StatelessWidget {
                   context,
                   DETAIL_ROUTE,
                   arguments:
-                  DetailScreenArguments(id: movie.id, category: category),
+                      DetailScreenArguments(id: movie.id, category: category),
                 );
               },
               child: ClipRRect(

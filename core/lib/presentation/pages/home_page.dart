@@ -63,7 +63,8 @@ class _HomePageState extends State<HomePage> {
                     );
                   } else if (state is StateHasData) {
                     final result = state.result;
-                    return MovieList(result, CategoryMovie.Movies);
+                    return MovieList(
+                        'now_playing', result, CategoryMovie.Movies);
                   } else if (state is StateError) {
                     return const Text('Failed');
                   } else {
@@ -86,7 +87,8 @@ class _HomePageState extends State<HomePage> {
                     );
                   } else if (state is StateHasData) {
                     final result = state.result;
-                    return MovieList(result, CategoryMovie.TvSeries);
+                    return MovieList(
+                        'airing_today', result, CategoryMovie.TvSeries);
                   } else if (state is StateError) {
                     return const Text('Failed');
                   } else {
@@ -109,7 +111,8 @@ class _HomePageState extends State<HomePage> {
                     );
                   } else if (state is StateHasData) {
                     final result = state.result;
-                    return MovieList(result, CategoryMovie.Movies);
+                    return MovieList(
+                        'popular_movie', result, CategoryMovie.Movies);
                   } else if (state is StateError) {
                     return const Text('Failed');
                   } else {
@@ -132,7 +135,8 @@ class _HomePageState extends State<HomePage> {
                     );
                   } else if (state is StateHasData) {
                     final result = state.result;
-                    return MovieList(result, CategoryMovie.TvSeries);
+                    return MovieList(
+                        'popular_tv', result, CategoryMovie.TvSeries);
                   } else if (state is StateError) {
                     return const Text('Failed');
                   } else {

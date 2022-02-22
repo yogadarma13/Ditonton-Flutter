@@ -236,7 +236,7 @@ void main() {
 
     final listView = find.byType(ListView);
     expect(listView, findsWidgets);
-    await tester.tap(listView.first);
+    await tester.tap(find.byKey(Key('now_playing_0')));
     await tester.pumpAndSettle();
 
     expect(find.byType(MovieDetailPage), findsOneWidget);
@@ -264,7 +264,7 @@ void main() {
 
     final listView = find.byType(ListView);
     expect(listView, findsWidgets);
-    await tester.tap(listView.at(1));
+    await tester.tap(find.byKey(Key('airing_today_0')));
     await tester.pumpAndSettle();
 
     expect(find.byType(MovieDetailPage), findsOneWidget);
@@ -294,7 +294,7 @@ void main() {
 
     final listView = find.byType(ListView);
     expect(listView, findsWidgets);
-    await tester.tap(listView.first);
+    await tester.tap(find.byKey(Key('now_playing_0')));
     await tester.pumpAndSettle();
 
     expect(find.byType(MovieDetailPage), findsOneWidget);
