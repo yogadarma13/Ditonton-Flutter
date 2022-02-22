@@ -48,6 +48,7 @@ class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
               final result = state.result;
               return result.isNotEmpty
                   ? ListView.builder(
+                      key: const Key('tv_watchlist_list'),
                       itemBuilder: (context, index) {
                         final movie = result[index];
                         return MovieCard(

@@ -344,6 +344,64 @@ void main() {
     expect(find.byKey(Key('empty_message')), findsOneWidget);
   });
 
+  testWidgets('save and remove watchlist tv series', (tester) async {
+    app.main();
+    await tester.pumpAndSettle();
+
+    final listView = find.byType(ListView);
+    expect(listView, findsWidgets);
+    await tester.tap(find.byKey(Key('airing_today_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    final watchlistButton = find.byKey(Key('watchlist_button'));
+    expect(watchlistButton, findsOneWidget);
+    expect(find.byIcon(Icons.add), findsOneWidget);
+    await tester.tap(watchlistButton);
+    await tester.pump(Duration(milliseconds: 50));
+    expect(find.byIcon(Icons.check), findsOneWidget);
+    expect(find.byType(SnackBar), findsOneWidget);
+    expect(find.text('Added to Watchlist'), findsOneWidget);
+
+    final backButton = find.byKey(Key('back_button_detail'));
+    await tester.tap(backButton);
+    await tester.pumpAndSettle();
+
+    final menuIcon = find.byKey(Key("menu_button"));
+    await tester.tap(menuIcon);
+    await tester.pumpAndSettle();
+
+    final watchlistMenu = find.text('Watchlist');
+    expect(watchlistMenu, findsOneWidget);
+    await tester.tap(watchlistMenu);
+    await tester.pumpAndSettle();
+    expect(find.byType(WatchlistPage), findsOneWidget);
+    expect(find.byType(TabBar), findsOneWidget);
+
+    await tester.tap(find.text('TV Series'));
+    await tester.pumpAndSettle();
+    final watchlistMovie = find.byKey(Key('tv_watchlist_list'));
+    expect(watchlistMovie, findsOneWidget);
+    await tester.tap(find.byKey(Key('item_0')));
+    await tester.pumpAndSettle();
+
+    expect(find.byType(MovieDetailPage), findsOneWidget);
+    final watchlistButton2 = find.byKey(Key('watchlist_button'));
+    expect(watchlistButton2, findsOneWidget);
+    expect(find.byIcon(Icons.check), findsOneWidget);
+    await tester.tap(watchlistButton2);
+    await tester.pump(Duration(seconds: 1));
+    expect(find.byIcon(Icons.add), findsOneWidget);
+    expect(find.byType(SnackBar), findsOneWidget);
+    expect(find.text('Removed from Watchlist'), findsOneWidget);
+
+    final backButton2 = find.byKey(Key('back_button_detail'));
+    await tester.tap(backButton2);
+    await tester.pumpAndSettle();
+
+    expect(find.byKey(Key('empty_message')), findsOneWidget);
+  });
+
   testWidgets('open about page', (tester) async {
     app.main();
     await tester.pumpAndSettle();
